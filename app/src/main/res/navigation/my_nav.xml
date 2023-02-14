@@ -6,7 +6,7 @@
     app:startDestination="@id/registerFragment2">
     <fragment
         android:id="@+id/registerFragment2"
-        android:name="com.app.ufit.ui.fragments.register.RegisterFragment2"
+        android:name="com.app.ufit.ui.fragments.register.RegisterFragment"
         android:label="fragment_register2"
-        tools:layout="@layout/fragment_register2" />
+        tools:layout="@layout/fragment_register" />
 </navigation>
