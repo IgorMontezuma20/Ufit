@@ -1,30 +1,11 @@
-package com.app.youfit.ui
+package com.app.ufit.ui
 
-import android.graphics.Color
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.app.youfit.databinding.ActivityMainBinding
+import android.os.Bundle
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Esconder a barra de suporte
-        supportActionBar!!.hide()
-        window.statusBarColor = Color.parseColor("#90caf9")
-
-
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-
+        setContentView(R.layout.activity_main)
     }
-
-
 }
-
-
-
