@@ -2,4 +2,5 @@
     <string name="app_name">UFit</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="checkbox_text">Para continuar aceite nossas\n políticas e termos de uso.</string>
 </resources>
