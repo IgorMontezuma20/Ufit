@@ -20,4 +20,13 @@
     <color name="gray_500">#80D1D1D1</color>
     <color name="pink_500">#F36595</color>
 
+
+
+
+    <color name="red">#FF0000</color>
+    <color name="light_gray">#646464</color>
+    <color name="orange">#FF9800</color>
+    <color name="blue">#1753EC</color>
+    <color name="dark_gray">#181818</color>
+
 </resources>
