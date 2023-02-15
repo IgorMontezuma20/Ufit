@@ -2,4 +2,6 @@
     <string name="app_name">UFit</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="register_info_title">Vamos completar o seu perfil</string>
+    <string name="register_info_subtitle">Isso vai nos ajudar a saber mais sobre você!</string>
 </resources>
