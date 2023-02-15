@@ -3,10 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/my_nav"
-    app:startDestination="@id/registerFragment2">
+    app:startDestination="@id/loginFragment">
     <fragment
         android:id="@+id/registerFragment2"
         android:name="com.app.ufit.ui.fragments.register.RegisterFragment"
         android:label="fragment_register2"
-        tools:layout="@layout/fragment_register" />
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment2_to_registerInfoFragment"
+            app:destination="@id/registerInfoFragment" />
+        <action
+            android:id="@+id/action_registerFragment2_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerInfoFragment"
+        android:name="com.app.ufit.ui.fragments.register.RegisterInfoFragment"
+        android:label="fragment_register_info"
+        tools:layout="@layout/fragment_register_info" >
+        <action
+            android:id="@+id/action_registerInfoFragment_to_registerFragment2"
+            app:destination="@id/registerFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.app.ufit.ui.login.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment2"
+            app:destination="@id/registerFragment2" />
+    </fragment>
 </navigation>
