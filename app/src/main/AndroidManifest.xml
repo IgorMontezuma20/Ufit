@@ -15,7 +15,7 @@
             android:name=".ChooseYourGoal"
             android:exported="false" />
         <activity
-            android:name=".util.MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
