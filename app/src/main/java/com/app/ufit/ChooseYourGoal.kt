@@ -6,6 +6,6 @@ import android.os.Bundle
 class ChooseYourGoal : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_chose_goal)
+        setContentView(R.layout.activity_choose_your_goal)
     }
 }

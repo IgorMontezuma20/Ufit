@@ -1,4 +1,6 @@
 package com.app.ufit.models
 
 
-class Exercises : ArrayList<ExercisesItem>()
+data class Exercises(
+    val results: List<ExercisesItem>
+    )

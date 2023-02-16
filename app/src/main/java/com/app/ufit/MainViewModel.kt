@@ -24,17 +24,18 @@ class MainViewModel @Inject constructor(
 
     var exercisesResponse: MutableLiveData<NetworkResult<Exercises>> = MutableLiveData()
 
-    fun getRecipes(queries: Map<String, String>) = viewModelScope.launch {
+    fun getExercises(queries: Map<String, String>) = viewModelScope.launch {
 
-        getRecipesSafeCall(queries)
+        getExercisesSafeCall(queries)
 
     }
 
-    private suspend fun getRecipesSafeCall(queries: Map<String, String>) {
+    private suspend fun getExercisesSafeCall(queries: Map<String, String>) {
         exercisesResponse.value = NetworkResult.Loading()
         if(hasInternetConnection()){
             try {
                 val response = repository.remote.getExercises(queries)
+
                 exercisesResponse.value = handleExercisesResponse(response)
             } catch (e: Exception){
                 exercisesResponse.value = NetworkResult.Error("Exercise not found.")
@@ -54,9 +55,9 @@ class MainViewModel @Inject constructor(
             response.code() == 402 -> {
                 return NetworkResult.Error("API Key Limited.")
             }
-//            response.body()!!.res -> {
-//                return NetworkResult.Error("Recipes not found.")
-//            }
+            response.body()!!.results.isNullOrEmpty() -> {
+                return NetworkResult.Error("Recipes not found.")
+            }
             response.isSuccessful -> {
                 val exercises = response.body()
                 return NetworkResult.Success(exercises!!)
