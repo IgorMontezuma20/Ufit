@@ -1,4 +1,4 @@
-package com.app.ufit.viewmodels
+package com.app.ufit.viewmodels.exercise
 
 import android.app.Application
 import javax.inject.Inject
