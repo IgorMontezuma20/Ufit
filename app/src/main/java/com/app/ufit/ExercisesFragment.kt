@@ -11,8 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.ufit.adapters.ExercisesAdapter
 import com.app.ufit.databinding.FragmentExercisesBinding
-import com.app.ufit.util.Constants.Companion.API_KEY
 import com.app.ufit.util.NetworkResult
+import com.app.ufit.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 

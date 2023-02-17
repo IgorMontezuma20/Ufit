@@ -12,9 +12,11 @@ interface ExercisesApi {
         "x-api-key: dsfa4VaUvTJFkUMxolR4W2gbROKy2xkYSdOyA6wx"
     )
     @GET("/v1/exercises")
+
     suspend fun getExercises(
        @QueryMap queries: Map<String, String>
 
     ): Response<List<ExercisesItem>>
+
 
 }

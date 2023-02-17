@@ -1,4 +1,4 @@
-package com.app.ufit
+package com.app.ufit.viewmodels
 
 import android.app.Application
 import android.content.Context
@@ -36,13 +36,13 @@ class MainViewModel @Inject constructor(
         if(hasInternetConnection()){
 
             Log.d("Retorno api", repository.remote.getExercises(queries).toString())
-//            try {
-//                val response = repository.remote.getExercises(queries)
-//
-//                exercisesResponse.value = handleExercisesResponse(response)
-//            } catch (e: Exception){
-//                exercisesResponse.value = NetworkResult.Error(e.toString())
-//            }
+            try {
+                val response = repository.remote.getExercises(queries)
+
+                exercisesResponse.value = handleExercisesResponse(response)
+            } catch (e: Exception){
+                exercisesResponse.value = NetworkResult.Error(e.toString())
+            }
 
         }else{
             exercisesResponse.value = NetworkResult.Error("No Internet Connection.")

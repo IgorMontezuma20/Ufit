@@ -9,14 +9,14 @@ import kotlinx.parcelize.Parcelize
 data class ExercisesItem(
     @SerializedName("difficulty")
     val difficulty: String,
-    @SerializedName("equipment")
-    val equipment: String,
-    @SerializedName("instructions")
-    val instructions: String,
+//    @SerializedName("equipment")
+//    val equipment: String,
+//    @SerializedName("instructions")
+//    val instructions: String,
     @SerializedName("muscle")
     val muscle: String,
     @SerializedName("name")
-    val name: String,
-    @SerializedName("type")
-    val type: String
+    val name: String?=null,
+    //@SerializedName("type")
+   // val type: String
 ) : Parcelable
