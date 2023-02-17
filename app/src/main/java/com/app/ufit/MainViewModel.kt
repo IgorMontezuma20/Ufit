@@ -9,7 +9,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.app.ufit.data.Repository
-import com.app.ufit.models.Exercises
+import com.app.ufit.models.ExercisesItem
 import com.app.ufit.util.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -23,7 +23,7 @@ class MainViewModel @Inject constructor(
 ) : AndroidViewModel(application) {
 
 
-    var exercisesResponse: MutableLiveData<NetworkResult<Exercises>> = MutableLiveData()
+    var exercisesResponse: MutableLiveData<NetworkResult<List<ExercisesItem>>> = MutableLiveData()
 
     fun getExercises(queries: Map<String, String>) = viewModelScope.launch {
 
@@ -50,7 +50,7 @@ class MainViewModel @Inject constructor(
 
     }
 
-    private fun handleExercisesResponse(response: Response<Exercises>): NetworkResult<Exercises>? {
+    private fun handleExercisesResponse(response: Response<List<ExercisesItem>>): NetworkResult<List<ExercisesItem>>? {
         when {
             response.message().toString().contains("timeout") -> {
                 return NetworkResult.Error("Timeout")
@@ -58,9 +58,9 @@ class MainViewModel @Inject constructor(
             response.code() == 402 -> {
                 return NetworkResult.Error("API Key Limited.")
             }
-            response.body()!!.results.isNullOrEmpty() -> {
-                return NetworkResult.Error("Recipes not found.")
-            }
+//            response.body()!!.results.isNullOrEmpty() -> {
+//                return NetworkResult.Error("Recipes not found.")
+//            }
             response.isSuccessful -> {
                 val exercises = response.body()
                 return NetworkResult.Success(exercises!!)

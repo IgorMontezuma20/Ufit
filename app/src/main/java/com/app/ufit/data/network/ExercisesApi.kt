@@ -1,6 +1,6 @@
 package com.app.ufit.data.network
 
-import com.app.ufit.models.Exercises
+import com.app.ufit.models.ExercisesItem
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -15,6 +15,6 @@ interface ExercisesApi {
     suspend fun getExercises(
        @QueryMap queries: Map<String, String>
 
-    ): Response<Exercises>
+    ): Response<List<ExercisesItem>>
 
 }

@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.app.ufit.databinding.ExerciseItemBinding
-import com.app.ufit.models.Exercises
 import com.app.ufit.models.ExercisesItem
 import com.app.ufit.util.ExercisesDiffUtil
 
@@ -43,14 +42,15 @@ class ExercisesAdapter : RecyclerView.Adapter<ExercisesAdapter.MyViewHolder>() {
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentExercise = exercise[position]
         holder.bind(currentExercise)
+
     }
 
 
-    fun setData(newData: Exercises){
+    fun setData(newData: List<ExercisesItem>){
 
-        val exercisesDiffUtil = ExercisesDiffUtil(exercise, newData.results)
+        val exercisesDiffUtil = ExercisesDiffUtil(exercise, newData)
         val diffUtilResult = DiffUtil.calculateDiff(exercisesDiffUtil)
-        exercise = newData.results
+        exercise = newData
         diffUtilResult.dispatchUpdatesTo(this)
     }
 }

@@ -43,8 +43,8 @@ class ExercisesFragment : Fragment() {
 
         //mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
 
-        setupRecyclerView()
         requestApiData()
+        setupRecyclerView()
 
         return binding.root
     }
@@ -57,6 +57,7 @@ class ExercisesFragment : Fragment() {
                 is NetworkResult.Success -> {
                     //hideShimmerEffect()
                     response.data?.let { mAdapter.setData(it) }
+                    Log.d("listSize", response.data?.size.toString())
                 }
                 is NetworkResult.Error -> {
                    // hideShimmerEffect()
