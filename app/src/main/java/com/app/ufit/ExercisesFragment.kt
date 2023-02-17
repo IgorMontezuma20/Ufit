@@ -78,8 +78,8 @@ class ExercisesFragment : Fragment() {
     private fun applyQueries(): HashMap<String, String> {
         val queries: HashMap<String, String> = HashMap()
 
-        queries["number"] = "10"
-        queries["apiKey"] = API_KEY
+//        queries["number"] = "10"
+//        queries["x-api-key"] = API_KEY
 
         return queries
     }

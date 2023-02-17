@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -33,13 +34,15 @@ class MainViewModel @Inject constructor(
     private suspend fun getExercisesSafeCall(queries: Map<String, String>) {
         exercisesResponse.value = NetworkResult.Loading()
         if(hasInternetConnection()){
-            try {
-                val response = repository.remote.getExercises(queries)
 
-                exercisesResponse.value = handleExercisesResponse(response)
-            } catch (e: Exception){
-                exercisesResponse.value = NetworkResult.Error("Exercise not found.")
-            }
+            Log.d("Retorno api", repository.remote.getExercises(queries).toString())
+//            try {
+//                val response = repository.remote.getExercises(queries)
+//
+//                exercisesResponse.value = handleExercisesResponse(response)
+//            } catch (e: Exception){
+//                exercisesResponse.value = NetworkResult.Error(e.toString())
+//            }
 
         }else{
             exercisesResponse.value = NetworkResult.Error("No Internet Connection.")
