@@ -11,8 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.ufit.adapters.ExercisesAdapter
 import com.app.ufit.databinding.FragmentExercisesBinding
-import com.app.ufit.util.Constants.Companion.API_KEY
 import com.app.ufit.util.NetworkResult
+import com.app.ufit.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -43,8 +43,8 @@ class ExercisesFragment : Fragment() {
 
         //mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
 
-        setupRecyclerView()
         requestApiData()
+        setupRecyclerView()
 
         return binding.root
     }
@@ -57,6 +57,7 @@ class ExercisesFragment : Fragment() {
                 is NetworkResult.Success -> {
                     //hideShimmerEffect()
                     response.data?.let { mAdapter.setData(it) }
+                    Log.d("listSize", response.data?.size.toString())
                 }
                 is NetworkResult.Error -> {
                    // hideShimmerEffect()
