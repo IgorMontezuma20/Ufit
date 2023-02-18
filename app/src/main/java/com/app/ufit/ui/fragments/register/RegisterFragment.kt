@@ -9,12 +9,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.app.ufit.R
 import com.app.ufit.databinding.FragmentRegisterBinding
 import com.app.ufit.models.ResponseHttp
 import com.app.ufit.models.User
 import com.app.ufit.provider.UsersProvider
+import com.app.ufit.util.NetworkResult
+import com.app.ufit.viewmodels.MainViewModel
+import com.app.ufit.viewmodels.register.RegisterViewModel
 import com.google.android.material.textfield.TextInputEditText
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,6 +28,8 @@ class RegisterFragment : Fragment() {
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var mRegisterViewModel: RegisterViewModel
 
     val TAG = "FragmentRegister"
 
@@ -37,8 +43,17 @@ class RegisterFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
+        mRegisterViewModel = ViewModelProvider(requireActivity())[RegisterViewModel::class.java]
+        //mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
+
+
         binding.button.setOnClickListener {
-            findNavController().navigate(R.id.action_registerFragment2_to_registerInfoFragment)
+            if(register()) {
+                findNavController().navigate(R.id.action_registerFragment2_to_registerInfoFragment)
+            }else{
+                Toast.makeText(this@RegisterFragment.context , "Erro ao realizar cadastro." ,
+                    Toast.LENGTH_SHORT).show()
+            }
         }
 
         return binding.root
@@ -46,7 +61,9 @@ class RegisterFragment : Fragment() {
 
 
 
-    private fun registerUser() {
+    private fun register() : Boolean{
+
+        var success = false
 
         val name = binding.etName.text.toString()
         val lastname = binding.etLastname.text.toString()
@@ -56,43 +73,48 @@ class RegisterFragment : Fragment() {
 
         if (isValidForm(name, lastname, email, password, confirmedPass)) {
 
-            val user = User(
+            mRegisterViewModel.registerUser(user = User(name, lastname, email, password, confirmedPass))
+            success = true
 
-                name = name,
-                lastName = lastname,
-                email = email,
-                password = password,
-
-
-            )
-
-            usersProvider.register(user)?.enqueue(object : Callback<ResponseHttp> {
-                override fun onResponse(
-                    call: Call<ResponseHttp>,
-                    response: Response<ResponseHttp>
-                ) {
-                    Toast.makeText(
-                        this@RegisterFragment.context,
-                        response.body()?.message,
-                        Toast.LENGTH_LONG
-                    ).show()
-                    Log.d(TAG, "Response: ${response}")
-                    Log.d(TAG, "Body: ${response.body()}")
-                }
-
-                override fun onFailure(call: Call<ResponseHttp>, t: Throwable) {
-                    Log.d(TAG, "Ocorreu um error ${t.message}")
-                    Toast.makeText(
-                        this@RegisterFragment.context,
-                        "Ocorreu um error ${t.message}",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-
-
-            })
+//            val user = User(
+//
+//                name = name,
+//                lastName = lastname,
+//                email = email,
+//                password = password,
+//
+//
+//            )
+//
+//            usersProvider.register(user)?.enqueue(object : Callback<ResponseHttp> {
+//                override fun onResponse(
+//                    call: Call<ResponseHttp>,
+//                    response: Response<ResponseHttp>
+//                ) {
+//                    Toast.makeText(
+//                        this@RegisterFragment.context,
+//                        response.body()?.message,
+//                        Toast.LENGTH_LONG
+//                    ).show()
+//                    Log.d(TAG, "Response: ${response}")
+//                    Log.d(TAG, "Body: ${response.body()}")
+//                }
+//
+//                override fun onFailure(call: Call<ResponseHttp>, t: Throwable) {
+//                    Log.d(TAG, "Ocorreu um error ${t.message}")
+//                    Toast.makeText(
+//                        this@RegisterFragment.context,
+//                        "Ocorreu um error ${t.message}",
+//                        Toast.LENGTH_LONG
+//                    ).show()
+//                }
+//
+//
+//            })
 
         }
+
+        return success
 
     }
 
