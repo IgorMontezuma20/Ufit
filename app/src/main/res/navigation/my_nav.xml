@@ -35,6 +35,10 @@
         <action
             android:id="@+id/action_loginFragment_to_exercisesFragment"
             app:destination="@id/exercisesFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/exercisesFragment"
@@ -50,4 +54,16 @@
             app:nullable="true"
             android:defaultValue="@null" />
     </fragment>
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.app.ufit.ui.fragments.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+
+
+    </fragment>
+
+
+
 </navigation>
