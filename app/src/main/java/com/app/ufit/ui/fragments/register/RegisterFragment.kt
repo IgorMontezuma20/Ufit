@@ -73,7 +73,7 @@ class RegisterFragment : Fragment() {
 
         if (isValidForm(name, lastname, email, password, confirmedPass)) {
 
-            mRegisterViewModel.registerUser(user = User(name, lastname, email, password, confirmedPass))
+            mRegisterViewModel.registerUser(user = User(name=name, lastName=lastname, email=email, password=password))
             success = true
 
         }
