@@ -12,8 +12,6 @@ import dagger.hilt.components.SingletonComponent
 import retrofit2.Call
 import javax.inject.Inject
 
-@Module
-@InstallIn(SingletonComponent::class)
 class UsersProvider @Inject constructor() {
 
     private var usersRoutes : UsersRoutes? = null
@@ -25,7 +23,7 @@ class UsersProvider @Inject constructor() {
     }
 
 
-    @Provides
+
     fun register(user: User): Call<ResponseHttp>?{
 
         return  usersRoutes?.register(user)
