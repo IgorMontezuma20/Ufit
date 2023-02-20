@@ -125,6 +125,8 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
 
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/const_login"
         android:layout_width="wrap_content"
@@ -145,7 +147,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/progress_bar"
+        style="@style/SpinKitView.ThreeBounce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:visibility="visible"
+        app:SpinKit_Color="@color/blue_700"
+        app:layout_constraintBottom_toTopOf="@+id/const_login"
+        app:layout_constraintEnd_toEndOf="@+id/btnEntrar"
+        app:layout_constraintStart_toStartOf="@+id/btnEntrar"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

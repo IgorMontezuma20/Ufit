@@ -108,4 +108,7 @@ dependencies {
 
     // Jsoup
     implementation 'org.jsoup:jsoup:1.13.1'
+
+    //Loading animation
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 }
