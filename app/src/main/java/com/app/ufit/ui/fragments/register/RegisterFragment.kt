@@ -33,7 +33,7 @@ class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
 
-  lateinit var mRegisterViewModel: RegisterViewModel
+    lateinit var mRegisterViewModel: RegisterViewModel
 
 
     override fun onCreateView(
@@ -81,7 +81,6 @@ class RegisterFragment : Fragment() {
         return success
 
     }
-
 
     fun String.isEmailValid(): Boolean {
         return !TextUtils.isEmpty(this) && android.util.Patterns.EMAIL_ADDRESS.matcher(this)
