@@ -20,6 +20,7 @@ object NetworkModule {
     @Provides
     fun provideHttpClient(): OkHttpClient{
         return OkHttpClient.Builder()
+            .connectTimeout(20, TimeUnit.SECONDS)
             .readTimeout(15, TimeUnit.SECONDS)
             .connectTimeout(15, TimeUnit.SECONDS)
             .build()
