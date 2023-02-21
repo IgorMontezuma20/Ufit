@@ -40,10 +40,16 @@ class LoginFragment : Fragment() {
 
         mLoginViewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
 
+        mLoginViewModel.success.observe(requireActivity()) {
+            findNavController().navigate(R.id.action_loginFragment_to_exercisesFragment)
+        }
 
         binding.btnEntrar.setOnClickListener {
             loginCheckFields()
+
         }
+
+        mLoginViewModel.getUserFromSession()
 
         binding.constLogin.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment2)
@@ -61,9 +67,8 @@ class LoginFragment : Fragment() {
 
         if(isValidForm(email,password)){
 
-            if (mLoginViewModel.loginUser(email, password)){
-                findNavController().navigate(R.id.action_loginFragment_to_exercisesFragment)
-            }
+            mLoginViewModel.loginUser(email, password)
+
 
         }
         else {
