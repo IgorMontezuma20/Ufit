@@ -28,4 +28,9 @@ class UsersProvider @Inject constructor() {
 
         return  usersRoutes?.register(user)
     }
+
+    fun login(email:String,password:String):Call<ResponseHttp>?{
+
+        return  usersRoutes?.login(email, password)
+    }
 }
