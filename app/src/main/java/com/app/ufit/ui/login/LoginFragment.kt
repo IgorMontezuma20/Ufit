@@ -27,8 +27,7 @@ class LoginFragment : Fragment() {
     private val binding get() = _binding!!
 
 
-
-     private lateinit var mLoginViewModel: LoginViewModel
+    private lateinit var mLoginViewModel: LoginViewModel
 
 
     override fun onCreateView(
@@ -39,6 +38,8 @@ class LoginFragment : Fragment() {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
         mLoginViewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
+
+        setLoadingProgressbar()
 
         mLoginViewModel.success.observe(requireActivity()) {
             findNavController().navigate(R.id.action_loginFragment_to_exercisesFragment)
@@ -59,20 +60,23 @@ class LoginFragment : Fragment() {
         return binding.root
     }
 
-    private fun loginCheckFields() : Boolean {
+    private fun loginCheckFields(): Boolean {
         val email = binding.edtEmail.text.toString()
         val password = binding.edtSenha.text.toString()
 
         var success = false
 
-        if(isValidForm(email,password)){
+        if (isValidForm(email, password)) {
 
             mLoginViewModel.loginUser(email, password)
 
 
-        }
-        else {
-            Toast.makeText(this@LoginFragment.context, "O Formulario não é Válido ", Toast.LENGTH_LONG).show()
+        } else {
+            Toast.makeText(
+                this@LoginFragment.context,
+                "O Formulario não é Válido ",
+                Toast.LENGTH_LONG
+            ).show()
         }
 
         return false
@@ -81,9 +85,9 @@ class LoginFragment : Fragment() {
 
 
     fun String.isEmailValid(): Boolean {
-        return !TextUtils.isEmpty(this) && android.util.Patterns.EMAIL_ADDRESS.matcher(this).matches()
+        return !TextUtils.isEmpty(this) && android.util.Patterns.EMAIL_ADDRESS.matcher(this)
+            .matches()
     }
-
 
 
     private fun isValidForm(email: String, password: String): Boolean {
@@ -101,6 +105,16 @@ class LoginFragment : Fragment() {
         }
 
         return true
+    }
+
+    private fun setLoadingProgressbar() {
+        mLoginViewModel.load.observe(requireActivity()) {
+            if (it) {
+                binding.progressBar.visibility = View.VISIBLE
+            } else {
+                binding.progressBar.visibility = View.GONE
+            }
+        }
     }
 
 

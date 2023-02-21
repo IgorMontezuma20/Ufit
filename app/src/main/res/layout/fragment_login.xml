@@ -159,12 +159,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:indeterminate="true"
-        android:visibility="visible"
+        android:visibility="gone"
+        tools:visibility="visible"
         app:SpinKit_Color="@color/blue_700"
         app:layout_constraintBottom_toTopOf="@+id/const_login"
         app:layout_constraintEnd_toEndOf="@+id/btnEntrar"
-        app:layout_constraintStart_toStartOf="@+id/btnEntrar"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintStart_toStartOf="@+id/btnEntrar"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
