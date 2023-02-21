@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
 import com.app.ufit.models.ResponseHttp
 import com.app.ufit.models.User
 import com.app.ufit.provider.UsersProvider
@@ -28,15 +29,19 @@ class RegisterViewModel @Inject constructor(
     application: Application
 ) : AndroidViewModel(application) {
 
-
+    val success = MutableLiveData<Boolean>()
+    val load = MutableLiveData<Boolean>()
 
     fun registerUser(user: User){
-
+        load.postValue(true)
         usersProvider.register(user)?.enqueue(object : Callback<ResponseHttp> {
             override fun onResponse(
                 call: Call<ResponseHttp>,
                 response: Response<ResponseHttp>
             ) {
+                success.postValue(true)
+                load.postValue(false)
+
                 Toast.makeText(
                     getApplication(),
                     response.body()?.message,
@@ -47,6 +52,7 @@ class RegisterViewModel @Inject constructor(
             }
 
             override fun onFailure(call: Call<ResponseHttp>, t: Throwable) {
+                load.postValue(false)
                 Log.d(TAG, "Ocorreu um error ${t.message}")
                 Toast.makeText(
                     getApplication(),

@@ -36,8 +36,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:background="@drawable/round_edit_text_background"
-        app:boxStrokeColor="@color/white"
         android:padding="5dp"
+        app:boxStrokeColor="@color/white"
         app:boxStrokeWidth="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,8 +62,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:background="@drawable/round_edit_text_background"
-        app:boxStrokeColor="@color/white"
         android:padding="5dp"
+        app:boxStrokeColor="@color/white"
         app:boxStrokeWidth="0dp"
         app:layout_constraintEnd_toEndOf="@+id/tlName"
         app:layout_constraintStart_toStartOf="@+id/tlName"
@@ -88,8 +88,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:background="@drawable/round_edit_text_background"
-        app:boxStrokeColor="@color/white"
         android:padding="5dp"
+        app:boxStrokeColor="@color/white"
         app:boxStrokeWidth="0dp"
         app:layout_constraintEnd_toEndOf="@+id/tlLastname"
         app:layout_constraintStart_toStartOf="@+id/tlLastname"
@@ -111,13 +111,13 @@
         android:id="@+id/tlPassword"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="320dp"
-        app:endIconMode="password_toggle"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:background="@drawable/round_edit_text_background"
-        app:boxStrokeColor="@color/white"
         android:padding="5dp"
+        app:boxStrokeColor="@color/white"
         app:boxStrokeWidth="0dp"
+        app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="@+id/tlEmail"
         app:layout_constraintStart_toStartOf="@+id/tlEmail"
         app:layout_constraintTop_toBottomOf="@+id/tlEmail">
@@ -138,13 +138,13 @@
         android:id="@+id/tlPasswordConfirmation"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="320dp"
-        app:endIconMode="password_toggle"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:background="@drawable/round_edit_text_background"
-        app:boxStrokeColor="@color/white"
         android:padding="5dp"
+        app:boxStrokeColor="@color/white"
         app:boxStrokeWidth="0dp"
+        app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="@+id/tlPassword"
         app:layout_constraintStart_toStartOf="@+id/tlPassword"
         app:layout_constraintTop_toBottomOf="@+id/tlPassword">
@@ -165,26 +165,40 @@
         android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
+        android:layout_marginTop="8dp"
         android:text="@string/checkbox_text"
-        app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="@+id/tlPasswordConfirmation"
-        app:layout_constraintStart_toStartOf="@+id/tlPasswordConfirmation" />
+        app:layout_constraintStart_toStartOf="@+id/tlPasswordConfirmation"
+        app:layout_constraintTop_toBottomOf="@+id/tlPasswordConfirmation" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="62dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/button"
         android:text="Registrar"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tlPasswordConfirmation"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/tlPasswordConfirmation" />
+        app:layout_constraintStart_toStartOf="@+id/tlPasswordConfirmation"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
 
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/progress_bar"
+        style="@style/SpinKitView.ThreeBounce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:SpinKit_Color="@color/blue_700"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/button"
+        app:layout_constraintStart_toStartOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        tools:visibility="visible" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

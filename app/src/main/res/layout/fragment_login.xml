@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:fillViewport="true"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:fillViewport="true">
 
 
     <TextView
@@ -26,14 +26,15 @@
         android:id="@+id/containerEmail"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="320dp"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:layout_marginTop="30dp"
+        app:boxBackgroundColor="@color/gray_100"
         android:textColorHint="@color/black"
         app:boxStrokeWidth="0dp"
         app:errorEnabled="true"
         app:helperTextEnabled="true"
         app:helperTextTextColor="@color/orange"
-        app:hintTextColor="@color/white"
+        app:hintTextColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/textView4"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4">
@@ -41,16 +42,12 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtEmail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/round_edit_text_background"
-            android:backgroundTint="@color/gray_100"
+            android:layout_height="match_parent"
             android:drawableStart="@drawable/ic_email"
             android:drawablePadding="8dp"
             android:hint="Email"
             android:inputType="textEmailAddress"
-            android:padding="25dp"
             android:textColor="@color/black"
-            android:textColorHint="@color/black"
             android:textCursorDrawable="@drawable/cursor_edittext_login"
             android:textSize="18sp"
             app:endIconMode="clear_text" />
@@ -61,15 +58,16 @@
         android:id="@+id/containerSenha"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="320dp"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:layout_marginTop="15dp"
+        app:boxBackgroundColor="@color/gray_100"
         android:textColorHint="@color/black"
         app:boxStrokeWidth="0dp"
         app:endIconMode="password_toggle"
         app:errorEnabled="true"
         app:helperTextEnabled="true"
         app:helperTextTextColor="@color/orange"
-        app:hintTextColor="@color/white"
+        app:hintTextColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/containerEmail"
         app:layout_constraintStart_toStartOf="@+id/containerEmail"
         app:layout_constraintTop_toBottomOf="@+id/containerEmail">
@@ -77,8 +75,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtSenha"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/round_edit_text_background"
+            android:layout_height="match_parent"
             android:backgroundTint="@color/gray_100"
             android:drawableStart="@drawable/ic_locker"
             android:drawablePadding="8dp"
@@ -125,8 +122,6 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
 
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/const_login"
         android:layout_width="wrap_content"
@@ -148,7 +143,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -160,11 +154,11 @@
         android:layout_gravity="center"
         android:indeterminate="true"
         android:visibility="gone"
-        tools:visibility="visible"
         app:SpinKit_Color="@color/blue_700"
         app:layout_constraintBottom_toTopOf="@+id/const_login"
         app:layout_constraintEnd_toEndOf="@+id/btnEntrar"
-        app:layout_constraintStart_toStartOf="@+id/btnEntrar"/>
+        app:layout_constraintStart_toStartOf="@+id/btnEntrar"
+        tools:visibility="visible" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

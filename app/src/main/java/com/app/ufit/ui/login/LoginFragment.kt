@@ -74,7 +74,7 @@ class LoginFragment : Fragment() {
         } else {
             Toast.makeText(
                 this@LoginFragment.context,
-                "O Formulario não é Válido ",
+                "Preencha todos os campos. ",
                 Toast.LENGTH_LONG
             ).show()
         }

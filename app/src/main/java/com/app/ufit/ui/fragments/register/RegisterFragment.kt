@@ -46,24 +46,21 @@ class RegisterFragment : Fragment() {
         mRegisterViewModel = ViewModelProvider(requireActivity())[RegisterViewModel::class.java]
         //mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
 
+        setLoadingProgressbar()
+        mRegisterViewModel.success.observe(requireActivity()) {
+            findNavController().navigate(R.id.action_registerFragment2_to_registerInfoFragment)
+        }
 
         binding.button.setOnClickListener {
-            if(register()) {
-                findNavController().navigate(R.id.action_registerFragment2_to_registerInfoFragment)
-            }else{
-                Toast.makeText(this@RegisterFragment.context , "Erro ao realizar cadastro." ,
-                    Toast.LENGTH_SHORT).show()
-            }
+            register()
+
         }
 
         return binding.root
     }
 
 
-
-    private fun register() : Boolean{
-
-        var success = false
+    private fun register() {
 
         val name = binding.etName.text.toString()
         val lastname = binding.etLastname.text.toString()
@@ -73,12 +70,17 @@ class RegisterFragment : Fragment() {
 
         if (isValidForm(name, lastname, email, password, confirmedPass)) {
 
-            mRegisterViewModel.registerUser(user = User(name=name, lastName=lastname, email=email, password=password))
-            success = true
+            mRegisterViewModel.registerUser(
+                user = User(
+                    name = name,
+                    lastName = lastname,
+                    email = email,
+                    password = password
+                )
+            )
 
         }
 
-        return success
 
     }
 
@@ -113,7 +115,11 @@ class RegisterFragment : Fragment() {
             return false
         }
         if (confirmedPass.isBlank()) {
-            Toast.makeText(context, "Necessita Colocar uma confirmação de Senha ", Toast.LENGTH_SHORT)
+            Toast.makeText(
+                context,
+                "Necessita Colocar uma confirmação de Senha ",
+                Toast.LENGTH_SHORT
+            )
                 .show()
             return false
         }
@@ -126,6 +132,16 @@ class RegisterFragment : Fragment() {
             return false
         }
         return true
+    }
+
+    private fun setLoadingProgressbar() {
+        mRegisterViewModel.load.observe(requireActivity()) {
+            if (it) {
+                binding.progressBar.visibility = View.VISIBLE
+            } else {
+                binding.progressBar.visibility = View.GONE
+            }
+        }
     }
 
 }
