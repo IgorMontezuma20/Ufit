@@ -8,11 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.app.ufit.R
 import com.app.ufit.databinding.FragmentLoginBinding
 import com.app.ufit.models.User
 import com.app.ufit.viewmodels.login.LoginViewModel
+import com.app.ufit.viewmodels.register.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.internal.Contexts
 import dagger.hilt.android.internal.Contexts.getApplication
@@ -26,7 +28,8 @@ class LoginFragment : Fragment() {
 
 
 
-    private lateinit var mLoginViewModel: LoginViewModel
+     private lateinit var mLoginViewModel: LoginViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,10 +38,11 @@ class LoginFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
+        mLoginViewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
+
 
         binding.btnEntrar.setOnClickListener {
             loginCheckFields()
-            findNavController().navigate(R.id.action_loginFragment_to_exercisesFragment)
         }
 
         binding.constLogin.setOnClickListener {
@@ -49,19 +53,24 @@ class LoginFragment : Fragment() {
         return binding.root
     }
 
-    private fun loginCheckFields() {
+    private fun loginCheckFields() : Boolean {
         val email = binding.edtEmail.text.toString()
         val password = binding.edtSenha.text.toString()
 
+        var success = false
+
         if(isValidForm(email,password)){
 
-            mLoginViewModel.loginUser(user = User(name = "", lastName = "", email = email, password=password))
+            if (mLoginViewModel.loginUser(email, password)){
+                findNavController().navigate(R.id.action_loginFragment_to_exercisesFragment)
+            }
 
         }
         else {
             Toast.makeText(this@LoginFragment.context, "O Formulario não é Válido ", Toast.LENGTH_LONG).show()
         }
 
+        return false
 //        Log.d("Main", "A senha é: $password")
     }
 
