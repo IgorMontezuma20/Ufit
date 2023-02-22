@@ -53,6 +53,10 @@
             app:argType="com.app.ufit.models.ExercisesItem"
             app:nullable="true"
             android:defaultValue="@null" />
+        <argument
+            android:name="muscle"
+            app:argType="String"
+            app:nullable="true" />
     </fragment>
 
     <fragment
@@ -61,6 +65,9 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
 
+        <action
+            android:id="@+id/action_homeFragment_to_exercisesFragment"
+            app:destination="@id/exercisesFragment" />
 
     </fragment>
 
