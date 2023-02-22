@@ -33,6 +33,7 @@
         app:boxStrokeWidth="0dp"
         app:errorEnabled="true"
         app:helperTextEnabled="true"
+        app:endIconMode="clear_text"
         app:helperTextTextColor="@color/orange"
         app:hintTextColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/textView4"

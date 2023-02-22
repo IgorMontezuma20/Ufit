@@ -88,79 +88,44 @@ class RegisterFragment : Fragment() {
 
 
         when {
-            name.isEmpty()->{
+            name.isEmpty() -> {
                 binding.tlName.helperText = getString(R.string.obrigatory_field)
-                binding.tlName.boxStrokeColor= Color.parseColor("#FF0000")
+                binding.tlName.boxStrokeColor = Color.parseColor("#FF0000")
                 return false
             }
-            lastname.isEmpty()->{
+            lastname.isEmpty() -> {
                 binding.tlLastname.helperText = getString(R.string.obrigatory_field)
-                binding.tlLastname.boxStrokeColor= Color.parseColor("#FF0000")
+                binding.tlLastname.boxStrokeColor = Color.parseColor("#FF0000")
                 return false
             }
-            email.isEmpty()->{
+            email.isEmpty() && !email.isEmailValid() -> {
                 binding.tlEmail.helperText = getString(R.string.obrigatory_field)
-                binding.tlEmail.boxStrokeColor= Color.parseColor("#FF0000")
+                binding.tlEmail.boxStrokeColor = Color.parseColor("#FF0000")
                 return false
             }
-            password.isEmpty()->{
+            password.isEmpty() -> {
                 binding.tlPassword.helperText = getString(R.string.obrigatory_field)
-                binding.tlPassword.boxStrokeColor= Color.parseColor("#FF0000")
+                binding.tlPassword.boxStrokeColor = Color.parseColor("#FF0000")
                 return false
             }
-            confirmedPass.isEmpty()->{
+            confirmedPass.isEmpty() -> {
                 binding.tlPasswordConfirmation.helperText = getString(R.string.obrigatory_field)
-                binding.tlPasswordConfirmation.boxStrokeColor= Color.parseColor("#FF0000")
+                binding.tlPasswordConfirmation.boxStrokeColor = Color.parseColor("#FF0000")
                 return false
             }
 
             password != confirmedPass -> {
                 binding.tlPasswordConfirmation.helperText = getString(R.string.password_dont_match)
-                binding.tlPasswordConfirmation.boxStrokeColor= Color.parseColor("#FF0000")
+                binding.tlPasswordConfirmation.boxStrokeColor = Color.parseColor("#FF0000")
                 return false
             }
 
             else -> {
-              return true
+                return true
             }
+
         }
 
-
-//        if (name.isBlank()) {
-//            Toast.makeText(context, "Necessita Colocar um Nome ", Toast.LENGTH_SHORT).show()
-//            return false
-//        }
-//        if (lastname.isBlank()) {
-//            Toast.makeText(context, "Necessita Colocar um Sobrenome ", Toast.LENGTH_SHORT).show()
-//            return false
-//        }
-
-//        if (email.isBlank()) {
-//            Toast.makeText(context, "Necessita Colocar um Email  ", Toast.LENGTH_SHORT).show()
-//            return false
-//        }
-//        if (password.isBlank()) {
-//            Toast.makeText(context, "Necessita Colocar uma Senha ", Toast.LENGTH_SHORT).show()
-//            return false
-//        }
-//        if (confirmedPass.isBlank()) {
-//            Toast.makeText(
-//                context,
-//                "Necessita Colocar uma confirmação de Senha ",
-//                Toast.LENGTH_SHORT
-//            )
-//                .show()
-//            return false
-//        }
-//        if (!email.isEmailValid()) {
-//            return false
-//
-//        }
-//        if (password != confirmedPass) {
-//            Toast.makeText(context, "As Senhas não coincidem ", Toast.LENGTH_SHORT).show()
-//            return false
-//        }
-       // return true
     }
 
     private fun setLoadingProgressbar() {
