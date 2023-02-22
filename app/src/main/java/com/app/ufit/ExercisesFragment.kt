@@ -8,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.ufit.adapters.ExercisesAdapter
 import com.app.ufit.databinding.FragmentExercisesBinding
+import com.app.ufit.ui.fragments.home.HomeFragment
 import com.app.ufit.util.NetworkResult
 import com.app.ufit.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,8 +27,9 @@ class ExercisesFragment : Fragment() {
     private var _binding: FragmentExercisesBinding? = null
     private val binding get() = _binding!!
 
-
     private val mAdapter by lazy { ExercisesAdapter() }
+
+    private val args: ExercisesFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +46,10 @@ class ExercisesFragment : Fragment() {
 
         //mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
 
+        val exercise = args.muscle as String
+        Toast.makeText(requireContext(), exercise,
+            Toast.LENGTH_SHORT
+        ).show()
         requestApiData()
         setupRecyclerView()
 

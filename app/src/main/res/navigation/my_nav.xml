@@ -55,7 +55,7 @@
             android:defaultValue="@null" />
         <argument
             android:name="muscle"
-            app:argType="String"
+            app:argType="string"
             app:nullable="true" />
     </fragment>
 
@@ -68,6 +68,7 @@
         <action
             android:id="@+id/action_homeFragment_to_exercisesFragment"
             app:destination="@id/exercisesFragment" />
+
 
     </fragment>
 

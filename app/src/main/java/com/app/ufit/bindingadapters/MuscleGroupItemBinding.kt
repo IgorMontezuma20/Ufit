@@ -4,14 +4,13 @@ import android.util.Log
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import androidx.navigation.findNavController
-import com.app.ufit.ui.fragments.home.HomeFragment
 import com.app.ufit.ui.fragments.home.HomeFragmentDirections
 
 class MuscleGroupItemBinding {
 
     companion object {
 
-        @BindingAdapter("onRecipeClickListener")
+        @BindingAdapter("onMuscleGroupClickListener")
         @JvmStatic
         fun onMuscleGroupClickListener(muscleGroupLayout: ConstraintLayout, muscle: String){
             muscleGroupLayout.setOnClickListener{
