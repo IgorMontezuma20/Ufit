@@ -1,6 +1,7 @@
-package com.app.ufit.ui.login
+package com.app.ufit.ui.fragments.login
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.fragment.app.Fragment
@@ -60,51 +61,43 @@ class LoginFragment : Fragment() {
         return binding.root
     }
 
-    private fun loginCheckFields(): Boolean {
-        val email = binding.edtEmail.text.toString()
-        val password = binding.edtSenha.text.toString()
+    private fun loginCheckFields() {
+        val email = binding.etEmail.text.toString()
+        val password = binding.etPassword.text.toString()
 
-        var success = false
 
         if (isValidForm(email, password)) {
 
             mLoginViewModel.loginUser(email, password)
 
-
-        } else {
-            Toast.makeText(
-                this@LoginFragment.context,
-                "Preencha todos os campos. ",
-                Toast.LENGTH_LONG
-            ).show()
         }
 
-        return false
-//        Log.d("Main", "A senha é: $password")
     }
-
 
     fun String.isEmailValid(): Boolean {
         return !TextUtils.isEmpty(this) && android.util.Patterns.EMAIL_ADDRESS.matcher(this)
             .matches()
     }
 
-
     private fun isValidForm(email: String, password: String): Boolean {
 
-        if (email.isBlank()) {
-            return false
+        when {
+            email.isEmpty() && !email.isEmailValid() -> {
+                binding.tlEmail.helperText = getString(R.string.obrigatory_field)
+                binding.tlEmail.boxStrokeColor = Color.parseColor("#FF0000")
+                return false
+            }
+            password.isEmpty() -> {
+                binding.tlPassword.helperText = getString(R.string.obrigatory_field)
+                binding.tlPassword.boxStrokeColor = Color.parseColor("#FF0000")
+                return false
+            }
+            else -> {
+                return true
+            }
+
         }
 
-        if (password.isBlank()) {
-            return false
-        }
-
-        if (!email.isEmailValid()) {
-            return false
-        }
-
-        return true
     }
 
     private fun setLoadingProgressbar() {

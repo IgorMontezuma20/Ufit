@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.app.ufit.ui.login.LoginFragment"
+        android:name="com.app.ufit.ui.fragments.login.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_registerFragment2"
@@ -38,7 +38,7 @@
     </fragment>
     <fragment
         android:id="@+id/exercisesFragment"
-        android:name="com.app.ufit.ExercisesFragment"
+        android:name="com.app.ufit.ui.fragments.exercise.ExercisesFragment"
         android:label="fragment_exercises"
         tools:layout="@layout/fragment_exercises" >
         <action

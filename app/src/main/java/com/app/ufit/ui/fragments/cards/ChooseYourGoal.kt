@@ -1,7 +1,8 @@
-package com.app.ufit
+package com.app.ufit.ui.fragments.cards
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.app.ufit.R
 
 class ChooseYourGoal : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

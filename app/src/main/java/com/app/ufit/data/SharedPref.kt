@@ -1,4 +1,4 @@
-package com.app.ufit
+package com.app.ufit.data
 
 import android.app.Application
 import android.content.Context
