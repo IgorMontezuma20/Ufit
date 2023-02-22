@@ -117,4 +117,7 @@ dependencies {
 
     //Loading animation
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+
+    //splash animation
+    implementation 'com.airbnb.android:lottie:3.4.4'
 }
