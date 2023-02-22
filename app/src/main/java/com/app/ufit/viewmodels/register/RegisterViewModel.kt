@@ -4,15 +4,11 @@ import android.app.Application
 import android.content.ContentValues.TAG
 import android.util.Log
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.app.ufit.models.ResponseHttp
 import com.app.ufit.models.User
 import com.app.ufit.provider.UsersProvider
-import com.app.ufit.ui.fragments.register.RegisterFragment
-import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.scopes.ViewModelScoped

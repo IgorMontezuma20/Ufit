@@ -1,4 +1,4 @@
-package com.app.ufit.ui.login
+package com.app.ufit.ui.fragments.login
 
 import android.content.Context
 import android.os.Bundle

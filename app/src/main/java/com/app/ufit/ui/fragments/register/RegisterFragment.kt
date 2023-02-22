@@ -1,31 +1,20 @@
 package com.app.ufit.ui.fragments.register
 
+import android.graphics.Color
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.app.ufit.R
 import com.app.ufit.databinding.FragmentRegisterBinding
-import com.app.ufit.models.ResponseHttp
 import com.app.ufit.models.User
-import com.app.ufit.provider.UsersProvider
-import com.app.ufit.util.NetworkResult
-import com.app.ufit.viewmodels.MainViewModel
 import com.app.ufit.viewmodels.register.RegisterViewModel
-import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class RegisterFragment : Fragment() {
@@ -97,41 +86,81 @@ class RegisterFragment : Fragment() {
         confirmedPass: String
     ): Boolean {
 
-        if (name.isBlank()) {
-            Toast.makeText(context, "Necessita Colocar um Nome ", Toast.LENGTH_SHORT).show()
-            return false
-        }
-        if (lastname.isBlank()) {
-            Toast.makeText(context, "Necessita Colocar um Sobrenome ", Toast.LENGTH_SHORT).show()
-            return false
+
+        when {
+            name.isEmpty()->{
+                binding.tlName.helperText = getString(R.string.obrigatory_field)
+                binding.tlName.boxStrokeColor= Color.parseColor("#FF0000")
+                return false
+            }
+            lastname.isEmpty()->{
+                binding.tlLastname.helperText = getString(R.string.obrigatory_field)
+                binding.tlLastname.boxStrokeColor= Color.parseColor("#FF0000")
+                return false
+            }
+            email.isEmpty()->{
+                binding.tlEmail.helperText = getString(R.string.obrigatory_field)
+                binding.tlEmail.boxStrokeColor= Color.parseColor("#FF0000")
+                return false
+            }
+            password.isEmpty()->{
+                binding.tlPassword.helperText = getString(R.string.obrigatory_field)
+                binding.tlPassword.boxStrokeColor= Color.parseColor("#FF0000")
+                return false
+            }
+            confirmedPass.isEmpty()->{
+                binding.tlPasswordConfirmation.helperText = getString(R.string.obrigatory_field)
+                binding.tlPasswordConfirmation.boxStrokeColor= Color.parseColor("#FF0000")
+                return false
+            }
+
+            password != confirmedPass -> {
+                binding.tlPasswordConfirmation.helperText = getString(R.string.password_dont_match)
+                binding.tlPasswordConfirmation.boxStrokeColor= Color.parseColor("#FF0000")
+                return false
+            }
+
+            else -> {
+              return true
+            }
         }
 
-        if (email.isBlank()) {
-            Toast.makeText(context, "Necessita Colocar um Email  ", Toast.LENGTH_SHORT).show()
-            return false
-        }
-        if (password.isBlank()) {
-            Toast.makeText(context, "Necessita Colocar uma Senha ", Toast.LENGTH_SHORT).show()
-            return false
-        }
-        if (confirmedPass.isBlank()) {
-            Toast.makeText(
-                context,
-                "Necessita Colocar uma confirmação de Senha ",
-                Toast.LENGTH_SHORT
-            )
-                .show()
-            return false
-        }
-        if (!email.isEmailValid()) {
-            return false
 
-        }
-        if (password != confirmedPass) {
-            Toast.makeText(context, "As Senhas não coincidem ", Toast.LENGTH_SHORT).show()
-            return false
-        }
-        return true
+//        if (name.isBlank()) {
+//            Toast.makeText(context, "Necessita Colocar um Nome ", Toast.LENGTH_SHORT).show()
+//            return false
+//        }
+//        if (lastname.isBlank()) {
+//            Toast.makeText(context, "Necessita Colocar um Sobrenome ", Toast.LENGTH_SHORT).show()
+//            return false
+//        }
+
+//        if (email.isBlank()) {
+//            Toast.makeText(context, "Necessita Colocar um Email  ", Toast.LENGTH_SHORT).show()
+//            return false
+//        }
+//        if (password.isBlank()) {
+//            Toast.makeText(context, "Necessita Colocar uma Senha ", Toast.LENGTH_SHORT).show()
+//            return false
+//        }
+//        if (confirmedPass.isBlank()) {
+//            Toast.makeText(
+//                context,
+//                "Necessita Colocar uma confirmação de Senha ",
+//                Toast.LENGTH_SHORT
+//            )
+//                .show()
+//            return false
+//        }
+//        if (!email.isEmailValid()) {
+//            return false
+//
+//        }
+//        if (password != confirmedPass) {
+//            Toast.makeText(context, "As Senhas não coincidem ", Toast.LENGTH_SHORT).show()
+//            return false
+//        }
+       // return true
     }
 
     private fun setLoadingProgressbar() {

@@ -1,16 +1,11 @@
 package com.app.ufit.viewmodels.login
 
 import android.app.Application
-import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.navigation.NavController
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.fragment.findNavController
-import com.app.ufit.R
-import com.app.ufit.SharedPref
+import com.app.ufit.data.SharedPref
 import com.app.ufit.models.ResponseHttp
 import com.app.ufit.models.User
 import com.app.ufit.provider.UsersProvider
