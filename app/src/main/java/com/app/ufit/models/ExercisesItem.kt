@@ -9,6 +9,8 @@ import kotlinx.parcelize.Parcelize
 data class ExercisesItem(
     @SerializedName("difficulty")
     val difficulty: String,
+//    @SerializedName("equipment")
+//    val equipment: String,
     @SerializedName("equipment")
     val equipment: String,
     @SerializedName("instructions")
