@@ -12,7 +12,6 @@
     <string name="choose_your_goal_title">Qual a sua meta ?</string>
     <string name="choose_your_goal_subtitle">Vai nos ajudar a escolher a melhor\nprogramação para você</string>
     <string name="confirm_button">Confirmar</string>
-<<<<<<< HEAD
     <string name="abdominals">Abdominals</string>
     <string name="abductors">Abductors</string>
     <string name="adductors">Adductors</string>
@@ -29,10 +28,8 @@
     <string name="quadriceps">Quadriceps</string>
     <string name="traps">Traps</string>
     <string name="triceps">Triceps</string>
-=======
     <string name="obrigatory_field">Campo obrigatório!</string>
     <string name="password_dont_match">As senhas não conferem!</string>
->>>>>>> main
 
 
 </resources>

@@ -43,7 +43,7 @@ class LoginFragment : Fragment() {
         setLoadingProgressbar()
 
         mLoginViewModel.success.observe(requireActivity()) {
-            findNavController().navigate(R.id.action_loginFragment_to_exercisesFragment)
+            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
         }
 
         binding.btnEntrar.setOnClickListener {

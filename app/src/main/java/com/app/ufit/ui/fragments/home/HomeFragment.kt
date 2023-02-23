@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.ufit.R
 import com.app.ufit.adapters.MuscleGroupAdapter
 import com.app.ufit.databinding.FragmentHomeBinding
+import com.app.ufit.ui.MainActivity
 import com.app.ufit.viewmodels.MainViewModel
 
 class HomeFragment : Fragment() {
@@ -25,12 +26,13 @@ class HomeFragment : Fragment() {
         super.onCreate(savedInstanceState)
         mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
 
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding  = FragmentHomeBinding.inflate(inflater, container, false)
 

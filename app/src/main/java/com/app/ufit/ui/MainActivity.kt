@@ -2,10 +2,12 @@ package com.app.ufit.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.app.ufit.R
 import com.app.ufit.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,19 +23,29 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        val navHostFragment = supportFragmentManager
-//            .findFragmentById(R.id.navHostFragment) as NavHostFragment
-//        navController = navHostFragment.navController
-//        val appBarConfiguration = AppBarConfiguration(
-//            setOf(
-//                R.id.E,
-//                R.id.favoriteRecipesFragment,
-//                R.id.foodJokeFragment
-//            )
-//        )
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.navHostFragment) as NavHostFragment
+        navController = navHostFragment.navController
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.homeFragment,
+                R.id.favoritesFragment,
+                R.id.profileFragment
+            )
+        )
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if(destination.id == R.id.splashFragment || destination.id == R.id.loginFragment ||
+                destination.id == R.id.registerFragment2 || destination.id == R.id.registerInfoFragment) {
 
-//        binding.bottomNavigationView.setupWithNavController(navController)
-//        setupActionBarWithNavController(navController, appBarConfiguration)
+                binding.bottomNavigationView.visibility = View.GONE
+            } else {
+
+               binding.bottomNavigationView.visibility = View.VISIBLE
+            }
+        }
+
+        binding.bottomNavigationView.setupWithNavController(navController)
+        setupActionBarWithNavController(navController, appBarConfiguration)
 
     }
 

@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/registerFragment2"
         android:name="com.app.ufit.ui.fragments.register.RegisterFragment"
-        android:label="fragment_register2"
+        android:label="Dados Adicionais"
         tools:layout="@layout/fragment_register">
         <action
             android:id="@+id/action_registerFragment2_to_registerInfoFragment"
@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/registerInfoFragment"
         android:name="com.app.ufit.ui.fragments.register.RegisterInfoFragment"
-        android:label="fragment_register_info"
+        android:label="Registro"
         tools:layout="@layout/fragment_register_info">
         <action
             android:id="@+id/action_registerInfoFragment_to_registerFragment2"
@@ -28,7 +28,7 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.app.ufit.ui.fragments.login.LoginFragment"
-        android:label="LoginFragment">
+        android:label="Login">
         <action
             android:id="@+id/action_loginFragment_to_registerFragment2"
             app:destination="@id/registerFragment2" />
@@ -43,7 +43,7 @@
     <fragment
         android:id="@+id/exercisesFragment"
         android:name="com.app.ufit.ui.fragments.exercise.ExercisesFragment"
-        android:label="fragment_exercises"
+        android:label="Exercícios"
         tools:layout="@layout/fragment_exercises">
         <action
             android:id="@+id/action_exercisesFragment_to_loginFragment"
@@ -62,12 +62,18 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.app.ufit.ui.fragments.home.HomeFragment"
-        android:label="fragment_home"
+        android:label="Home"
         tools:layout="@layout/fragment_home">
 
         <action
             android:id="@+id/action_homeFragment_to_exercisesFragment"
             app:destination="@id/exercisesFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
 
 
     </fragment>
@@ -75,10 +81,31 @@
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.app.ufit.ui.fragments.splash.SplashFragment"
-        android:label="fragment_splash"
+        android:label="Ufit"
         tools:layout="@layout/fragment_splash">
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.app.ufit.ui.fragments.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.app.ufit.ui.fragments.favorites.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_favoritesFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

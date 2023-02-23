@@ -9,7 +9,9 @@ import android.os.Handler
 import android.os.Looper
 import androidx.navigation.fragment.findNavController
 import com.app.ufit.R
+import com.app.ufit.databinding.FragmentHomeBinding
 import com.app.ufit.databinding.FragmentSplashBinding
+import com.app.ufit.ui.MainActivity
 
 
 private var _binding: FragmentSplashBinding? = null
@@ -27,6 +29,13 @@ class SplashFragment : Fragment() {
 
 
         binding.ltAnimation
+
+//        val bottomNavView = binding?
+//        if (activity is MainActivity) {
+//            bottomNavView?.visibility = View.VISIBLE
+//        } else {
+//            bottomNavView?.visibility = View.GONE
+//        }
 
         Handler(Looper.getMainLooper()).postDelayed({
 
