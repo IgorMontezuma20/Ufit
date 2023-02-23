@@ -11,8 +11,8 @@ data class ExercisesItem(
     val difficulty: String,
 //    @SerializedName("equipment")
 //    val equipment: String,
-//    @SerializedName("instructions")
-//    val instructions: String,
+    @SerializedName("instructions")
+    val instructions: String,
     @SerializedName("muscle")
     val muscle: String,
     @SerializedName("name")
