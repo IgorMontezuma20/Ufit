@@ -70,5 +70,10 @@ class HomeFragment : Fragment() {
         mAdapter.setData(listMuscleGroup)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 
 }

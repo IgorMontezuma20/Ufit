@@ -30,6 +30,16 @@ class LoginFragment : Fragment() {
 
     private lateinit var mLoginViewModel: LoginViewModel
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        mLoginViewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
+
+        mLoginViewModel.success.observe(requireActivity()) {
+            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+        }
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,13 +48,7 @@ class LoginFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
-        mLoginViewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
-
         setLoadingProgressbar()
-
-        mLoginViewModel.success.observe(requireActivity()) {
-            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-        }
 
         binding.btnEntrar.setOnClickListener {
             loginCheckFields()
@@ -108,6 +112,11 @@ class LoginFragment : Fragment() {
                 binding.progressBar.visibility = View.GONE
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 

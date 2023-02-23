@@ -28,7 +28,9 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.app.ufit.ui.fragments.login.LoginFragment"
-        android:label="Login">
+        android:label="Login"
+        tools:layout="@layout/fragment_login">
+
         <action
             android:id="@+id/action_loginFragment_to_registerFragment2"
             app:destination="@id/registerFragment2" />
@@ -86,6 +88,9 @@
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"

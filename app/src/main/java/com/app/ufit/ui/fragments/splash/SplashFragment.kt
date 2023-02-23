@@ -7,17 +7,21 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import android.os.Handler
 import android.os.Looper
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.app.ufit.R
 import com.app.ufit.databinding.FragmentHomeBinding
 import com.app.ufit.databinding.FragmentSplashBinding
 import com.app.ufit.ui.MainActivity
+import com.app.ufit.viewmodels.login.LoginViewModel
 
-
-private var _binding: FragmentSplashBinding? = null
-private val binding get() = _binding!!
 
 class SplashFragment : Fragment() {
+
+    private var _binding: FragmentSplashBinding? = null
+    private val binding get() = _binding!!
+
+    private lateinit var mLoginViewModel: LoginViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +30,7 @@ class SplashFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentSplashBinding.inflate(inflater, container, false)
 
-
+        mLoginViewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
 
         binding.ltAnimation
 
@@ -39,7 +43,11 @@ class SplashFragment : Fragment() {
 
         Handler(Looper.getMainLooper()).postDelayed({
 
-            findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+            if (mLoginViewModel.verifyLoggedIn()) {
+                findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+            } else {
+                findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+            }
 
         }, 3000)
 
