@@ -1,4 +1,4 @@
-package com.app.ufit
+package com.app.ufit.ui.fragments.exercise
 
 import android.os.Bundle
 import android.util.Log
