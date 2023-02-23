@@ -23,7 +23,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 class ExercisesFragment : Fragment() {
 
     private lateinit var mainViewModel: MainViewModel
-
     private var _binding: FragmentExercisesBinding? = null
     private val binding get() = _binding!!
 
@@ -34,7 +33,6 @@ class ExercisesFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
-
     }
 
     override fun onCreateView(
@@ -44,12 +42,6 @@ class ExercisesFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentExercisesBinding.inflate(inflater, container, false)
 
-        //mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
-
-        val exercise = args.muscle as String
-        Toast.makeText(requireContext(), exercise,
-            Toast.LENGTH_SHORT
-        ).show()
         requestApiData()
         setupRecyclerView()
 
@@ -67,7 +59,7 @@ class ExercisesFragment : Fragment() {
                     Log.d("listSize", response.data?.size.toString())
                 }
                 is NetworkResult.Error -> {
-                   // hideShimmerEffect()
+                    // hideShimmerEffect()
                     //loadDataFromCache()
                     Toast.makeText(
                         requireContext(),
@@ -76,7 +68,7 @@ class ExercisesFragment : Fragment() {
                     ).show()
                 }
                 is NetworkResult.Loading -> {
-                   // showShimmerEffect()
+                    // showShimmerEffect()
                 }
             }
 
@@ -85,9 +77,14 @@ class ExercisesFragment : Fragment() {
 
     private fun applyQueries(): HashMap<String, String> {
         val queries: HashMap<String, String> = HashMap()
+        var exercise = args.muscle as String
 
-//        queries["number"] = "10"
-//        queries["x-api-key"] = API_KEY
+        if (exercise.equals("Lower back")) {
+            exercise = "lower_back"
+        } else if (exercise.equals("Middle back")) {
+            exercise = "middle_back"
+        }
+        queries["muscle"] = exercise.lowercase()
 
         return queries
     }
@@ -95,7 +92,6 @@ class ExercisesFragment : Fragment() {
     private fun setupRecyclerView() {
         binding.recyclerView.adapter = mAdapter
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
     }
 
 //    private fun showShimmerEffect() {
