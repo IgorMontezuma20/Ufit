@@ -23,6 +23,6 @@ interface UsersRoutes {
     )
     @GET("/getImage")
     fun getImage(
-        @QueryMap queries: Map<String, String>
+        @Query("muscleGroups") muscleGroups: String
     ): Call<ResponseHttp>
 }

@@ -35,14 +35,11 @@ class ExerciseDetailsFragment : Fragment() {
 
         mExerciseDetailsViewModel = ViewModelProvider(requireActivity())[ExerciseDetailsViewModel::class.java]
 
-        val args: ExerciseDetailsFragmentArgs by navArgs()
-        val myBundle: ExercisesItem? = args.data
+        callComponents()
+        requestApiData()
 
         //binding.ivMuscle.load()
-        binding.tvExerciseTitle.text = myBundle?.name
-        binding.tvMuscleName.text = myBundle?.muscle
-        binding.tvDifficultyLevel.text = myBundle?.difficulty
-        binding.tvInstructions.text = myBundle?.instructions
+
 
         return binding.root
     }
@@ -82,6 +79,17 @@ class ExerciseDetailsFragment : Fragment() {
         queries["muscleGroups"] = myBundle?.name as String
 
         return queries
+    }
+
+    private fun callComponents(){
+
+        val args: ExerciseDetailsFragmentArgs by navArgs()
+        val myBundle: ExercisesItem? = args.data
+
+        binding.tvExerciseTitle.text = myBundle?.name
+        binding.tvMuscleName.text = myBundle?.muscle
+        binding.tvDifficultyLevel.text = myBundle?.difficulty
+        binding.tvInstructions.text = myBundle?.instructions
     }
 
 

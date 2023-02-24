@@ -37,8 +37,8 @@ class UsersProvider @Inject constructor() {
         return  usersRoutes?.login(email, password)
     }
 
-    suspend fun exercisesImageApi(queries: Map<String, String>): Call<ResponseHttp>? {
-        return imageRoutes?.getImage(queries)
+    suspend fun exercisesImageApi(muscleGroups: String): Call<ResponseHttp>? {
+        return imageRoutes?.getImage(muscleGroups)
     }
 
 }
