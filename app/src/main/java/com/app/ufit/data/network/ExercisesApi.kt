@@ -14,7 +14,7 @@ interface ExercisesApi {
     @GET("/v1/exercises")
 
     suspend fun getExercises(
-       @QueryMap queries: Map<String, String>
+        @QueryMap queries: Map<String, String>
 
     ): Response<List<ExercisesItem>>
 

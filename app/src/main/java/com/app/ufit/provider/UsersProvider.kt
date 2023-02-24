@@ -10,15 +10,18 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Call
+import retrofit2.Response
 import javax.inject.Inject
 
 class UsersProvider @Inject constructor() {
 
     private var usersRoutes : UsersRoutes? = null
+    private var imageRoutes: UsersRoutes? = null
 
     init{
         val api = ApiRoutes()
         usersRoutes = api.getUsersRouters()
+        imageRoutes = api.getImagesRoutes()
 
     }
 
@@ -33,4 +36,9 @@ class UsersProvider @Inject constructor() {
 
         return  usersRoutes?.login(email, password)
     }
+
+    suspend fun exercisesImageApi(queries: Map<String, String>): Call<ResponseHttp>? {
+        return imageRoutes?.getImage(queries)
+    }
+
 }
