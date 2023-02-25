@@ -2,21 +2,22 @@ package com.app.ufit.ui.fragments.exercise
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.ufit.adapters.ExercisesAdapter
 import com.app.ufit.databinding.FragmentExercisesBinding
-import com.app.ufit.ui.fragments.home.HomeFragment
 import com.app.ufit.util.NetworkResult
 import com.app.ufit.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
@@ -44,8 +45,22 @@ class ExercisesFragment : Fragment() {
 
         requestApiData()
         setupRecyclerView()
+        readDatabase()
 
         return binding.root
+    }
+
+    private fun readDatabase() {
+        lifecycleScope.launch {
+            mainViewModel.readExercises.observe(viewLifecycleOwner) { database ->
+                if (database.isNotEmpty() && !args.backFromBottomSheet) {
+                    Log.d("RecipesFragment", "readDatabase called")
+                    mAdapter.setData(listOf(database[0].ExercisesItem))
+                } else {
+                    requestApiData()
+                }
+            }
+        }
     }
 
     private fun requestApiData() {

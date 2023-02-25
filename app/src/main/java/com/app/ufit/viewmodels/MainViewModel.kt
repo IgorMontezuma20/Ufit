@@ -5,10 +5,9 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.app.ufit.data.Repository
+import com.app.ufit.data.database.entities.ExercisesEntity
 import com.app.ufit.models.ExercisesItem
 import com.app.ufit.util.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,6 +23,9 @@ class MainViewModel @Inject constructor(
 
 
     var exercisesResponse: MutableLiveData<NetworkResult<List<ExercisesItem>>> = MutableLiveData()
+
+    //Room
+    val readExercises : LiveData<List<ExercisesEntity>> = repository.local.readExercises().asLiveData()
 
     fun getExercises(queries: Map<String, String>) = viewModelScope.launch {
 

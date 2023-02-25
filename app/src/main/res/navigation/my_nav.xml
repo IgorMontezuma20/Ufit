@@ -59,6 +59,10 @@
             android:name="muscle"
             app:argType="string"
             app:nullable="true" />
+        <argument
+            android:name="backFromBottomSheet"
+            app:argType="boolean"
+            android:defaultValue="false" />
         <action
             android:id="@+id/action_exercisesFragment_to_exerciseDetailsFragment"
             app:destination="@id/exerciseDetailsFragment" />

@@ -121,4 +121,6 @@ dependencies {
     //splash animation
     implementation 'com.airbnb.android:lottie:3.4.4'
 
+    implementation "androidx.fragment:fragment-ktx:1.5.5"
+
 }
