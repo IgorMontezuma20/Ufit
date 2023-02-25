@@ -33,7 +33,8 @@ class ExerciseDetailsFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentExerciseDetailsBinding.inflate(inflater, container, false)
 
-        mExerciseDetailsViewModel = ViewModelProvider(requireActivity())[ExerciseDetailsViewModel::class.java]
+        mExerciseDetailsViewModel =
+            ViewModelProvider(requireActivity())[ExerciseDetailsViewModel::class.java]
 
         callComponents()
         requestApiData()
@@ -45,43 +46,27 @@ class ExerciseDetailsFragment : Fragment() {
     }
 
     private fun requestApiData() {
-        Log.d("ExercisesFragment", "request api data called")
-        mExerciseDetailsViewModel.getImage(applyQueries())
+        val args: ExerciseDetailsFragmentArgs by navArgs()
+        val myBundle: ExercisesItem? = args.data
+        mExerciseDetailsViewModel.getImage(myBundle?.muscle as String)
         mExerciseDetailsViewModel.imageResponse.observe(viewLifecycleOwner) { response ->
-            when (response) {
-                is NetworkResult.Success -> {
-                    //hideShimmerEffect()
-                    response.data?.let { binding.ivMuscle.load(it) }
-                }
-                is NetworkResult.Error -> {
-                    // hideShimmerEffect()
-                    //loadDataFromCache()
-                    Toast.makeText(
-                        requireContext(),
-                        response.message.toString(),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                is NetworkResult.Loading -> {
-                    // showShimmerEffect()
-                }
-            }
+
+            binding.ivMuscle.load(response)
 
         }
     }
 
-    private fun applyQueries(): HashMap<String, String> {
-        val queries: HashMap<String, String> = HashMap()
-        val args: ExerciseDetailsFragmentArgs by navArgs()
-        val myBundle: ExercisesItem? = args.data
+//    private fun applyQueries(): HashMap<String, String> {
+//        val queries: HashMap<String, String> = HashMap()
+//
+//
+//
+//        queries["muscleGroups"] = myBundle?.name as String
+//
+//        return queries
+//    }
 
-
-        queries["muscleGroups"] = myBundle?.name as String
-
-        return queries
-    }
-
-    private fun callComponents(){
+    private fun callComponents() {
 
         val args: ExerciseDetailsFragmentArgs by navArgs()
         val myBundle: ExercisesItem? = args.data

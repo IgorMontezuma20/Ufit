@@ -9,16 +9,17 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.components.SingletonComponent
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
 import javax.inject.Inject
 
 class UsersProvider @Inject constructor() {
 
-    private var usersRoutes : UsersRoutes? = null
+    private var usersRoutes: UsersRoutes? = null
     private var imageRoutes: UsersRoutes? = null
 
-    init{
+    init {
         val api = ApiRoutes()
         usersRoutes = api.getUsersRouters()
         imageRoutes = api.getImagesRoutes()
@@ -26,18 +27,17 @@ class UsersProvider @Inject constructor() {
     }
 
 
+    fun register(user: User): Call<ResponseHttp>? {
 
-    fun register(user: User): Call<ResponseHttp>?{
-
-        return  usersRoutes?.register(user)
+        return usersRoutes?.register(user)
     }
 
-    fun login(email:String,password:String):Call<ResponseHttp>?{
+    fun login(email: String, password: String): Call<ResponseHttp>? {
 
-        return  usersRoutes?.login(email, password)
+        return usersRoutes?.login(email, password)
     }
 
-    suspend fun exercisesImageApi(muscleGroups: String): Call<ResponseHttp>? {
+    fun exercisesImageApi(muscleGroups: String): Call<ResponseBody>? {
         return imageRoutes?.getImage(muscleGroups)
     }
 

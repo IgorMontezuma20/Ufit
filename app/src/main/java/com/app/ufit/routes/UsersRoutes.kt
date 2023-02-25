@@ -2,6 +2,7 @@ package com.app.ufit.routes
 
 import com.app.ufit.models.ResponseHttp
 import com.app.ufit.models.User
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
@@ -24,5 +25,5 @@ interface UsersRoutes {
     @GET("/getImage")
     fun getImage(
         @Query("muscleGroups") muscleGroups: String
-    ): Call<ResponseHttp>
+    ): Call<ResponseBody>
 }
