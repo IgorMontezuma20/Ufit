@@ -30,6 +30,7 @@
     <string name="triceps">Triceps</string>
     <string name="obrigatory_field">Campo obrigatório!</string>
     <string name="password_dont_match">As senhas não conferem!</string>
+    <string name="muscular_group_image">Imagem do grupamento muscular</string>
 
 
 </resources>

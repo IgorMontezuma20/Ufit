@@ -9,8 +9,9 @@ class RemoteDataSource @Inject constructor(
     private val exercisesApi: ExercisesApi
 ) {
 
-    suspend fun getExercises(queries: Map<String, String>): Response<List<ExercisesItem>>{
-       return exercisesApi.getExercises(queries)
+    suspend fun getExercises(queries: Map<String, String>): Response<List<ExercisesItem>> {
+        return exercisesApi.getExercises(queries)
     }
+
 
 }
