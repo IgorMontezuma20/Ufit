@@ -25,8 +25,8 @@ class RegisterFragment : Fragment() {
 
     lateinit var mRegisterViewModel: RegisterViewModel
 
-    private var _registerInfoBinding: FragmentRegisterInfoBinding? = null
-    private val registerInfoBinding get() = _registerInfoBinding!!
+//    private var _registerInfoBinding: FragmentRegisterInfoBinding? = null
+//    private val registerInfoBinding get() = _registerInfoBinding!!
 
 
     override fun onCreateView(
@@ -39,7 +39,7 @@ class RegisterFragment : Fragment() {
         mRegisterViewModel = ViewModelProvider(requireActivity())[RegisterViewModel::class.java]
         //mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
 
-        _registerInfoBinding = FragmentRegisterInfoBinding.inflate(inflater, container, false)
+        //_registerInfoBinding = FragmentRegisterInfoBinding.inflate(inflater, container, false)
 
         setLoadingProgressbar()
         mRegisterViewModel.success.observe(requireActivity()) {
@@ -59,14 +59,14 @@ class RegisterFragment : Fragment() {
 
         val name = binding.etName.text.toString()
         val lastname = binding.etLastname.text.toString()
-        val gender = registerInfoBinding.acGender.toString()
+        //val gender = registerInfoBinding.acGender.toString()
         val email = binding.etEmail.text.toString()
         val password = binding.etPassword.text.toString()
         val confirmedPass = binding.etPasswordConfirmation.text.toString()
 
-        if (isValidForm(name, lastname, gender , email, password, confirmedPass)) {
+        if (isValidForm(name, lastname, email, password, confirmedPass)) {
 
-           findNavController().navigate(R.id.action_registerFragment2_to_registerInfoFragment)
+            findNavController().navigate(R.id.action_registerFragment2_to_registerInfoFragment)
 
         }
 
@@ -81,7 +81,6 @@ class RegisterFragment : Fragment() {
     private fun isValidForm(
         name: String,
         lastname: String,
-        gender: String,
         email: String,
         password: String,
         confirmedPass: String
@@ -97,11 +96,6 @@ class RegisterFragment : Fragment() {
             lastname.isEmpty() -> {
                 binding.tlLastname.helperText = getString(R.string.obrigatory_field)
                 binding.tlLastname.boxStrokeColor = Color.parseColor("#FF0000")
-                return false
-            }
-            gender.isEmpty() -> {
-                registerInfoBinding.tlGender.helperText = getString(R.string.obrigatory_field)
-                registerInfoBinding.tlGender.boxStrokeColor = Color.parseColor("#FF0000")
                 return false
             }
             email.isEmpty() && !email.isEmailValid() -> {

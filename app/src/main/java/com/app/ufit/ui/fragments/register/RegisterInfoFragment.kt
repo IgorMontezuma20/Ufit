@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -12,7 +13,6 @@ import com.app.ufit.R
 import com.app.ufit.databinding.FragmentRegisterInfoBinding
 import com.app.ufit.models.User
 import com.app.ufit.viewmodels.register.RegisterInfoViewModel
-import com.app.ufit.viewmodels.register.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,6 +23,7 @@ class RegisterInfoFragment : Fragment() {
 
     private lateinit var mRegisterInfoViewModel: RegisterInfoViewModel
 
+    private var gender = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,20 +32,25 @@ class RegisterInfoFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentRegisterInfoBinding.inflate(inflater, container, false)
 
-        mRegisterInfoViewModel = ViewModelProvider(requireActivity())[RegisterInfoViewModel::class.java]
+        mRegisterInfoViewModel =
+            ViewModelProvider(requireActivity())[RegisterInfoViewModel::class.java]
 
         startComponents()
 
-        val gender = resources.getStringArray(R.array.gender)
+        val genders = resources.getStringArray(R.array.gender)
         val adapter = ArrayAdapter<String>(
             requireContext(),
             android.R.layout.simple_spinner_dropdown_item,
-            gender
+            genders
         )
         binding.acGender.setAdapter(adapter)
 
         binding.btnRegister.setOnClickListener {
             createAccount()
+        }
+
+        binding.acGender.setOnItemClickListener { adapterView: AdapterView<*>, view2: View, i: Int, l: Long ->
+            gender = adapterView.getItemAtPosition(i).toString()
         }
 
         return binding.root
@@ -71,18 +77,18 @@ class RegisterInfoFragment : Fragment() {
     }
 
     private fun createAccount() {
-        val genderChoice = binding.acGender.toString()
+        //val genderChoice =
         val birthDay = binding.etBirth.toString()
         val weight = binding.etWeight.toString()
         val height = binding.etHeight.toString()
 
-        isValidForm(genderChoice)
+        isValidForm(gender)
 
         mRegisterInfoViewModel.registerUser(
             user = User(
                 name = "",
                 lastName = "",
-                gender = genderChoice,
+                gender = gender,
                 email = "",
                 password = "",
 //                birthDay = birthDay,
