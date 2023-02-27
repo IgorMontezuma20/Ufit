@@ -9,7 +9,7 @@ import com.app.ufit.util.ExercisesTypeConverter
 
 @Database(
     entities = [ExercisesEntity::class, FavoritesEntity::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters(ExercisesTypeConverter::class)

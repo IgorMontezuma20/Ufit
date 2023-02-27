@@ -21,13 +21,13 @@ class ExercisesTypeConverter {
     }
 
     @TypeConverter
-    fun resultToString(exercisesItem: ExercisesItem): String {
+    fun exerciseItemToString(exercisesItem: List<ExercisesItem>): String {
         return gson.toJson(exercisesItem)
     }
 
     @TypeConverter
-    fun stringToResult(data: String): ExercisesItem {
-        val listType = object : TypeToken<ExercisesItem>() {}.type
+    fun stringToExerciseItem(data: String): List<ExercisesItem> {
+        val listType = object : TypeToken<List<ExercisesItem>>() {}.type
         return gson.fromJson(data, listType)
     }
 

@@ -55,7 +55,7 @@ class ExercisesFragment : Fragment() {
             mainViewModel.readExercises.observe(viewLifecycleOwner) { database ->
                 if (database.isNotEmpty() && !args.backFromBottomSheet) {
                     Log.d("RecipesFragment", "readDatabase called")
-                    mAdapter.setData(listOf(database[0].ExercisesItem))
+                    mAdapter.setData(database.first().ExercisesItem)
                 } else {
                     requestApiData()
                 }

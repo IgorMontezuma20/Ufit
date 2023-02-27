@@ -8,7 +8,7 @@ import com.app.ufit.util.Constants.Companion.EXERCISES_TABLE
 
 @Entity(tableName = EXERCISES_TABLE)
 class ExercisesEntity(
-    var ExercisesItem: ExercisesItem
+    var ExercisesItem: List<ExercisesItem>
 ) {
 
     @PrimaryKey(autoGenerate = false)

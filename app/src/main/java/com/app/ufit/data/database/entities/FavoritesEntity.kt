@@ -11,6 +11,6 @@ class FavoritesEntity(
 
     @PrimaryKey(autoGenerate = true)
     var id: Int,
-    var exercisesItem: ExercisesItem
+    //var exercisesItem: ExercisesItem
 
 )
