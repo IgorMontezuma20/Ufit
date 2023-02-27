@@ -32,5 +32,11 @@
     <string name="password_dont_match">As senhas não conferem!</string>
     <string name="muscular_group_image">Imagem do grupamento muscular</string>
 
+    <string-array name="gender">
+        <item>masculino</item>
+        <item>feminino</item>
+        <item>outro</item>
+    </string-array>
+
 
 </resources>

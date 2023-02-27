@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.app.ufit.R
 import com.app.ufit.databinding.FragmentRegisterBinding
+import com.app.ufit.databinding.FragmentRegisterInfoBinding
 import com.app.ufit.models.User
 import com.app.ufit.viewmodels.register.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,6 +25,9 @@ class RegisterFragment : Fragment() {
 
     lateinit var mRegisterViewModel: RegisterViewModel
 
+    private var _registerInfoBinding: FragmentRegisterInfoBinding? = null
+    private val registerInfoBinding get() = _registerInfoBinding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,12 +39,14 @@ class RegisterFragment : Fragment() {
         mRegisterViewModel = ViewModelProvider(requireActivity())[RegisterViewModel::class.java]
         //mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
 
+        _registerInfoBinding = FragmentRegisterInfoBinding.inflate(inflater, container, false)
+
         setLoadingProgressbar()
         mRegisterViewModel.success.observe(requireActivity()) {
             findNavController().navigate(R.id.action_registerFragment2_to_registerInfoFragment)
         }
 
-        binding.button.setOnClickListener {
+        binding.btnNext.setOnClickListener {
             register()
 
         }
@@ -53,20 +59,14 @@ class RegisterFragment : Fragment() {
 
         val name = binding.etName.text.toString()
         val lastname = binding.etLastname.text.toString()
+        val gender = registerInfoBinding.acGender.toString()
         val email = binding.etEmail.text.toString()
         val password = binding.etPassword.text.toString()
         val confirmedPass = binding.etPasswordConfirmation.text.toString()
 
-        if (isValidForm(name, lastname, email, password, confirmedPass)) {
+        if (isValidForm(name, lastname, gender , email, password, confirmedPass)) {
 
-            mRegisterViewModel.registerUser(
-                user = User(
-                    name = name,
-                    lastName = lastname,
-                    email = email,
-                    password = password
-                )
-            )
+           findNavController().navigate(R.id.action_registerFragment2_to_registerInfoFragment)
 
         }
 
@@ -81,6 +81,7 @@ class RegisterFragment : Fragment() {
     private fun isValidForm(
         name: String,
         lastname: String,
+        gender: String,
         email: String,
         password: String,
         confirmedPass: String
@@ -96,6 +97,11 @@ class RegisterFragment : Fragment() {
             lastname.isEmpty() -> {
                 binding.tlLastname.helperText = getString(R.string.obrigatory_field)
                 binding.tlLastname.boxStrokeColor = Color.parseColor("#FF0000")
+                return false
+            }
+            gender.isEmpty() -> {
+                registerInfoBinding.tlGender.helperText = getString(R.string.obrigatory_field)
+                registerInfoBinding.tlGender.boxStrokeColor = Color.parseColor("#FF0000")
                 return false
             }
             email.isEmpty() && !email.isEmailValid() -> {
