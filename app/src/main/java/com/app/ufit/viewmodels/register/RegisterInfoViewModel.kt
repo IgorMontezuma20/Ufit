@@ -38,8 +38,7 @@ class RegisterInfoViewModel  @Inject constructor(
 
                 Toast.makeText(
                     getApplication(),
-//                    response.body()?.message,
-                    "Ocorreu um erro",
+                    response.body()?.message,
                     Toast.LENGTH_LONG
                 ).show()
                 Log.d(ContentValues.TAG, "Response: ${response}")

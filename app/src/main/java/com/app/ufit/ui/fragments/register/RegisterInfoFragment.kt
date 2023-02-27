@@ -9,6 +9,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import com.app.ufit.R
 import com.app.ufit.databinding.FragmentRegisterInfoBinding
 import com.app.ufit.models.User
@@ -24,6 +25,8 @@ class RegisterInfoFragment : Fragment() {
     private lateinit var mRegisterInfoViewModel: RegisterInfoViewModel
 
     private var gender = ""
+
+    private val args: RegisterInfoFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -84,18 +87,10 @@ class RegisterInfoFragment : Fragment() {
 
         isValidForm(gender)
 
+        val user = args.user as User
+        user.gender = gender
         mRegisterInfoViewModel.registerUser(
-            user = User(
-                name = "",
-                lastName = "",
-                gender = gender,
-                email = "",
-                password = "",
-//                birthDay = birthDay,
-//                weight = weight,
-//                email = email,
-//                password = password
-            )
+            user
         )
 
     }
