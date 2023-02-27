@@ -10,6 +10,12 @@ class Constants {
         const val IMAGE_BASE_URL = "https://muscle-group-image-generator.p.rapidapi.com"
 
 
+        //Room
+        const val DATABASE_NAME = "exercises_database"
+        const val EXERCISES_TABLE = "exercises_table"
+        const val FAVORITE_EXERCISES_TABLE = "favorite_exercises_table"
+
+
     }
 
 }
