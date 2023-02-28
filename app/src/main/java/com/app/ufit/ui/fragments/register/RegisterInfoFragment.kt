@@ -25,6 +25,8 @@ class RegisterInfoFragment : Fragment() {
     private lateinit var mRegisterInfoViewModel: RegisterInfoViewModel
 
     private var gender = ""
+    private var weight = ""
+    private var height = ""
 
     private val args: RegisterInfoFragmentArgs by navArgs()
 
@@ -38,7 +40,7 @@ class RegisterInfoFragment : Fragment() {
         mRegisterInfoViewModel =
             ViewModelProvider(requireActivity())[RegisterInfoViewModel::class.java]
 
-        startComponents()
+//        startComponents()
 
         val genders = resources.getStringArray(R.array.gender)
         val adapter = ArrayAdapter<String>(
@@ -56,6 +58,7 @@ class RegisterInfoFragment : Fragment() {
             gender = adapterView.getItemAtPosition(i).toString()
         }
 
+
         return binding.root
     }
 
@@ -70,25 +73,27 @@ class RegisterInfoFragment : Fragment() {
 //    )
 //    )
 
-    private fun startComponents() {
-        val genderChoice = binding.acGender
-        val birthDay = binding.etBirth
-        val weight = binding.etWeight
-        val height = binding.etHeight
-        //val registerButton = binding.button
-
-    }
+//    private fun startComponents() {
+//        val genderChoice = binding.acGender
+//        val birthDay = binding.etBirth
+//        val weight = binding.etWeight
+//        val height = binding.etHeight
+//        //val registerButton = binding.button
+//
+//    }
 
     private fun createAccount() {
         //val genderChoice =
-        val birthDay = binding.etBirth.toString()
-        val weight = binding.etWeight.toString()
-        val height = binding.etHeight.toString()
+//        val birthDay = binding.etBirth.toString()
+        weight = binding.etWeight.text.toString()
+        height = binding.etHeight.text.toString()
 
-        isValidForm(gender)
+        isValidForm(gender, weight, height)
 
         val user = args.user as User
         user.gender = gender
+        user.weight = weight
+        user.height = height
         mRegisterInfoViewModel.registerUser(
             user
         )
@@ -98,8 +103,8 @@ class RegisterInfoFragment : Fragment() {
     private fun isValidForm(
         gender: String,
 //        birthDay: String,
-//        weight: String,
-//        height: String,
+        weight: String,
+        height: String,
     ): Boolean {
 
 
@@ -114,16 +119,16 @@ class RegisterInfoFragment : Fragment() {
 //                binding.tlBirth.boxStrokeColor = Color.parseColor("#FF0000")
 //                return false
 //            }
-//            weight.isEmpty() -> {
-//                binding.tlWeight.helperText = getString(R.string.obrigatory_field)
-//                binding.tlWeight.boxStrokeColor = Color.parseColor("#FF0000")
-//                return false
-//            }
-//            height.isEmpty() -> {
-//                binding.tlHeight.helperText = getString(R.string.obrigatory_field)
-//                binding.tlHeight.boxStrokeColor = Color.parseColor("#FF0000")
-//                return false
-//            }
+            weight.isEmpty() -> {
+                binding.tlWeight.helperText = getString(R.string.obrigatory_field)
+                binding.tlWeight.boxStrokeColor = Color.parseColor("#FF0000")
+                return false
+            }
+            height.isEmpty() -> {
+                binding.tlHeight.helperText = getString(R.string.obrigatory_field)
+                binding.tlHeight.boxStrokeColor = Color.parseColor("#FF0000")
+                return false
+            }
 
 
             else -> {

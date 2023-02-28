@@ -11,6 +11,8 @@ data class User(
     @SerializedName("name") val name: String,
     @SerializedName("lastname") val lastName: String,
     @SerializedName("gender") var gender: String,
+    @SerializedName("weight") var weight: String,
+    @SerializedName("height") var height: String,
     @SerializedName("email") val email: String,
     @SerializedName("password") val password: String,
     @SerializedName("image") val image: String? = null,
@@ -20,9 +22,7 @@ data class User(
 ) : Parcelable {
 
     override fun toString(): String {
-        return "User(id=$id, name='$name', lastName='$lastName', gender='$gender', email='$email', " +
-                "password='$password', image=$image, " +
-                "sessionToken=$sessionToken, isAvailable=$isAvailable)"
+        return "User(id=$id, name='$name', lastName='$lastName', gender='$gender', weight='$weight', height='$height', email='$email', password='$password', image=$image, sessionToken=$sessionToken, isAvailable=$isAvailable)"
     }
 }
 

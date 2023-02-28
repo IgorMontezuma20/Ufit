@@ -66,7 +66,7 @@ class RegisterFragment : Fragment() {
 
         if (isValidForm(name, lastname, email, password, confirmedPass)) {
 
-            val user = User("",name, lastname,"", email, password)
+            val user = User("",name, lastname,"","","", email, password)
             val action = RegisterFragmentDirections.actionRegisterFragment2ToRegisterInfoFragment(user)
             findNavController().navigate(action)
 
