@@ -1,12 +1,15 @@
 package com.app.ufit.ui.fragments.register
 
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
@@ -15,6 +18,9 @@ import com.app.ufit.databinding.FragmentRegisterInfoBinding
 import com.app.ufit.models.User
 import com.app.ufit.viewmodels.register.RegisterInfoViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.sql.Date
+import java.text.SimpleDateFormat
+import java.time.LocalDate
 
 @AndroidEntryPoint
 class RegisterInfoFragment : Fragment() {
@@ -82,15 +88,26 @@ class RegisterInfoFragment : Fragment() {
 //
 //    }
 
+    //    @RequiresApi(Build.VERSION_CODES.O)
     private fun createAccount() {
-        //val genderChoice =
-//        val birthDay = binding.etBirth.toString()
+
+        //val format = SimpleDateFormat("yyyy/MM/dd")
+
+        val birthDate = binding.etBirth.text.toString()
+        //val localDate = LocalDate.parse(birthDate)
+        Toast.makeText(requireContext(), birthDate, Toast.LENGTH_SHORT).show()
+
+        val formatter = SimpleDateFormat("ddMMyyyy")
+
+        val date = formatter.parse(birthDate)
+
         weight = binding.etWeight.text.toString()
         height = binding.etHeight.text.toString()
 
-        if (isValidForm(gender, weight, height)) {
+        if (isValidForm(gender, birthDate, weight, height)) {
             val user = args.user as User
             user.gender = gender
+            user.birthDate = date!!
             user.weight = weight
             user.height = height
             mRegisterInfoViewModel.registerUser(
@@ -103,7 +120,7 @@ class RegisterInfoFragment : Fragment() {
 
     private fun isValidForm(
         gender: String,
-//        birthDay: String,
+        birthDate: String,
         weight: String,
         height: String,
     ): Boolean {
@@ -115,11 +132,11 @@ class RegisterInfoFragment : Fragment() {
                 binding.tlGender.boxStrokeColor = Color.parseColor("#FF0000")
                 return false
             }
-//            birthDay.isEmpty() -> {
-//                binding.tlBirth.helperText = getString(R.string.obrigatory_field)
-//                binding.tlBirth.boxStrokeColor = Color.parseColor("#FF0000")
-//                return false
-//            }
+            birthDate.isEmpty() -> {
+                binding.tlBirth.helperText = getString(R.string.obrigatory_field)
+                binding.tlBirth.boxStrokeColor = Color.parseColor("#FF0000")
+                return false
+            }
             weight.isEmpty() -> {
                 binding.tlWeight.helperText = getString(R.string.obrigatory_field)
                 binding.tlWeight.boxStrokeColor = Color.parseColor("#FF0000")

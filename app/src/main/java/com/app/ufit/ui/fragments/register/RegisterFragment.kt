@@ -16,6 +16,7 @@ import com.app.ufit.databinding.FragmentRegisterInfoBinding
 import com.app.ufit.models.User
 import com.app.ufit.viewmodels.register.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Date
 
 @AndroidEntryPoint
 class RegisterFragment : Fragment() {
@@ -63,11 +64,13 @@ class RegisterFragment : Fragment() {
         val email = binding.etEmail.text.toString()
         val password = binding.etPassword.text.toString()
         val confirmedPass = binding.etPasswordConfirmation.text.toString()
+        val date = Date()
 
         if (isValidForm(name, lastname, email, password, confirmedPass)) {
 
-            val user = User("",name, lastname,"","","", email, password)
-            val action = RegisterFragmentDirections.actionRegisterFragment2ToRegisterInfoFragment(user)
+            val user = User("", name, lastname, "", date, "", "", email, password)
+            val action =
+                RegisterFragmentDirections.actionRegisterFragment2ToRegisterInfoFragment(user)
             findNavController().navigate(action)
 
         }
