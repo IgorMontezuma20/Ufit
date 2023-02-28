@@ -88,15 +88,16 @@ class RegisterInfoFragment : Fragment() {
         weight = binding.etWeight.text.toString()
         height = binding.etHeight.text.toString()
 
-        isValidForm(gender, weight, height)
+        if (isValidForm(gender, weight, height)) {
+            val user = args.user as User
+            user.gender = gender
+            user.weight = weight
+            user.height = height
+            mRegisterInfoViewModel.registerUser(
+                user
+            )
+        }
 
-        val user = args.user as User
-        user.gender = gender
-        user.weight = weight
-        user.height = height
-        mRegisterInfoViewModel.registerUser(
-            user
-        )
 
     }
 
