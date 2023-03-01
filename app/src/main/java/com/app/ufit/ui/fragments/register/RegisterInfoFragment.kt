@@ -1,7 +1,7 @@
 package com.app.ufit.ui.fragments.register
 
+import android.app.DatePickerDialog
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,18 +9,17 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.app.ufit.R
 import com.app.ufit.databinding.FragmentRegisterInfoBinding
 import com.app.ufit.models.User
+import com.app.ufit.util.StringHelper
 import com.app.ufit.viewmodels.register.RegisterInfoViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.sql.Date
 import java.text.SimpleDateFormat
-import java.time.LocalDate
+import java.util.*
 
 @AndroidEntryPoint
 class RegisterInfoFragment : Fragment() {
@@ -33,6 +32,7 @@ class RegisterInfoFragment : Fragment() {
     private var gender = ""
     private var weight = ""
     private var height = ""
+    private var datePicker = ""
 
     private val args: RegisterInfoFragmentArgs by navArgs()
 
@@ -64,6 +64,10 @@ class RegisterInfoFragment : Fragment() {
             gender = adapterView.getItemAtPosition(i).toString()
         }
 
+        binding.etBirth.setOnClickListener {
+            setDate()
+        }
+
 
         return binding.root
     }
@@ -89,22 +93,66 @@ class RegisterInfoFragment : Fragment() {
 //    }
 
     //    @RequiresApi(Build.VERSION_CODES.O)
+
+
+    private fun setDate() {
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+
+
+        val dpd = DatePickerDialog(
+            requireContext(),
+            DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                val returnDate = "$dayOfMonth ${monthOfYear + 1}  $year"
+                val date = StringHelper.parseDate(
+                    "dd MM yyyy",
+                    "dd/MM/yyyy",
+                    returnDate
+                )
+                val dateString = date
+                datePicker = dateString
+                binding.etBirth.setText(StringHelper.parseDate("dd/MM/yyyy", "dd MM yyyy", date))
+                binding.etBirth.error = null
+                Toast.makeText(
+                    requireContext(),
+                    "pick date input format and display $dateString",
+                    Toast.LENGTH_LONG
+                ).show()
+                //Thanks for watching this tutorial
+            },
+            year,
+            month,
+            day
+        )
+        dpd.datePicker.maxDate = c.timeInMillis
+        dpd.show()
+    }
+
     private fun createAccount() {
 
         //val format = SimpleDateFormat("yyyy/MM/dd")
 
-        val birthDate = binding.etBirth.text.toString()
+        if (datePicker.isEmpty()) {
+            datePicker = binding.etBirth.text.toString()
+        } else {
+            datePicker = StringHelper.parseDate(
+                "dd/MM/yyyy",
+                "ddMMyyyy", datePicker
+            )
+        }
+        //val birthDate = binding.etBirth.text.toString()
         //val localDate = LocalDate.parse(birthDate)
-        Toast.makeText(requireContext(), birthDate, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), datePicker, Toast.LENGTH_SHORT).show()
 
         val formatter = SimpleDateFormat("ddMMyyyy")
-
-        val date = formatter.parse(birthDate)
+        val date = formatter.parse(datePicker)
 
         weight = binding.etWeight.text.toString()
         height = binding.etHeight.text.toString()
 
-        if (isValidForm(gender, birthDate, weight, height)) {
+        if (isValidForm(gender, datePicker, weight, height)) {
             val user = args.user as User
             user.gender = gender
             user.birthDate = date!!
