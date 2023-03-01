@@ -108,7 +108,7 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.app.ufit.ui.fragments.profile.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="Perfil"
         tools:layout="@layout/fragment_profile" >
         <action
             android:id="@+id/action_profileFragment_to_homeFragment"
@@ -117,7 +117,7 @@
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.app.ufit.ui.fragments.favorites.FavoritesFragment"
-        android:label="fragment_favorites"
+        android:label="Favoritos"
         tools:layout="@layout/fragment_favorites" >
         <action
             android:id="@+id/action_favoritesFragment_to_profileFragment"
