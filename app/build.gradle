@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId "com.app.ufit"
-        minSdk 24
+        minSdk 26
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -46,6 +46,10 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.0'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.core:core-ktx:+'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    implementation 'androidx.core:core-ktx:+'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     implementation 'androidx.core:core-ktx:+'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     implementation 'androidx.core:core-ktx:+'
@@ -122,5 +126,8 @@ dependencies {
     implementation 'com.airbnb.android:lottie:3.4.4'
 
     implementation "androidx.fragment:fragment-ktx:1.5.5"
+
+    //Date Mask
+    implementation"io.github.vicmikhailau:MaskedEditText:4.0.7"
 
 }

@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_registerInfoFragment_to_registerFragment2"
             app:destination="@id/registerFragment2" />
+        <argument
+            android:name="user"
+            app:argType="com.app.ufit.models.User" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"

@@ -12,9 +12,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.app.ufit.R
 import com.app.ufit.databinding.FragmentRegisterBinding
+import com.app.ufit.databinding.FragmentRegisterInfoBinding
 import com.app.ufit.models.User
 import com.app.ufit.viewmodels.register.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Date
 
 @AndroidEntryPoint
 class RegisterFragment : Fragment() {
@@ -24,23 +26,21 @@ class RegisterFragment : Fragment() {
 
     lateinit var mRegisterViewModel: RegisterViewModel
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
+
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
         mRegisterViewModel = ViewModelProvider(requireActivity())[RegisterViewModel::class.java]
-        //mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
 
         setLoadingProgressbar()
         mRegisterViewModel.success.observe(requireActivity()) {
             findNavController().navigate(R.id.action_registerFragment2_to_registerInfoFragment)
         }
 
-        binding.button.setOnClickListener {
+        binding.btnNext.setOnClickListener {
             register()
 
         }
@@ -56,17 +56,14 @@ class RegisterFragment : Fragment() {
         val email = binding.etEmail.text.toString()
         val password = binding.etPassword.text.toString()
         val confirmedPass = binding.etPasswordConfirmation.text.toString()
+        val date = Date()
 
         if (isValidForm(name, lastname, email, password, confirmedPass)) {
 
-            mRegisterViewModel.registerUser(
-                user = User(
-                    name = name,
-                    lastName = lastname,
-                    email = email,
-                    password = password
-                )
-            )
+            val user = User("", name, lastname, "", date, "", "", email, password)
+            val action =
+                RegisterFragmentDirections.actionRegisterFragment2ToRegisterInfoFragment(user)
+            findNavController().navigate(action)
 
         }
 

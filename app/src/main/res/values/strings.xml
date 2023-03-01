@@ -31,6 +31,13 @@
     <string name="obrigatory_field">Campo obrigatório!</string>
     <string name="password_dont_match">As senhas não conferem!</string>
     <string name="muscular_group_image">Imagem do grupamento muscular</string>
+    <string name="date_hint">00/00/0000</string>
+
+    <string-array name="gender">
+        <item>masculino</item>
+        <item>feminino</item>
+        <item>outro</item>
+    </string-array>
 
 
 </resources>
