@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.app.ufit.R
 import com.app.ufit.databinding.FragmentRegisterInfoBinding
@@ -45,6 +46,10 @@ class RegisterInfoFragment : Fragment() {
 
         mRegisterInfoViewModel =
             ViewModelProvider(requireActivity())[RegisterInfoViewModel::class.java]
+
+        mRegisterInfoViewModel.success.observe(requireActivity()) {
+            findNavController().navigate(R.id.action_registerInfoFragment_to_homeFragment)
+        }
 
 
         val genders = resources.getStringArray(R.array.gender)
@@ -135,6 +140,7 @@ class RegisterInfoFragment : Fragment() {
             mRegisterInfoViewModel.registerUser(
                 user
             )
+
         }
 
 
