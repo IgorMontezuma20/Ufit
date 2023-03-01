@@ -31,6 +31,7 @@
         android:layout_marginTop="4dp"
         android:textColor="@color/black"
         android:textSize="18sp"
+        android:text="Igor Montezuma"
         app:layout_constraintStart_toEndOf="@id/cvProfileImage"
         app:layout_constraintTop_toTopOf="@id/cvProfileImage"
         tools:text="Gabriel Farias" />
@@ -68,6 +69,7 @@
             android:layout_marginTop="8dp"
             android:textColor="@color/blue_700"
             android:textSize="18sp"
+            android:text="187cm"
             tools:text="180cm" />
 
         <TextView
@@ -96,6 +98,7 @@
             android:layout_marginTop="8dp"
             android:textColor="@color/blue_700"
             android:textSize="18sp"
+            android:text="70"
             tools:text="70kg" />
 
         <TextView
@@ -124,6 +127,7 @@
             android:layout_marginTop="8dp"
             android:textColor="@color/blue_700"
             android:textSize="18sp"
+            android:text="22 anos"
             tools:text="21 anos" />
 
         <TextView
