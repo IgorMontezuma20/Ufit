@@ -17,6 +17,7 @@ import com.app.ufit.databinding.FragmentRegisterInfoBinding
 import com.app.ufit.models.User
 import com.app.ufit.util.StringHelper
 import com.app.ufit.viewmodels.register.RegisterInfoViewModel
+import com.vicmikhailau.maskededittext.MaskedFormatter
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
@@ -40,13 +41,11 @@ class RegisterInfoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         _binding = FragmentRegisterInfoBinding.inflate(inflater, container, false)
 
         mRegisterInfoViewModel =
             ViewModelProvider(requireActivity())[RegisterInfoViewModel::class.java]
 
-//        startComponents()
 
         val genders = resources.getStringArray(R.array.gender)
         val adapter = ArrayAdapter<String>(
@@ -71,29 +70,6 @@ class RegisterInfoFragment : Fragment() {
 
         return binding.root
     }
-
-
-//    mRegisterViewModel.registerUser(
-//    user = User(
-//    name = name,
-//    lastName = lastname,
-//    gender = gender,
-//    email = email,
-//    password = password
-//    )
-//    )
-
-//    private fun startComponents() {
-//        val genderChoice = binding.acGender
-//        val birthDay = binding.etBirth
-//        val weight = binding.etWeight
-//        val height = binding.etHeight
-//        //val registerButton = binding.button
-//
-//    }
-
-    //    @RequiresApi(Build.VERSION_CODES.O)
-
 
     private fun setDate() {
         val c = Calendar.getInstance()
@@ -120,7 +96,6 @@ class RegisterInfoFragment : Fragment() {
                     "pick date input format and display $dateString",
                     Toast.LENGTH_LONG
                 ).show()
-                //Thanks for watching this tutorial
             },
             year,
             month,
@@ -132,19 +107,18 @@ class RegisterInfoFragment : Fragment() {
 
     private fun createAccount() {
 
-        //val format = SimpleDateFormat("yyyy/MM/dd")
-
         if (datePicker.isEmpty()) {
             datePicker = binding.etBirth.text.toString()
+            val dateFormatter = MaskedFormatter("##/##/####")
+            datePicker = dateFormatter.formatString(datePicker)?.unMaskedString!!
+
+
         } else {
             datePicker = StringHelper.parseDate(
                 "dd/MM/yyyy",
                 "ddMMyyyy", datePicker
             )
         }
-        //val birthDate = binding.etBirth.text.toString()
-        //val localDate = LocalDate.parse(birthDate)
-        Toast.makeText(requireContext(), datePicker, Toast.LENGTH_SHORT).show()
 
         val formatter = SimpleDateFormat("ddMMyyyy")
         val date = formatter.parse(datePicker)

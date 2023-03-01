@@ -127,4 +127,7 @@ dependencies {
 
     implementation "androidx.fragment:fragment-ktx:1.5.5"
 
+    //Date Mask
+    implementation"io.github.vicmikhailau:MaskedEditText:4.0.7"
+
 }

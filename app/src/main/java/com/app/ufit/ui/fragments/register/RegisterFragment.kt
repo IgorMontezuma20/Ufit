@@ -26,21 +26,14 @@ class RegisterFragment : Fragment() {
 
     lateinit var mRegisterViewModel: RegisterViewModel
 
-//    private var _registerInfoBinding: FragmentRegisterInfoBinding? = null
-//    private val registerInfoBinding get() = _registerInfoBinding!!
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
+
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
         mRegisterViewModel = ViewModelProvider(requireActivity())[RegisterViewModel::class.java]
-        //mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
-
-        //_registerInfoBinding = FragmentRegisterInfoBinding.inflate(inflater, container, false)
 
         setLoadingProgressbar()
         mRegisterViewModel.success.observe(requireActivity()) {
@@ -60,7 +53,6 @@ class RegisterFragment : Fragment() {
 
         val name = binding.etName.text.toString()
         val lastname = binding.etLastname.text.toString()
-        //val gender = registerInfoBinding.acGender.toString()
         val email = binding.etEmail.text.toString()
         val password = binding.etPassword.text.toString()
         val confirmedPass = binding.etPasswordConfirmation.text.toString()
