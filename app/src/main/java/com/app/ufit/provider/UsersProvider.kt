@@ -9,9 +9,16 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.components.SingletonComponent
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
+import java.io.File
 import javax.inject.Inject
 
 class UsersProvider @Inject constructor() {
@@ -39,6 +46,13 @@ class UsersProvider @Inject constructor() {
 
     fun exercisesImageApi(muscleGroups: String): Call<ResponseBody>? {
         return imageRoutes?.getImage(muscleGroups)
+    }
+
+    fun update(file: File, user: User): Call<ResponseHttp>? {
+        val reqFile = file.asRequestBody("image/*".toMediaTypeOrNull())
+        val image = MultipartBody.Part.createFormData("image", file.name, reqFile)
+        val requestBody = user.toJson().toRequestBody("text/plain".toMediaTypeOrNull())
+        return usersRoutes?.update(image, requestBody)
     }
 
 }
