@@ -13,6 +13,7 @@ import com.app.ufit.databinding.FragmentHomeBinding
 import com.app.ufit.ui.MainActivity
 import com.app.ufit.viewmodels.MainViewModel
 
+
 class HomeFragment : Fragment() {
 
     private lateinit var mainViewModel: MainViewModel
