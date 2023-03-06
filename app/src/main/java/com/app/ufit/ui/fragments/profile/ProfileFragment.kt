@@ -6,8 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.app.ufit.R
-import com.app.ufit.databinding.FragmentHomeBinding
 import com.app.ufit.databinding.FragmentProfileBinding
 import com.app.ufit.viewmodels.profile.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
