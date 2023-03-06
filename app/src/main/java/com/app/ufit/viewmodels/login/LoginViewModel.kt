@@ -74,7 +74,7 @@ class LoginViewModel @Inject constructor(
         val gson = Gson()
 
         if (!sharedPref.getData("user").isNullOrBlank()) {
-            // SI EL USARIO EXISTE EN SESION
+
             val user = gson.fromJson(sharedPref.getData("user"), User::class.java)
             success.postValue(true)
 
@@ -87,7 +87,7 @@ class LoginViewModel @Inject constructor(
         val gson = Gson()
 
         if (!sharedPref.getData("user").isNullOrBlank()) {
-            // SI EL USARIO EXISTE EN SESION
+
             val user = gson.fromJson(sharedPref.getData("user"), User::class.java)
             return true
 

@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" /> -->
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/circle_image"
+        android:id="@+id/user_image"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_gravity="center|top"
@@ -33,5 +33,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button"
+        android:layout_marginBottom="64dp"
+        android:text="Salvar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
