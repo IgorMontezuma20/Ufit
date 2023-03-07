@@ -26,7 +26,7 @@ class SaveImageFragment : Fragment() {
     private val binding get() = _binding!!
 
      private var circleImage: CircleImageView? = null
-      private var imageFile: File? =null
+      private var imageFile: File? = null
 
     var usersProvider = UsersProvider()
     var user: User? = null
@@ -44,7 +44,7 @@ class SaveImageFragment : Fragment() {
 
         mProfileImageViewModel = ViewModelProvider(requireActivity())[ProfileImageViewModel::class.java]
 
-        mProfileImageViewModel.getUserFromSession()
+        //mProfileImageViewModel.getUserFromSession()
 
         circleImage = binding.circleImageUser
        binding.circleImageUser.setOnClickListener {
@@ -52,7 +52,7 @@ class SaveImageFragment : Fragment() {
        }
 
         binding.btnConfirm.setOnClickListener {
-            mProfileImageViewModel.saveImage()
+            mProfileImageViewModel.saveImage(imageFile)
         }
 //        return inflater.inflate(R.layout.fragment_save_image, container, false)
         return binding.root

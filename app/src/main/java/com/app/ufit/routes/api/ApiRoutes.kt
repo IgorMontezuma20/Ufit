@@ -7,7 +7,7 @@ import com.app.ufit.util.Constants.Companion.IMAGE_BASE_URL
 class ApiRoutes {
 
 
-    val API_URL = "http://10.0.0.101:3000/api/"
+    val API_URL = "http://192.168.0.106:3000/api/"
     val IMAGE_API = IMAGE_BASE_URL
     val retrofit = RetrofitClient()
 

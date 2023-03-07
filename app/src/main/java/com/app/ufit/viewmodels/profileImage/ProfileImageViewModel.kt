@@ -28,11 +28,13 @@ class ProfileImageViewModel @Inject constructor(
 
     private var imageFile: File? = null
     var sharedPref: SharedPref? = null
-    var user: User? = null
+    //var user: User? = null
 
 
 
-    fun saveImage() {
+    fun saveImage(imageFile: File?) {
+
+        val user = getUserFromSession()
 
         if (imageFile != null && user != null) {
             usersProvider.update(imageFile!!, user!!)?.enqueue(object : Callback<ResponseHttp> {
@@ -73,17 +75,19 @@ class ProfileImageViewModel @Inject constructor(
     }
 
 
-    fun getUserFromSession() {
+    fun getUserFromSession(): User {
 
+        val sharedPref = SharedPref(getApplication())
         val gson = Gson()
+        var user: User? = null
 
 
-        if (!sharedPref?.getData("user").isNullOrBlank()) {
+        if (!sharedPref.getData("user").isNullOrBlank()) {
             // SI EL USARIO EXISTE EN SESION
              user = gson.fromJson(sharedPref?.getData("user"), User::class.java)
         }
 
-
+        return user!!
     }
 
 
