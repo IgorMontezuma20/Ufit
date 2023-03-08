@@ -2,6 +2,7 @@ package com.app.ufit.models
 
 import android.os.Parcelable
 import com.google.android.material.textfield.TextInputEditText
+import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import java.time.LocalDate
@@ -27,6 +28,10 @@ data class User(
     override fun toString(): String {
         return "User(id=$id, name='$name', lastName='$lastName', gender='$gender', birthDate=$birthDate, weight='$weight', height='$height', email='$email', password='$password', image=$image, sessionToken=$sessionToken, isAvailable=$isAvailable)"
     }
-}
 
+    fun toJson(): String {
+        return Gson().toJson(this)
+    }
+
+}
 

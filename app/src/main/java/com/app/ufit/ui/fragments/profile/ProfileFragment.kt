@@ -6,8 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import coil.load
 import com.app.ufit.R
-import com.app.ufit.databinding.FragmentHomeBinding
 import com.app.ufit.databinding.FragmentProfileBinding
 import com.app.ufit.viewmodels.profile.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,10 +31,15 @@ class ProfileFragment : Fragment() {
         _binding  = FragmentProfileBinding.inflate(inflater, container, false)
         mProfileViewModel = ViewModelProvider(requireActivity())[ProfileViewModel::class.java]
 
+        binding.btnEdit.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_editProfileActivity)
+        }
+
         mProfileViewModel.success.observe(requireActivity()) {
             binding.tvProfileName.text = it.name
             binding.tvHeight.text = "${it.height} cm"
             binding.tvWeight.text = "${it.weight} Kg"
+            binding.ivProfileImage.load(it.image)
             binding.tvAge.text = mProfileViewModel.getUserAge()
 
         }
