@@ -20,7 +20,8 @@
         <ImageView
             android:id="@+id/ivProfileImage"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"/>
     </androidx.cardview.widget.CardView>
 
     <TextView
@@ -32,6 +33,7 @@
         android:textColor="@color/black"
         android:textSize="18sp"
         android:text="Igor Montezuma"
+        app:layout_constraintEnd_toStartOf="@id/btnEdit"
         app:layout_constraintStart_toEndOf="@id/cvProfileImage"
         app:layout_constraintTop_toTopOf="@id/cvProfileImage"
         tools:text="Gabriel Farias" />
