@@ -25,13 +25,13 @@ class SaveImageFragment : Fragment() {
     private var _binding: FragmentSaveImageBinding? = null
     private val binding get() = _binding!!
 
-     private var circleImage: CircleImageView? = null
-      private var imageFile: File? = null
+    private var circleImage: CircleImageView? = null
+    private var imageFile: File? = null
 
     var usersProvider = UsersProvider()
     var user: User? = null
 
-     lateinit var mProfileImageViewModel: ProfileImageViewModel
+    lateinit var mProfileImageViewModel: ProfileImageViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,16 +40,17 @@ class SaveImageFragment : Fragment() {
 
 
         // Inflate the layout for this fragment
-        _binding  = FragmentSaveImageBinding.inflate(inflater, container, false)
+        _binding = FragmentSaveImageBinding.inflate(inflater, container, false)
 
-        mProfileImageViewModel = ViewModelProvider(requireActivity())[ProfileImageViewModel::class.java]
+        mProfileImageViewModel =
+            ViewModelProvider(requireActivity())[ProfileImageViewModel::class.java]
 
         //mProfileImageViewModel.getUserFromSession()
 
         circleImage = binding.circleImageUser
-       binding.circleImageUser.setOnClickListener {
-           selectImage()
-       }
+        binding.circleImageUser.setOnClickListener {
+            selectImage()
+        }
 
         binding.btnConfirm.setOnClickListener {
             mProfileImageViewModel.saveImage(imageFile)
@@ -67,13 +68,12 @@ class SaveImageFragment : Fragment() {
 
             if (resultCode == Activity.RESULT_OK) {
                 val fileUri = data?.data
-                imageFile = File(fileUri?.path) // EL ARCHIVO QUE VAMOS A GUARDAR COMO IMAGEN EN EL SERVIDOR
+                imageFile =
+                    File(fileUri?.path) // EL ARCHIVO QUE VAMOS A GUARDAR COMO IMAGEN EN EL SERVIDOR
                 circleImage?.setImageURI(fileUri)
-            }
-            else if (resultCode == ImagePicker.RESULT_ERROR) {
+            } else if (resultCode == ImagePicker.RESULT_ERROR) {
                 Toast.makeText(context, ImagePicker.getError(data), Toast.LENGTH_LONG).show()
-            }
-            else {
+            } else {
                 Toast.makeText(context, "Tarea se cancelo", Toast.LENGTH_LONG).show()
             }
 
@@ -85,10 +85,9 @@ class SaveImageFragment : Fragment() {
             .compress(1024)
             .maxResultSize(1080, 1080)
             .createIntent {
-            startImageForResult.launch(it)
+                startImageForResult.launch(it)
             }
     }
-
 
 
 }

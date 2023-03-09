@@ -41,6 +41,10 @@ class UsersProvider @Inject constructor() {
         return imageRoutes?.getImage(muscleGroups)
     }
 
+    fun updateWithoutImage(user: User): Call<ResponseHttp>? {
+        return usersRoutes?.updateWithoutImage(user)
+    }
+
     fun update(file: File, user: User): Call<ResponseHttp>? {
         val reqFile = file.asRequestBody("image/*".toMediaTypeOrNull())
         val image = MultipartBody.Part.createFormData("image", file.name, reqFile)

@@ -12,8 +12,8 @@ import java.util.*
 @Parcelize
 data class User(
     @SerializedName("id") val id: String? = null,
-    @SerializedName("name") val name: String,
-    @SerializedName("lastname") val lastName: String,
+    @SerializedName("name") var name: String,
+    @SerializedName("lastname") var lastName: String,
     @SerializedName("gender") var gender: String,
     @SerializedName("birthdate") var birthDate: Date,
     @SerializedName("weight") var weight: String,

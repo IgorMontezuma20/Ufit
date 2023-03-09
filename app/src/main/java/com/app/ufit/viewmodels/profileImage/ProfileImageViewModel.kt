@@ -24,12 +24,11 @@ class ProfileImageViewModel @Inject constructor(
     application: Application,
     private val usersProvider: UsersProvider,
 
-) : AndroidViewModel(application) {
+    ) : AndroidViewModel(application) {
 
     private var imageFile: File? = null
     var sharedPref: SharedPref? = null
     //var user: User? = null
-
 
 
     fun saveImage(imageFile: File?) {
@@ -67,7 +66,70 @@ class ProfileImageViewModel @Inject constructor(
 
     }
 
-    private fun saveUserInSession(data: String) {
+
+    fun updateData(imageFile: File?, name: String, lastName: String) {
+
+        val user = getUserFromSession()
+
+        user.name = name
+        user.lastName = lastName
+
+
+        if (imageFile != null) {
+            usersProvider.update(imageFile!!, user!!)?.enqueue(object : Callback<ResponseHttp> {
+                override fun onResponse(
+                    call: Call<ResponseHttp>,
+                    response: Response<ResponseHttp>
+                ) {
+
+                    Log.d(TAG, "RESPONSE: $response")
+                    Log.d(TAG, "BODY: ${response.body()}")
+
+                    Toast.makeText(getApplication(), response.body()?.message, Toast.LENGTH_SHORT)
+                        .show()
+
+                    saveUserInSession(response.body()?.data.toString())
+
+                }
+
+                override fun onFailure(call: Call<ResponseHttp>, t: Throwable) {
+                    Log.d(TAG, "Error: ${t.message}")
+                    Toast.makeText(getApplication(), "Error: ${t.message}", Toast.LENGTH_LONG)
+                        .show()
+                }
+
+            })
+        } else {
+            usersProvider.updateWithoutImage(user!!)?.enqueue(object : Callback<ResponseHttp> {
+                override fun onResponse(
+                    call: Call<ResponseHttp>,
+                    response: Response<ResponseHttp>
+                ) {
+
+                    Log.d(TAG, "RESPONSE: $response")
+                    Log.d(TAG, "BODY: ${response.body()}")
+
+                    Toast.makeText(getApplication(), response.body()?.message, Toast.LENGTH_SHORT)
+                        .show()
+
+                    saveUserInSession(response.body()?.data.toString())
+
+                }
+
+                override fun onFailure(call: Call<ResponseHttp>, t: Throwable) {
+                    Log.d(TAG, "Error: ${t.message}")
+                    Toast.makeText(getApplication(), "Error: ${t.message}", Toast.LENGTH_LONG)
+                        .show()
+                }
+
+            })
+        }
+
+
+    }
+
+    fun saveUserInSession(data: String) {
+        val sharedPref = SharedPref(getApplication())
         val gson = Gson()
         val user = gson.fromJson(data, User::class.java)
         sharedPref?.save("user", user)
@@ -84,7 +146,7 @@ class ProfileImageViewModel @Inject constructor(
 
         if (!sharedPref.getData("user").isNullOrBlank()) {
             // SI EL USARIO EXISTE EN SESION
-             user = gson.fromJson(sharedPref?.getData("user"), User::class.java)
+            user = gson.fromJson(sharedPref?.getData("user"), User::class.java)
         }
 
         return user!!
