@@ -3,7 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="checkbox_text">Para continuar aceite nossas políticas e <u>\ntermos de uso</u></string>
-    <string name="welcome"><b><font color="#3F51B5">\nOlá,\n</font></b>Seja Bem Vindo(a)</string>
+    <string name="welcome">Olá,\nSeja Bem Vindo(a)</string>
     <string name="forgot_password"><u>Esqueceu sua senha?</u></string>
     <string name="register">Não tem uma conta ainda?<b><font color="#3F51B5"> registre-se</font></b></string>
     <string name="login">Já possui uma conta?<b><font color="#3F51B5"> Login</font></b></string>

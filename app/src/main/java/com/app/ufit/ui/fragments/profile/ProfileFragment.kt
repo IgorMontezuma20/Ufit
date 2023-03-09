@@ -37,6 +37,7 @@ class ProfileFragment : Fragment() {
 
         mProfileViewModel.success.observe(requireActivity()) {
             binding.tvProfileName.text = it.name
+            binding.tvProfileLastName.text = it.lastName
             binding.tvHeight.text = "${it.height} cm"
             binding.tvWeight.text = "${it.weight} Kg"
             binding.ivProfileImage.load(it.image)
