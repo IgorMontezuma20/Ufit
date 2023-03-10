@@ -1,6 +1,5 @@
 package com.app.ufit.ui.fragments.viewpager
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,24 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.app.ufit.R
 import com.app.ufit.adapters.OnBoardingItemsAdapter
-import com.app.ufit.databinding.FragmentProfileBinding
-import com.app.ufit.databinding.FragmentViewPagerBinding
+import com.app.ufit.databinding.FragmentOnboardingBinding
 import com.app.ufit.models.OnBoardingItem
-import com.google.android.material.button.MaterialButton
-import dagger.hilt.android.internal.Contexts.getApplication
 
-class ViewPagerFragment : Fragment() {
+class OnBoardingrFragment : Fragment() {
 
 
-    private var _binding: FragmentViewPagerBinding? = null
+    private var _binding: FragmentOnboardingBinding? = null
     private val binding get() = _binding!!
     private lateinit var onBoardingItemsAdapter: OnBoardingItemsAdapter
     private lateinit var indicatorsContainer: LinearLayout
@@ -35,7 +30,7 @@ class ViewPagerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding  = FragmentViewPagerBinding.inflate(inflater, container, false)
+        _binding = FragmentOnboardingBinding.inflate(inflater, container, false)
 
         binding.btnGetStarted.setOnClickListener {
             //findNavController().navigate(R.id.)
@@ -46,6 +41,10 @@ class ViewPagerFragment : Fragment() {
         setOnBoardingItems()
         setupIndicator()
         setCurrentIndicator(0)
+
+        binding.btnGetStarted.setOnClickListener {
+            findNavController().navigate(R.id.action_onBoardingFragment_to_homeFragment)
+        }
 
         return binding.root
     }

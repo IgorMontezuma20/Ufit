@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/registerFragment2"
         android:name="com.app.ufit.ui.fragments.register.RegisterFragment"
-        android:label="Dados Adicionais"
+        android:label="Dados iniciais"
         tools:layout="@layout/fragment_register">
         <action
             android:id="@+id/action_registerFragment2_to_registerInfoFragment"
@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/registerInfoFragment"
         android:name="com.app.ufit.ui.fragments.register.RegisterInfoFragment"
-        android:label="Registro"
+        android:label="Dados adicionais"
         tools:layout="@layout/fragment_register_info">
         <action
             android:id="@+id/action_registerInfoFragment_to_registerFragment2"
@@ -28,8 +28,8 @@
             android:name="user"
             app:argType="com.app.ufit.models.User" />
         <action
-            android:id="@+id/action_registerInfoFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            android:id="@+id/action_registerInfoFragment_to_onBoardingFragment"
+            app:destination="@id/onBoardingFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -169,8 +169,12 @@
         android:id="@+id/action_editProfileActivity_to_profileFragment2"
         app:destination="@id/profileFragment" />
     <fragment
-        android:id="@+id/viewPagerFragment"
-        android:name="com.app.ufit.ui.fragments.viewpager.ViewPagerFragment"
+        android:id="@+id/onBoardingFragment"
+        android:name="com.app.ufit.ui.fragments.viewpager.OnBoardingrFragment"
         android:label="fragment_view_pager"
-        tools:layout="@layout/fragment_view_pager" />
+        tools:layout="@layout/fragment_onboarding" >
+        <action
+            android:id="@+id/action_onBoardingFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>

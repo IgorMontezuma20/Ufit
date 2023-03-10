@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_200"
-    tools:context=".ui.fragments.viewpager.ViewPagerFragment">
+    android:background="@color/blue_500"
+    tools:context=".ui.fragments.viewpager.OnBoardingrFragment">
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/onBoardingViewPager"
@@ -24,7 +24,6 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
