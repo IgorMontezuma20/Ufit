@@ -1,5 +1,6 @@
 package com.app.ufit.ui
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -34,13 +35,23 @@ class MainActivity : AppCompatActivity() {
             )
         )
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if(destination.id == R.id.splashFragment || destination.id == R.id.loginFragment ||
-                destination.id == R.id.registerFragment2 || destination.id == R.id.registerInfoFragment) {
+            if (destination.id == R.id.splashFragment || destination.id == R.id.loginFragment ||
+                destination.id == R.id.viewPagerFragment || destination.id == R.id.registerFragment2
+                || destination.id == R.id.registerInfoFragment
 
+
+            ) {
+                if(destination.id == R.id.splashFragment || destination.id == R.id.loginFragment ||
+                    destination.id == R.id.viewPagerFragment){
+                    supportActionBar!!.hide()
+                }else{
+
+                supportActionBar!!.show()
+                }
                 binding.bottomNavigationView.visibility = View.GONE
             } else {
 
-               binding.bottomNavigationView.visibility = View.VISIBLE
+                binding.bottomNavigationView.visibility = View.VISIBLE
             }
         }
 

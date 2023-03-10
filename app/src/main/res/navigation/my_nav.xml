@@ -168,4 +168,9 @@
     <action
         android:id="@+id/action_editProfileActivity_to_profileFragment2"
         app:destination="@id/profileFragment" />
+    <fragment
+        android:id="@+id/viewPagerFragment"
+        android:name="com.app.ufit.ui.fragments.viewpager.ViewPagerFragment"
+        android:label="fragment_view_pager"
+        tools:layout="@layout/fragment_view_pager" />
 </navigation>
