@@ -28,15 +28,13 @@
         android:id="@+id/tvProfileName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="22dp"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="18dp"
         android:text="Igor Montezuma"
         android:textColor="@color/blue_700"
         android:textSize="18sp"
         app:fontFamily="@font/roboto_medium"
-        app:layout_constraintEnd_toStartOf="@+id/tvProfileLastName"
-        app:layout_constraintStart_toEndOf="@id/cvProfileImage"
+        app:layout_constraintEnd_toStartOf="@+id/btnEdit"
+        app:layout_constraintStart_toEndOf="@+id/cvProfileImage"
         app:layout_constraintTop_toTopOf="@id/cvProfileImage"
         tools:text="Nome" />
 
@@ -293,7 +291,7 @@
 
     </androidx.cardview.widget.CardView>
 
-    <TextView
+    <!-- <TextView
         android:id="@+id/tvProfileLastName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -303,7 +301,7 @@
         app:fontFamily="@font/roboto_medium"
         app:layout_constraintBottom_toBottomOf="@+id/tvProfileName"
         app:layout_constraintEnd_toStartOf="@+id/btnEdit"
-        app:layout_constraintTop_toTopOf="@+id/tvProfileName" />
+        app:layout_constraintTop_toTopOf="@+id/tvProfileName" /> -->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

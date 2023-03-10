@@ -48,7 +48,7 @@ class RegisterInfoFragment : Fragment() {
             ViewModelProvider(requireActivity())[RegisterInfoViewModel::class.java]
 
         mRegisterInfoViewModel.success.observe(requireActivity()) {
-            findNavController().navigate(R.id.action_registerInfoFragment_to_homeFragment)
+            findNavController().navigate(R.id.action_registerInfoFragment_to_onBoardingFragment)
         }
 
 
@@ -96,11 +96,7 @@ class RegisterInfoFragment : Fragment() {
                 datePicker = dateString
                 binding.etBirth.setText(StringHelper.parseDate("dd/MM/yyyy", "dd MM yyyy", date))
                 binding.etBirth.error = null
-                Toast.makeText(
-                    requireContext(),
-                    "pick date input format and display $dateString",
-                    Toast.LENGTH_LONG
-                ).show()
+
             },
             year,
             month,
@@ -112,26 +108,26 @@ class RegisterInfoFragment : Fragment() {
 
     private fun createAccount() {
 
-        if (datePicker.isEmpty()) {
-            datePicker = binding.etBirth.text.toString()
-            val dateFormatter = MaskedFormatter("##/##/####")
-            datePicker = dateFormatter.formatString(datePicker)?.unMaskedString!!
-
-
-        } else {
-            datePicker = StringHelper.parseDate(
-                "dd/MM/yyyy",
-                "ddMMyyyy", datePicker
-            )
-        }
-
-        val formatter = SimpleDateFormat("ddMMyyyy")
-        val date = formatter.parse(datePicker)
 
         weight = binding.etWeight.text.toString()
         height = binding.etHeight.text.toString()
 
         if (isValidForm(gender, datePicker, weight, height)) {
+
+            if (datePicker.isEmpty() || datePicker == "") {
+                datePicker = binding.etBirth.text.toString()
+                val dateFormatter = MaskedFormatter("##/##/####")
+                datePicker = dateFormatter.formatString(datePicker)?.unMaskedString!!
+
+
+            } else {
+                datePicker = StringHelper.parseDate(
+                    "dd/MM/yyyy",
+                    "ddMMyyyy", datePicker
+                )
+            }
+            val formatter = SimpleDateFormat("ddMMyyyy")
+            val date = formatter.parse(datePicker)
             val user = args.user as User
             user.gender = gender
             user.birthDate = date!!

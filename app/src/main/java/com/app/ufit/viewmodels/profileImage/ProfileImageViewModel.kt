@@ -57,11 +57,11 @@ class ProfileImageViewModel @Inject constructor(
 
             })
         } else {
-            Toast.makeText(
-                getApplication(),
-                "La imagen no puede ser nula ni tampoco los datos de sesion del usuario",
-                Toast.LENGTH_LONG
-            ).show()
+//            Toast.makeText(
+//                getApplication(),
+//                "La imagen no puede ser nula ni tampoco los datos de sesion del usuario",
+//                Toast.LENGTH_LONG
+//            ).show()
         }
 
     }
