@@ -47,6 +47,8 @@ class RegisterInfoFragment : Fragment() {
         mRegisterInfoViewModel =
             ViewModelProvider(requireActivity())[RegisterInfoViewModel::class.java]
 
+        setLoadingProgressbar()
+
         mRegisterInfoViewModel.success.observe(requireActivity()) {
             findNavController().navigate(R.id.action_registerInfoFragment_to_onBoardingFragment)
         }
@@ -179,6 +181,16 @@ class RegisterInfoFragment : Fragment() {
 
         }
 
+    }
+
+    private fun setLoadingProgressbar() {
+        mRegisterInfoViewModel.load.observe(requireActivity()) {
+            if (it) {
+                binding.progressBar.visibility = View.VISIBLE
+            } else {
+                binding.progressBar.visibility = View.GONE
+            }
+        }
     }
 
 }
