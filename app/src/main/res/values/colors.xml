@@ -24,6 +24,7 @@
 
 
     <color name="red">#FF0000</color>
+    <color name="red100">#EF5350</color>
     <color name="light_gray">#646464</color>
     <color name="orange">#FF9800</color>
     <color name="blue">#1753EC</color>
