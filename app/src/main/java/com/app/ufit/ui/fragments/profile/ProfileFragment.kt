@@ -44,9 +44,22 @@ class ProfileFragment : Fragment() {
         }
 
         binding.btnLogout.setOnClickListener {
-            openDialogExit()
+            openExitDialog()
 
 
+        }
+
+        binding.btnPersonalData.setOnClickListener {
+            openWarningDialog()
+        }
+        binding.btnAchievements.setOnClickListener {
+            openWarningDialog()
+        }
+        binding.btnActHistory.setOnClickListener {
+            openWarningDialog()
+        }
+        binding.btnProgress.setOnClickListener {
+            openWarningDialog()
         }
 
         mProfileViewModel.success.observe(requireActivity()) {
@@ -77,7 +90,7 @@ class ProfileFragment : Fragment() {
 
     }
 
-    private fun openDialogExit() {
+    private fun openExitDialog() {
         val view = LayoutInflater.from(requireContext()).inflate(R.layout.custom_exit_dialog, null)
         val dialog = AlertDialog.Builder(requireContext()).setView(view)
         val dialogBinding = CustomExitDialogBinding.bind(view)
@@ -99,6 +112,28 @@ class ProfileFragment : Fragment() {
         cancelButton.setOnClickListener {
             mAlertDialog.cancel()
         }
+
+    }
+
+    private fun openWarningDialog() {
+        val view = LayoutInflater.from(requireContext()).inflate(R.layout.custom_warning_dialog, null)
+        val dialog = AlertDialog.Builder(requireContext()).setView(view)
+        val dialogBinding = CustomExitDialogBinding.bind(view)
+        val confirmButton = dialogBinding.confirmButton
+        val cancelButton = dialogBinding.cancelButton
+
+        val mAlertDialog = dialog.create().apply {
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            setCancelable(false)
+            show()
+        }
+
+
+
+        confirmButton.setOnClickListener {
+            mAlertDialog.cancel()
+        }
+
 
     }
 

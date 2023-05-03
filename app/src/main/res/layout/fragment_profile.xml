@@ -173,7 +173,7 @@
 
             <TextView
                 android:id="@+id/tvPersonalData"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
@@ -181,14 +181,15 @@
                 android:text="Dados Pessoais"
                 android:textAlignment="textStart"
                 android:textColor="@color/dark_gray"
-                app:layout_constraintTop_toBottomOf="@id/tvAccount"
                 app:drawableStartCompat="@drawable/peope_outlined"
-                app:drawableEndCompat="@drawable/arrow_right"
-                app:drawableTint="@color/blue_700" />
+                app:drawableTint="@color/blue_700"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvAccount" />
+
 
             <TextView
                 android:id="@+id/tvAchievements"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
@@ -196,14 +197,14 @@
                 android:text="Conquistas"
                 android:textAlignment="textStart"
                 android:textColor="@color/dark_gray"
-                app:layout_constraintTop_toBottomOf="@id/tvPersonalData"
                 app:drawableStartCompat="@drawable/achievements"
-                app:drawableEndCompat="@drawable/arrow_right"
-                app:drawableTint="@color/blue_700" />
+                app:drawableTint="@color/blue_700"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvPersonalData" />
 
             <TextView
                 android:id="@+id/tvActHistory"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
@@ -211,14 +212,14 @@
                 android:text="Histórico de atividade"
                 android:textAlignment="textStart"
                 android:textColor="@color/dark_gray"
-                app:layout_constraintTop_toBottomOf="@id/tvAchievements"
                 app:drawableStartCompat="@drawable/history"
-                app:drawableEndCompat="@drawable/arrow_right"
-                app:drawableTint="@color/blue_700" />
+                app:drawableTint="@color/blue_700"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvAchievements" />
 
             <TextView
                 android:id="@+id/tvProgress"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="12dp"
@@ -226,12 +227,65 @@
                 android:text="Progresso de treino"
                 android:textAlignment="textStart"
                 android:textColor="@color/dark_gray"
-                app:layout_constraintTop_toBottomOf="@id/tvActHistory"
-                app:layout_constraintBottom_toBottomOf="parent"
-                tools:layout_editor_absoluteX="16dp"
                 app:drawableStartCompat="@drawable/table"
-                app:drawableEndCompat="@drawable/arrow_right"
-                app:drawableTint="@color/blue_700" />
+                app:drawableTint="@color/blue_700"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvActHistory" />
+
+            <ImageButton
+                android:id="@+id/btnPersonalData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="25dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="Arrow Image"
+                android:src="@drawable/arrow_right"
+                app:layout_constraintBottom_toBottomOf="@+id/tvPersonalData"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvPersonalData"
+                app:tint="@color/blue_700" />
+
+
+            <ImageButton
+                android:id="@+id/btnAchievements"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="25dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="Arrow Image"
+                android:src="@drawable/arrow_right"
+                app:layout_constraintBottom_toBottomOf="@+id/tvAchievements"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvAchievements"
+                app:tint="@color/blue_700" />
+
+            <ImageButton
+                android:id="@+id/btnActHistory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="25dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="Arrow Image"
+                android:src="@drawable/arrow_right"
+                app:layout_constraintBottom_toBottomOf="@+id/tvActHistory"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvActHistory"
+                app:tint="@color/blue_700" />
+
+            <ImageButton
+                android:id="@+id/btnProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="25dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="Arrow Image"
+                android:src="@drawable/arrow_right"
+                app:layout_constraintBottom_toBottomOf="@+id/tvProgress"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvProgress"
+                app:tint="@color/blue_700" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
