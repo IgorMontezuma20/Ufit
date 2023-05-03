@@ -29,7 +29,7 @@ class LoginViewModel @Inject constructor(
 
     fun loginUser(email: String, password: String) {
 
-
+        load.postValue(true)
         usersProvider.login(email, password)?.enqueue(object : Callback<ResponseHttp> {
             override fun onResponse(call: Call<ResponseHttp>, response: Response<ResponseHttp>) {
 
@@ -40,6 +40,7 @@ class LoginViewModel @Inject constructor(
                         .show()
                     saveUserInSession(response.body()?.data.toString())
                     success.postValue(true)
+                    load.postValue(false)
 
                 } else {
                     Toast.makeText(
@@ -52,6 +53,7 @@ class LoginViewModel @Inject constructor(
             }
 
             override fun onFailure(call: Call<ResponseHttp>, t: Throwable) {
+                load.postValue(false)
                 Log.d("Main", "Houve um Erro ${t.message}")
                 Toast.makeText(getApplication(), "Houve um Erro ${t.message}", Toast.LENGTH_LONG)
                     .show()

@@ -48,7 +48,9 @@ class SharedPref @Inject constructor(
         return data
     }
 
-
+    fun remove(key: String) {
+        prefs?.edit()?.remove(key)?.apply()
+    }
 
 
 

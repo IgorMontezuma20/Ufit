@@ -1,13 +1,15 @@
 package com.app.ufit.viewmodels.profile
 
 import android.app.Application
+import android.content.Intent
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.app.ufit.data.SharedPref
 import com.app.ufit.models.User
 import com.google.gson.Gson
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.util.*
+import java.util.Date
 import javax.inject.Inject
 
 @HiltViewModel
@@ -45,5 +47,12 @@ class ProfileViewModel @Inject constructor(
         val years = months / 12
 
         return years.toString()
+    }
+
+    fun logout() {
+        val sharedPref = SharedPref(getApplication())
+
+        sharedPref.remove("user")
+
     }
 }
