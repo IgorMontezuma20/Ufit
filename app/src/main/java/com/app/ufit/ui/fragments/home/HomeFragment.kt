@@ -1,14 +1,22 @@
 package com.app.ufit.ui.fragments.home
 
+import android.app.AlertDialog
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.ufit.R
 import com.app.ufit.adapters.MuscleGroupAdapter
+import com.app.ufit.databinding.CustomExitDialogBinding
 import com.app.ufit.databinding.FragmentHomeBinding
 import com.app.ufit.ui.MainActivity
 import com.app.ufit.viewmodels.MainViewModel
@@ -38,6 +46,11 @@ class HomeFragment : Fragment() {
         _binding  = FragmentHomeBinding.inflate(inflater, container, false)
 
         setupRecyclerView()
+
+        binding.btnMap.setOnClickListener {
+            openMapsDialog()
+
+        }
 
 
         return binding.root
@@ -69,6 +82,62 @@ class HomeFragment : Fragment() {
         listMuscleGroup.add(getString(R.string.triceps))
 
         mAdapter.setData(listMuscleGroup)
+    }
+
+    private fun openMapsLink() {
+        val intentUri = "geo:?q=encontre as academias mais proximas"
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(intentUri))
+        intent.setPackage("com.google.android.apps.maps")
+        startActivity(intent)
+    }
+
+//    private fun openMapsDialog() {
+//        val builder = AlertDialog.Builder(requireActivity())
+//        //set title for alert dialog
+//        builder.setTitle(R.string.dialogTitle)
+//        //set message for alert dialog
+//        builder.setMessage(R.string.dialogMessage)
+//        builder.setIcon(android.R.drawable.ic_dialog_alert)
+//
+//        //performing positive action
+//        builder.setPositiveButton("Sim"){dialogInterface, which ->
+//            openMapsLink()
+//        }
+//
+//        //performing negative action
+//        builder.setNegativeButton("Não"){dialogInterface, which ->
+//            dialogInterface.cancel()
+//        }
+//        // Create the AlertDialog
+//        val alertDialog: AlertDialog = builder.create()
+//        // Set other dialog properties
+//        alertDialog.setCancelable(false)
+//        alertDialog.show()
+//    }
+
+    private fun openMapsDialog() {
+        val view = LayoutInflater.from(requireContext()).inflate(R.layout.custom_maps_dialog, null)
+        val dialog = AlertDialog.Builder(requireContext()).setView(view)
+        val dialogBinding = CustomExitDialogBinding.bind(view)
+        val confirmButton = dialogBinding.confirmButton
+        val cancelButton = dialogBinding.cancelButton
+
+        val mAlertDialog = dialog.create().apply {
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            setCancelable(false)
+            show()
+        }
+
+
+
+        confirmButton.setOnClickListener {
+            openMapsLink()
+
+        }
+        cancelButton.setOnClickListener {
+            mAlertDialog.cancel()
+        }
+
     }
 
     override fun onDestroyView() {

@@ -31,7 +31,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tlSearch"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:layout_width="360dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:padding="5dp"
@@ -60,11 +60,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        app:fontFamily="@font/roboto_medium"
         android:text="Grupos Musculares"
         android:textColor="@color/blue_700"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@id/tlSearch"
+        app:fontFamily="@font/roboto_medium"
+        app:layout_constraintStart_toStartOf="@+id/tlSearch"
         app:layout_constraintTop_toBottomOf="@id/tlSearch" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -76,6 +76,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvMuscleGroup" />
 
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="22dp"
+        android:text="Clique para academia mais próxima"
+        android:textColor="@color/blue_700"
+        android:textSize="16sp"
+        app:fontFamily="@font/roboto_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+    <ImageButton
+        android:id="@+id/btnMap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/transparent"
+        android:contentDescription="Map icon"
+        android:src="@android:drawable/ic_dialog_map"
+        app:layout_constraintBottom_toBottomOf="@+id/textView10"
+        app:layout_constraintStart_toEndOf="@+id/textView10"
+        app:layout_constraintTop_toTopOf="@+id/textView10"
+        app:tint="@color/blue_700" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
