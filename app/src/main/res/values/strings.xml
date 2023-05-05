@@ -34,6 +34,7 @@
     <string name="date_hint">Ex: 00/00/0000</string>
     <string name="dialogMessage">Você irá sair do aplicativo. Deseja proseguir?</string>
     <string name="dialogTitle">Acesso ao mapa</string>
+    <string name="heart_icon_description">Heart icon</string>
 
     <string-array name="gender">
         <item>masculino</item>

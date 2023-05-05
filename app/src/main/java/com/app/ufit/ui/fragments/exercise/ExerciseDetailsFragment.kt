@@ -25,6 +25,8 @@ class ExerciseDetailsFragment : Fragment() {
 
     lateinit var mExerciseDetailsViewModel: ExerciseDetailsViewModel
 
+    private var isFavorite: Boolean = false
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +40,20 @@ class ExerciseDetailsFragment : Fragment() {
 
         callComponents()
         requestApiData()
+
+        binding.favoriteButton.setOnClickListener {
+
+            if (isFavorite) {
+
+                isFavorite = false
+                binding.favoriteButton.setImageResource(R.drawable.ic_heart_2)
+
+            } else {
+                isFavorite = true
+                binding.favoriteButton.setImageResource(R.drawable.ic_heart)
+
+            }
+        }
 
         //binding.ivMuscle.load()
 
