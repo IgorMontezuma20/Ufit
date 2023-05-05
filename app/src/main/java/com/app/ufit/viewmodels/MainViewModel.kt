@@ -65,6 +65,7 @@ class MainViewModel @Inject constructor(
 
     }
 
+
     private fun offlineCacheExercises(exercises: List<ExercisesItem>){
         val exercisesEntity = ExercisesEntity(exercises)
         insertExercise(exercisesEntity)

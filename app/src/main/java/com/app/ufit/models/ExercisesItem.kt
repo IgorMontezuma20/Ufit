@@ -2,9 +2,12 @@ package com.app.ufit.models
 
 
 import android.os.Parcelable
+import androidx.room.Entity
+import com.app.ufit.util.Constants
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
+@Entity(tableName = Constants.EXERCISES_TABLE)
 @Parcelize
 data class ExercisesItem(
     @SerializedName("difficulty")

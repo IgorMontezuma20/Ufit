@@ -11,7 +11,7 @@ class Constants {
 
 
         //Room
-        const val DATABASE_NAME = "exercises_database"
+        var DATABASE_NAME = "exercises_database"
         const val EXERCISES_TABLE = "exercises_table"
         const val FAVORITE_EXERCISES_TABLE = "favorite_exercises_table"
 

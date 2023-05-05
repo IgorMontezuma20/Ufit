@@ -22,6 +22,9 @@ interface ExercisesDao {
     @Query("SELECT  * FROM exercises_table ORDER BY id ASC")
     fun readExercises(): Flow<List<ExercisesEntity>>
 
+    @Query("DELETE FROM exercises_table WHERE id=:id")
+    fun deleteExercise(id: Int)
+
 //    @Query("SELECT * FROM favorite_exercises_table ORDER BY id ASC")
 //    fun readFavoriteExercises(): Flow<List<FavoritesEntity>>
 //
@@ -30,5 +33,7 @@ interface ExercisesDao {
 //
 //    @Query("DELETE FROM favorite_exercises_table")
 //    suspend fun deleteAllFavoriteExercises()
+
+
 
 }

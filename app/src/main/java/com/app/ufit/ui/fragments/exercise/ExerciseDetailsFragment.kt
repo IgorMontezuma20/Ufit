@@ -16,14 +16,19 @@ import com.app.ufit.databinding.FragmentExercisesBinding
 import com.app.ufit.models.ExercisesItem
 import com.app.ufit.util.NetworkResult
 import com.app.ufit.viewmodels.exercise.ExerciseDetailsViewModel
+import com.app.ufit.viewmodels.favorites.FavoriteExerciseViewModel
 
 
 class ExerciseDetailsFragment : Fragment() {
 
     private var _binding: FragmentExerciseDetailsBinding? = null
     private val binding get() = _binding!!
+    val args: ExerciseDetailsFragmentArgs by navArgs()
+    val myBundle: ExercisesItem? = args.data
 
-    lateinit var mExerciseDetailsViewModel: ExerciseDetailsViewModel
+    private lateinit var mExerciseDetailsViewModel: ExerciseDetailsViewModel
+
+    private lateinit var mFavoriteExerciseViewModel: FavoriteExerciseViewModel
 
     private var isFavorite: Boolean = false
 
@@ -45,6 +50,7 @@ class ExerciseDetailsFragment : Fragment() {
 
             if (isFavorite) {
 
+                //mFavoriteExerciseViewModel.
                 isFavorite = false
                 binding.favoriteButton.setImageResource(R.drawable.ic_heart_2)
 
@@ -62,8 +68,6 @@ class ExerciseDetailsFragment : Fragment() {
     }
 
     private fun requestApiData() {
-        val args: ExerciseDetailsFragmentArgs by navArgs()
-        val myBundle: ExercisesItem? = args.data
         mExerciseDetailsViewModel.getImage(myBundle?.muscle as String)
         mExerciseDetailsViewModel.imageResponse.observe(viewLifecycleOwner) { response ->
 
@@ -83,9 +87,6 @@ class ExerciseDetailsFragment : Fragment() {
 //    }
 
     private fun callComponents() {
-
-        val args: ExerciseDetailsFragmentArgs by navArgs()
-        val myBundle: ExercisesItem? = args.data
 
         binding.tvExerciseTitle.text = myBundle?.name
         binding.tvMuscleName.text = myBundle?.muscle
