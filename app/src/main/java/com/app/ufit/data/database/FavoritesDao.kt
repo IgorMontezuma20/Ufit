@@ -29,6 +29,9 @@ interface FavoritesDao
     @Query("SELECT * FROM favorites_table")
     fun readFavorites(): Flow<List<FavoritesEntity>>
 
+    @Query("SELECT * FROM favorites_table WHERE name = :name")
+    fun findFavoriteByName(name: String): FavoritesEntity?
+
 
 
 

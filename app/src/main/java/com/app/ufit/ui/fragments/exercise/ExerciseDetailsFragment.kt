@@ -2,11 +2,10 @@ package com.app.ufit.ui.fragments.exercise
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -15,13 +14,11 @@ import coil.load
 import com.app.ufit.R
 import com.app.ufit.data.database.ExercisesDatabase
 import com.app.ufit.data.database.FavoritesDao
-import com.app.ufit.data.database.entities.ExercisesEntity
 import com.app.ufit.data.database.entities.FavoritesEntity
 import com.app.ufit.databinding.FragmentExerciseDetailsBinding
 import com.app.ufit.models.ExercisesItem
 import com.app.ufit.viewmodels.exercise.ExerciseDetailsViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -34,8 +31,6 @@ class ExerciseDetailsFragment : Fragment() {
     lateinit var mExerciseDetailsViewModel: ExerciseDetailsViewModel
 
      private  lateinit var favoriteDao : FavoritesDao
-
-  //   private lateinit var  mExercise : ExercisesEntity
 
     private lateinit var  mFavorite : FavoritesEntity
 
@@ -132,12 +127,15 @@ class ExerciseDetailsFragment : Fragment() {
         }
     }
 
-    private fun removeFromFavorites() {
 
+    private fun removeFromFavorites() {
         lifecycleScope.launch {
             withContext(Dispatchers.IO) {
-                favoriteDao.deleteFavorite(mFavorite.id)
-                Log.d("ExerciseDetailsFragment", "Exercise removed from favorites with id = ${mFavorite.id}")
+                val favorite = favoriteDao.findFavoriteByName(mFavorite.name)
+                favorite?.let {
+                    favoriteDao.deleteFavorite(it.id)
+                    Log.d("ExerciseDetailsFragment", "Exercise removed from favorites with id = ${it.id}")
+                }
             }
         }
     }
