@@ -35,6 +35,10 @@
     <string name="dialogMessage">Você irá sair do aplicativo. Deseja proseguir?</string>
     <string name="dialogTitle">Acesso ao mapa</string>
     <string name="heart_icon_description">Heart icon</string>
+    <string name="delete_favorite_dialog_title">Deseja excluir este exercício?</string>
+    <string name="delete_favorite_dialog_description">O exercício será removido dos favoritos!</string>
+    <string name="confirm_txt">Confirmar</string>
+    <string name="cancel_txt">Cancelar</string>
 
     <string-array name="gender">
         <item>masculino</item>

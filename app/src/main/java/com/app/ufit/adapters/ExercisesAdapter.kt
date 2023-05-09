@@ -48,6 +48,8 @@ class ExercisesAdapter : RecyclerView.Adapter<ExercisesAdapter.MyViewHolder>() {
     }
 
 
+
+
     fun setData(newData: List<ExercisesItem>){
 
         val exercisesDiffUtil = ExercisesDiffUtil(exercise, newData)

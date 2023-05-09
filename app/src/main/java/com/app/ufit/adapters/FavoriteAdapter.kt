@@ -7,16 +7,38 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.app.ufit.ClickEvent
 import com.app.ufit.R
 import com.app.ufit.data.database.FavoritesDao
 import com.app.ufit.data.database.entities.FavoritesEntity
+import com.app.ufit.databinding.ExerciseItemBinding
+import com.app.ufit.models.ExercisesItem
 
 class FavoriteAdapter(
     private val context: Context,
     private val favoriteDao: FavoritesDao,
-    private val list: MutableList<FavoritesEntity>,
+    private val clickEvent: ClickEvent,
+    private val list: MutableList<FavoritesEntity>
     //private val deleteItemClickListener: DeleteItemClickListner
 ) : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
+
+    class MyViewHolder(private val binding: ExerciseItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(exerciseItem: ExercisesItem) {
+            binding.exerciseItem = exerciseItem
+            binding.executePendingBindings()
+        }
+
+        companion object {
+            fun from(parent: ViewGroup): MyViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = ExerciseItemBinding.inflate(layoutInflater, parent, false)
+                return MyViewHolder(binding)
+            }
+        }
+
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.exercise_item, parent, false))
@@ -29,6 +51,16 @@ class FavoriteAdapter(
         holder.description.text = model.instructions
         holder.muscle.text = model.muscle
         holder.difficulty.text = model.difficulty
+
+        holder.itemView.setOnClickListener {
+            clickEvent.OnClick(position)
+        }
+
+        holder.itemView.setOnLongClickListener {
+
+            clickEvent.OnLongPress(position)
+            true
+        }
 
 //        val isFavorite = favoriteDao.isFavorite(model.id)
 //        if (isFavorite) {
