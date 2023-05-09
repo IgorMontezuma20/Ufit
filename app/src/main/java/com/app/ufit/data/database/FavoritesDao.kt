@@ -15,7 +15,7 @@ interface FavoritesDao
 {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-       fun insertFavorite(favorite: FavoritesEntity)
+    fun insertFavorite(favorite: FavoritesEntity)
 
 
     @Query("SELECT EXISTS (SELECT 1 FROM favorites_table WHERE id = :id)")
@@ -23,16 +23,18 @@ interface FavoritesDao
 
 
     @Query("DELETE FROM favorites_table WHERE id =:id")
-     fun deleteFavorite(id:Int)
+    fun deleteFavorite(id:Int)
 
 
     @Query("SELECT * FROM favorites_table")
-    fun readFavorites(): Flow<List<FavoritesEntity>>
+    fun getA(): Flow<List<FavoritesEntity>>
 
     @Query("SELECT * FROM favorites_table WHERE name = :name")
     fun findFavoriteByName(name: String): FavoritesEntity?
 
 
+    @Query("SELECT * FROM favorites_table")
+    fun getAllData(): List<FavoritesEntity>
 
 
 }

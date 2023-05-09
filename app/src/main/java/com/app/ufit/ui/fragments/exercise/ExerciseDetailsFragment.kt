@@ -1,5 +1,7 @@
 package com.app.ufit.ui.fragments.exercise
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -34,6 +36,8 @@ class ExerciseDetailsFragment : Fragment() {
 
     private lateinit var  mFavorite : FavoritesEntity
 
+    private lateinit var sharedPreferences: SharedPreferences
+
     private var isFavorite = false
 
 
@@ -59,22 +63,32 @@ class ExerciseDetailsFragment : Fragment() {
 
 
 
+        sharedPreferences = requireContext().getSharedPreferences("MySharedPreferences", Context.MODE_PRIVATE)
 
-        binding.ivFavorite.setOnClickListener {
+             // Carrega o estado do botão de favorito do SharedPreferences
 
-                isFavorite = !isFavorite
+             isFavorite = sharedPreferences.getBoolean("isFavorite", false)
+             if (isFavorite) {
+                 binding.ivFavorite.setImageResource(R.drawable.ic_favorite)
+             } else {
+                 binding.ivFavorite.setImageResource(R.drawable.ic_favorite_border)
+             }
+
+             binding.ivFavorite.setOnClickListener {
+                 isFavorite = !isFavorite
+
+                 if (isFavorite) {
+                     binding.ivFavorite.setImageResource(R.drawable.ic_favorite)
+                     addToFavorites()
+                 } else {
+                     binding.ivFavorite.setImageResource(R.drawable.ic_favorite_border)
+                     removeFromFavorites()
+                 }
+                 // Salva o estado do botão de favorito no SharedPreferences
+                 sharedPreferences.edit().putBoolean("isFavorite", isFavorite).apply()
+             }
 
 
-
-                if (isFavorite) {
-                    binding.ivFavorite.setImageResource(R.drawable.ic_favorite)
-                    addToFavorites()
-                } else {
-                    binding.ivFavorite.setImageResource(R.drawable.ic_favorite_border)
-                    removeFromFavorites()
-                }
-
-        }
 
         return binding.root
 
