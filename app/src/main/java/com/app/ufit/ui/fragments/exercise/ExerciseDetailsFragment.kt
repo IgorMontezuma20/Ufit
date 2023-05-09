@@ -110,7 +110,7 @@ class ExerciseDetailsFragment : Fragment() {
 
 
         mFavorite = FavoritesEntity(
-            id = myBundle!!.id,
+            id = id,
             name = myBundle?.name ?: "",
             difficulty = myBundle?.difficulty ?: "",
             equipment = myBundle?.equipment ?: "",
