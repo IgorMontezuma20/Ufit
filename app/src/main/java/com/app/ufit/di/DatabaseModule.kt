@@ -24,10 +24,15 @@ object DatabaseModule {
         context,
         ExercisesDatabase::class.java,
         DATABASE_NAME
-    ).fallbackToDestructiveMigration().build()
+    ).fallbackToDestructiveMigration()
+        .build()
 
     @Singleton
     @Provides
     fun provideDao( database: ExercisesDatabase) = database.exercisesDao()
+
+    @Singleton
+    @Provides
+    fun favoriteDao( favorite: ExercisesDatabase) = favorite.favoritesDao()
 
 }

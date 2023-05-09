@@ -6,16 +6,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import androidx.room.Room
 import coil.load
 import com.app.ufit.R
+import com.app.ufit.data.database.ExercisesDatabase
+import com.app.ufit.data.database.FavoritesDao
+import com.app.ufit.data.database.entities.ExercisesEntity
+import com.app.ufit.data.database.entities.FavoritesEntity
 import com.app.ufit.databinding.FragmentExerciseDetailsBinding
-import com.app.ufit.databinding.FragmentExercisesBinding
 import com.app.ufit.models.ExercisesItem
-import com.app.ufit.util.NetworkResult
 import com.app.ufit.viewmodels.exercise.ExerciseDetailsViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class ExerciseDetailsFragment : Fragment() {
@@ -25,7 +33,13 @@ class ExerciseDetailsFragment : Fragment() {
 
     lateinit var mExerciseDetailsViewModel: ExerciseDetailsViewModel
 
-    private var isFavorite: Boolean = false
+     private  lateinit var favoriteDao : FavoritesDao
+
+  //   private lateinit var  mExercise : ExercisesEntity
+
+    private lateinit var  mFavorite : FavoritesEntity
+
+    private var isFavorite = false
 
 
     override fun onCreateView(
@@ -41,24 +55,35 @@ class ExerciseDetailsFragment : Fragment() {
         callComponents()
         requestApiData()
 
-        binding.favoriteButton.setOnClickListener {
 
-            if (isFavorite) {
+        val db = Room.databaseBuilder(
+            requireContext(),
+            ExercisesDatabase::class.java, "ExercisesDatabase"
+        ).build()
+        favoriteDao = db.favoritesDao()
 
-                isFavorite = false
-                binding.favoriteButton.setImageResource(R.drawable.ic_heart_2)
 
-            } else {
-                isFavorite = true
-                binding.favoriteButton.setImageResource(R.drawable.ic_heart)
 
-            }
+
+        binding.ivFavorite.setOnClickListener {
+
+                isFavorite = !isFavorite
+
+
+
+                if (isFavorite) {
+                    binding.ivFavorite.setImageResource(R.drawable.ic_favorite)
+                    addToFavorites()
+                } else {
+                    binding.ivFavorite.setImageResource(R.drawable.ic_favorite_border)
+                    removeFromFavorites()
+                }
+
         }
 
-        //binding.ivMuscle.load()
-
-
         return binding.root
+
+
     }
 
     private fun requestApiData() {
@@ -72,15 +97,6 @@ class ExerciseDetailsFragment : Fragment() {
         }
     }
 
-//    private fun applyQueries(): HashMap<String, String> {
-//        val queries: HashMap<String, String> = HashMap()
-//
-//
-//
-//        queries["muscleGroups"] = myBundle?.name as String
-//
-//        return queries
-//    }
 
     private fun callComponents() {
 
@@ -91,6 +107,39 @@ class ExerciseDetailsFragment : Fragment() {
         binding.tvMuscleName.text = myBundle?.muscle
         binding.tvDifficultyLevel.text = myBundle?.difficulty
         binding.tvInstructions.text = myBundle?.instructions
+
+
+        mFavorite = FavoritesEntity(
+            id = myBundle!!.id,
+            name = myBundle?.name ?: "",
+            difficulty = myBundle?.difficulty ?: "",
+            equipment = myBundle?.equipment ?: "",
+            instructions = myBundle?.instructions ?: "",
+            muscle = myBundle?.muscle ?: "",
+            type = myBundle?.type ?: ""
+        )
+
+
+    }
+
+
+    private fun addToFavorites() {
+
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO) {
+                favoriteDao.insertFavorite(mFavorite)
+            }
+        }
+    }
+
+    private fun removeFromFavorites() {
+
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO) {
+                favoriteDao.deleteFavorite(mFavorite.id)
+                Log.d("ExerciseDetailsFragment", "Exercise removed from favorites with id = ${mFavorite.id}")
+            }
+        }
     }
 
 
