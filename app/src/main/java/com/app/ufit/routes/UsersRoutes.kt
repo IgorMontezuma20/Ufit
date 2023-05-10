@@ -22,7 +22,7 @@ interface UsersRoutes {
     ): Call<ResponseHttp>
 
     @Headers(
-        "x-RapidAPI-key: 80a6ac3cfbmshb0ad9c5649d853dp180ff9jsnd97019b47d0c"
+        "x-RapidAPI-key: c023a22db5msh626f4fd1fc55938p1a2579jsnb91b6c4c1733"
     )
     //Exercise image
     @GET("/getImage")
