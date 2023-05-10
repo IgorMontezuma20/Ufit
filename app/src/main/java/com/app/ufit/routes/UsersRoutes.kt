@@ -41,4 +41,7 @@ interface UsersRoutes {
     fun updateWithoutImage(
         @Body user: User
     ): Call<ResponseHttp>
+
+    @DELETE("users/delete/{userId}")
+    fun deleteUser(@Path("userId") userId: String): Call<ResponseHttp>
 }
