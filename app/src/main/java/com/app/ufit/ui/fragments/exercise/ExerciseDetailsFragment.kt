@@ -1,7 +1,5 @@
 package com.app.ufit.ui.fragments.exercise
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -36,9 +34,11 @@ class ExerciseDetailsFragment : Fragment() {
 
     private lateinit var mFavorite: FavoritesEntity
 
-    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var favoritesList: List<FavoritesEntity>
 
     private var isFavorite = false
+
+    val args: ExerciseDetailsFragmentArgs by navArgs()
 
 
     override fun onCreateView(
@@ -54,30 +54,17 @@ class ExerciseDetailsFragment : Fragment() {
         callComponents()
         requestApiData()
 
-
         val db = Room.databaseBuilder(
             requireContext(),
             ExercisesDatabase::class.java, "ExercisesDatabase"
         ).build()
         favoriteDao = db.favoritesDao()
 
+        getFavoritesList()
 
-
-        sharedPreferences =
-            requireContext().getSharedPreferences("MySharedPreferences", Context.MODE_PRIVATE)
-
-        // Carrega o estado do botão de favorito do SharedPreferences
-
-        isFavorite = sharedPreferences.getBoolean("isFavorite", false)
-        if (isFavorite) {
-            binding.ivFavorite.setImageResource(R.drawable.ic_favorite)
-        } else {
-            binding.ivFavorite.setImageResource(R.drawable.ic_favorite_border)
-        }
 
         binding.ivFavorite.setOnClickListener {
             isFavorite = !isFavorite
-
             if (isFavorite) {
                 binding.ivFavorite.setImageResource(R.drawable.ic_favorite)
                 addToFavorites()
@@ -85,35 +72,24 @@ class ExerciseDetailsFragment : Fragment() {
                 binding.ivFavorite.setImageResource(R.drawable.ic_favorite_border)
                 removeFromFavorites()
             }
-            // Salva o estado do botão de favorito no SharedPreferences
-            sharedPreferences.edit().putBoolean("isFavorite", isFavorite).apply()
         }
 
-
-
         return binding.root
-
-
     }
 
     private fun requestApiData() {
-        val args: ExerciseDetailsFragmentArgs by navArgs()
         val myBundle: ExercisesItem? = args.data
-        if(myBundle != null){
+
+        if (myBundle != null) {
             mExerciseDetailsViewModel.getImage(myBundle?.muscle as String)
             mExerciseDetailsViewModel.imageResponse.observe(viewLifecycleOwner) { response ->
-
                 binding.ivMuscle.load(response)
-
             }
         }
-
     }
 
 
     private fun callComponents() {
-
-        val args: ExerciseDetailsFragmentArgs by navArgs()
         val myBundle: ExercisesItem? = args.data
 
         binding.tvExerciseTitle.text = myBundle?.name
@@ -122,7 +98,6 @@ class ExerciseDetailsFragment : Fragment() {
         binding.tvInstructions.text = myBundle?.instructions
 
         if (myBundle != null) {
-
             mFavorite = FavoritesEntity(
                 id = myBundle!!.id,
                 name = myBundle?.name ?: "",
@@ -133,13 +108,10 @@ class ExerciseDetailsFragment : Fragment() {
                 type = myBundle?.type ?: ""
             )
         }
-
-
     }
 
 
     private fun addToFavorites() {
-
         lifecycleScope.launch {
             withContext(Dispatchers.IO) {
                 favoriteDao.insertFavorite(mFavorite)
@@ -163,5 +135,27 @@ class ExerciseDetailsFragment : Fragment() {
         }
     }
 
+    private fun getFavoritesList() {
+        lifecycleScope.launch {
+            favoritesList = withContext(Dispatchers.IO) {
+                favoriteDao.getAllData()
+            }
+            verifyFavorite()
+        }
 
+    }
+
+    private fun verifyFavorite() {
+        val myBundle: ExercisesItem? = args.data
+
+        if (myBundle != null) {
+            for (favoriteItem in favoritesList) {
+                if (favoriteItem.name.equals(myBundle.name)) {
+                    binding.ivFavorite.setImageResource(R.drawable.ic_favorite)
+                    isFavorite = true
+                    return
+                }
+            }
+        }
+    }
 }
