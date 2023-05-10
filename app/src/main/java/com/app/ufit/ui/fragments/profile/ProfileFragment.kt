@@ -57,6 +57,9 @@ class ProfileFragment : Fragment() {
         binding.btnProgress.setOnClickListener {
             openWarningDialog()
         }
+        binding.btnDeleteAccount.setOnClickListener {
+            openDeleteAccountDialog()
+        }
 
         mProfileViewModel.success.observe(requireActivity()) {
             binding.tvProfileName.text = it.name
@@ -124,6 +127,29 @@ class ProfileFragment : Fragment() {
         confirmButton.setOnClickListener {
             mAlertDialog.cancel()
         }
+    }
+
+    private fun openDeleteAccountDialog() {
+        val view = LayoutInflater.from(requireContext()).inflate(R.layout.custom_delete_account_dialog, null)
+        val dialog = AlertDialog.Builder(requireContext()).setView(view)
+        val dialogBinding = CustomExitDialogBinding.bind(view)
+        val confirmButton = dialogBinding.confirmButton
+        val cancelButton = dialogBinding.cancelButton
+
+        val mAlertDialog = dialog.create().apply {
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            setCancelable(false)
+            show()
+        }
+
+        confirmButton.setOnClickListener {
+            logOff()
+            findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
+        }
+        cancelButton.setOnClickListener {
+            mAlertDialog.cancel()
+        }
+
     }
 
     override fun onDestroy() {

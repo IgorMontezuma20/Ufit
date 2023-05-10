@@ -37,11 +37,23 @@
     <string name="heart_icon_description">Heart icon</string>
     <string name="delete_favorite_dialog_title">Quer excluir este exercício?</string>
     <string name="delete_favorite_dialog_description">O exercício será removido dos favoritos!</string>
+    <string name="delete_account_dialog_title">Excluir conta?</string>
+    <string name="delete_account_dialog_description">Sua conta será excluida. Deseja continuar?</string>
     <string name="confirm_txt">Confirmar</string>
     <string name="cancel_txt">Cancelar</string>
     <string name="exit_dialog_title">Deseja sair do aplicativo?</string>
     <string name="exit_maps_dialog_description">Você será direcionado ao google maps...</string>
     <string name="exit_dialog_description">Você irá se desconectar do aplicativo!</string>
+    <string name="arrow_icon">Arrow Image</string>
+    <string name="personal_data_text">Dados Pessoais</string>
+    <string name="achievements_text">Conquistas</string>
+    <string name="activities_resume_text">Histórico de atividade</string>
+    <string name="training_progress_text">Progresso de treino</string>
+    <string name="delete_account_text">Excluir conta</string>
+    <string name="account_title_text">Conta</string>
+    <string name="notification_title_text">Notificação</string>
+    <string name="notification_text">Notificações Pop-Up</string>
+    <string name="exit_text">Sair</string>
 
     <string-array name="gender">
         <item>masculino</item>
