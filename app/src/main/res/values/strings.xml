@@ -35,10 +35,13 @@
     <string name="dialogMessage">Você irá sair do aplicativo. Deseja proseguir?</string>
     <string name="dialogTitle">Acesso ao mapa</string>
     <string name="heart_icon_description">Heart icon</string>
-    <string name="delete_favorite_dialog_title">Deseja excluir este exercício?</string>
+    <string name="delete_favorite_dialog_title">Quer excluir este exercício?</string>
     <string name="delete_favorite_dialog_description">O exercício será removido dos favoritos!</string>
     <string name="confirm_txt">Confirmar</string>
     <string name="cancel_txt">Cancelar</string>
+    <string name="exit_dialog_title">Deseja sair do aplicativo?</string>
+    <string name="exit_maps_dialog_description">Você será direcionado ao google maps...</string>
+    <string name="exit_dialog_description">Você irá se desconectar do aplicativo!</string>
 
     <string-array name="gender">
         <item>masculino</item>

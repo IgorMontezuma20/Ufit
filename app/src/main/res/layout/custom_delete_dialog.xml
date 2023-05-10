@@ -6,8 +6,8 @@
     android:layout_height="match_parent">
 
     <com.airbnb.lottie.LottieAnimationView
-        android:layout_width="125dp"
-        android:layout_height="125dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_margin="15dp"
         android:elevation="2dp"
         app:lottie_autoPlay="true"
@@ -70,7 +70,7 @@
                 android:layout_marginStart="4dp"
                 android:layout_weight="1.0"
                 android:backgroundTint="@color/blue_700"
-                android:text="@string/confirm_txt"
+                android:text="Confirmar"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -88,7 +88,7 @@
                 android:layout_marginEnd="4dp"
                 android:layout_weight="1.0"
                 android:backgroundTint="@color/red100"
-                android:text="@string/cancel_txt"
+                android:text="Cancelar"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold"
