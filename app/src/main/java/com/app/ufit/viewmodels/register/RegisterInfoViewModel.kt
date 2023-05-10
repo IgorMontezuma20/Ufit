@@ -11,7 +11,6 @@ import com.app.ufit.models.ResponseHttp
 import com.app.ufit.models.User
 import com.app.ufit.provider.UsersProvider
 import com.google.gson.Gson
-import dagger.hilt.android.internal.Contexts.getApplication
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,8 +18,7 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class RegisterInfoViewModel  @Inject constructor(
-    //private val user: User,
+class RegisterInfoViewModel @Inject constructor(
     private val usersProvider: UsersProvider,
     application: Application
 ) : AndroidViewModel(application) {
@@ -28,7 +26,7 @@ class RegisterInfoViewModel  @Inject constructor(
     val success = MutableLiveData<Boolean>()
     val load = MutableLiveData<Boolean>()
 
-    fun registerUser(user: User){
+    fun registerUser(user: User) {
         load.postValue(true)
         usersProvider.register(user)?.enqueue(object : Callback<ResponseHttp> {
             override fun onResponse(
@@ -57,20 +55,15 @@ class RegisterInfoViewModel  @Inject constructor(
                     Toast.LENGTH_LONG
                 ).show()
             }
-
-
         })
-
     }
 
     fun login(email: String, password: String) {
         usersProvider.login(email, password)?.enqueue(object : Callback<ResponseHttp> {
             override fun onResponse(call: Call<ResponseHttp>, response: Response<ResponseHttp>) {
-
                 Log.d("Main", "Response : ${response.body()}")
 
                 if (response.body()?.isSuccess == true) {
-
                     saveUserInSession(response.body()?.data.toString())
                 }
             }
@@ -81,7 +74,6 @@ class RegisterInfoViewModel  @Inject constructor(
                     .show()
             }
         })
-
     }
 
     fun saveUserInSession(data: String) {
@@ -90,6 +82,4 @@ class RegisterInfoViewModel  @Inject constructor(
         val user = gson.fromJson(data, User::class.java)
         sharedPref.save("user", user)
     }
-
-
 }

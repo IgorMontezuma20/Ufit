@@ -1,15 +1,13 @@
 package com.app.ufit.ui.fragments.editprofile
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import coil.load
-import com.app.ufit.R
 import com.app.ufit.databinding.FragmentEditProfileBinding
-import com.app.ufit.databinding.FragmentProfileBinding
 import com.app.ufit.viewmodels.profile.ProfileViewModel
 
 class EditProfileFragment : Fragment() {
@@ -32,8 +30,6 @@ class EditProfileFragment : Fragment() {
             binding.etName.setText(it.name)
             binding.etLastname.setText(it.lastName)
             binding.ivProfileImage.load(it.image)
-            //binding.acGender.setText(it.acGender)
-
         }
 
         mProfileViewModel.getUserFromSession()

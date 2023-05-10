@@ -62,7 +62,6 @@ class ExerciseDetailsFragment : Fragment() {
 
         getFavoritesList()
 
-
         binding.ivFavorite.setOnClickListener {
             isFavorite = !isFavorite
             if (isFavorite) {
@@ -87,7 +86,6 @@ class ExerciseDetailsFragment : Fragment() {
             }
         }
     }
-
 
     private fun callComponents() {
         val myBundle: ExercisesItem? = args.data

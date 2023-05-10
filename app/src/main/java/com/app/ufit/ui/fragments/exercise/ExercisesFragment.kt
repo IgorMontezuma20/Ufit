@@ -69,13 +69,10 @@ class ExercisesFragment : Fragment() {
         mainViewModel.exercisesResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is NetworkResult.Success -> {
-                    //hideShimmerEffect()
                     response.data?.let { mAdapter.setData(it) }
                     Log.d("listSize", response.data?.size.toString())
                 }
                 is NetworkResult.Error -> {
-                    // hideShimmerEffect()
-                    //loadDataFromCache()
                     Toast.makeText(
                         requireContext(),
                         response.message.toString(),
@@ -83,7 +80,6 @@ class ExercisesFragment : Fragment() {
                     ).show()
                 }
                 is NetworkResult.Loading -> {
-                    // showShimmerEffect()
                 }
             }
 
@@ -109,22 +105,8 @@ class ExercisesFragment : Fragment() {
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
 
-//    private fun showShimmerEffect() {
-//        binding.shimmerFrameLayout.startShimmer()
-//        binding.shimmerFrameLayout.visibility = View.VISIBLE
-//        binding.recyclerview.visibility = View.GONE
-//
-//    }
-//
-//    private fun hideShimmerEffect() {
-//        binding.shimmerFrameLayout.stopShimmer()
-//        binding.shimmerFrameLayout.visibility = View.GONE
-//        binding.recyclerview.visibility = View.VISIBLE
-//    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }

@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -21,7 +20,7 @@ import com.app.ufit.viewmodels.register.RegisterInfoViewModel
 import com.vicmikhailau.maskededittext.MaskedFormatter
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
 
 @AndroidEntryPoint
 class RegisterInfoFragment : Fragment() {
@@ -53,7 +52,6 @@ class RegisterInfoFragment : Fragment() {
             findNavController().navigate(R.id.action_registerInfoFragment_to_onBoardingFragment)
         }
 
-
         val genders = resources.getStringArray(R.array.gender)
         val adapter = ArrayAdapter<String>(
             requireContext(),
@@ -62,18 +60,13 @@ class RegisterInfoFragment : Fragment() {
         )
         binding.acGender.setAdapter(adapter)
 
-        binding.btnRegister.setOnClickListener {
-            createAccount()
-        }
+        binding.btnRegister.setOnClickListener { createAccount() }
 
         binding.acGender.setOnItemClickListener { adapterView: AdapterView<*>, view2: View, i: Int, l: Long ->
             gender = adapterView.getItemAtPosition(i).toString()
         }
 
-        binding.etBirth.setOnClickListener {
-            setDate()
-        }
-
+        binding.etBirth.setOnClickListener { setDate() }
 
         return binding.root
     }
@@ -83,7 +76,6 @@ class RegisterInfoFragment : Fragment() {
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
-
 
         val dpd = DatePickerDialog(
             requireContext(),
@@ -109,18 +101,14 @@ class RegisterInfoFragment : Fragment() {
     }
 
     private fun createAccount() {
-
-
         weight = binding.etWeight.text.toString()
         height = binding.etHeight.text.toString()
 
         if (isValidForm(gender, datePicker, weight, height)) {
-
             if (datePicker.isEmpty() || datePicker == "") {
                 datePicker = binding.etBirth.text.toString()
                 val dateFormatter = MaskedFormatter("##/##/####")
                 datePicker = dateFormatter.formatString(datePicker)?.unMaskedString!!
-
 
             } else {
                 datePicker = StringHelper.parseDate(
@@ -138,10 +126,7 @@ class RegisterInfoFragment : Fragment() {
             mRegisterInfoViewModel.registerUser(
                 user
             )
-
         }
-
-
     }
 
     private fun isValidForm(
@@ -151,36 +136,35 @@ class RegisterInfoFragment : Fragment() {
         height: String,
     ): Boolean {
 
-
         when {
             gender.isEmpty() -> {
                 binding.tlGender.helperText = getString(R.string.obrigatory_field)
                 binding.tlGender.boxStrokeColor = Color.parseColor("#FF0000")
                 return false
             }
+
             birthDate.isEmpty() -> {
                 binding.tlBirth.helperText = getString(R.string.obrigatory_field)
                 binding.tlBirth.boxStrokeColor = Color.parseColor("#FF0000")
                 return false
             }
+
             weight.isEmpty() -> {
                 binding.tlWeight.helperText = getString(R.string.obrigatory_field)
                 binding.tlWeight.boxStrokeColor = Color.parseColor("#FF0000")
                 return false
             }
+
             height.isEmpty() -> {
                 binding.tlHeight.helperText = getString(R.string.obrigatory_field)
                 binding.tlHeight.boxStrokeColor = Color.parseColor("#FF0000")
                 return false
             }
 
-
             else -> {
                 return true
             }
-
         }
-
     }
 
     private fun setLoadingProgressbar() {

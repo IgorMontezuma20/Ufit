@@ -6,19 +6,16 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.ufit.R
 import com.app.ufit.adapters.MuscleGroupAdapter
 import com.app.ufit.databinding.CustomExitDialogBinding
 import com.app.ufit.databinding.FragmentHomeBinding
-import com.app.ufit.ui.MainActivity
 import com.app.ufit.viewmodels.MainViewModel
 
 
@@ -29,13 +26,10 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val mAdapter by lazy {MuscleGroupAdapter()}
-
+    private val mAdapter by lazy { MuscleGroupAdapter() }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
-
-
     }
 
     override fun onCreateView(
@@ -43,27 +37,23 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding  = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         setupRecyclerView()
 
         binding.btnMap.setOnClickListener {
             openMapsDialog()
-
         }
-
 
         return binding.root
     }
 
     private fun setupRecyclerView() {
         binding.recyclerView.adapter = mAdapter
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
-
-
+        binding.recyclerView.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
 
         val listMuscleGroup = arrayListOf<String>()
-
         listMuscleGroup.add(getString(R.string.abdominals))
         listMuscleGroup.add(getString(R.string.abductors))
         listMuscleGroup.add(getString(R.string.adductors))
@@ -91,30 +81,6 @@ class HomeFragment : Fragment() {
         startActivity(intent)
     }
 
-//    private fun openMapsDialog() {
-//        val builder = AlertDialog.Builder(requireActivity())
-//        //set title for alert dialog
-//        builder.setTitle(R.string.dialogTitle)
-//        //set message for alert dialog
-//        builder.setMessage(R.string.dialogMessage)
-//        builder.setIcon(android.R.drawable.ic_dialog_alert)
-//
-//        //performing positive action
-//        builder.setPositiveButton("Sim"){dialogInterface, which ->
-//            openMapsLink()
-//        }
-//
-//        //performing negative action
-//        builder.setNegativeButton("Não"){dialogInterface, which ->
-//            dialogInterface.cancel()
-//        }
-//        // Create the AlertDialog
-//        val alertDialog: AlertDialog = builder.create()
-//        // Set other dialog properties
-//        alertDialog.setCancelable(false)
-//        alertDialog.show()
-//    }
-
     private fun openMapsDialog() {
         val view = LayoutInflater.from(requireContext()).inflate(R.layout.custom_maps_dialog, null)
         val dialog = AlertDialog.Builder(requireContext()).setView(view)
@@ -128,8 +94,6 @@ class HomeFragment : Fragment() {
             show()
         }
 
-
-
         confirmButton.setOnClickListener {
             openMapsLink()
 
@@ -137,7 +101,6 @@ class HomeFragment : Fragment() {
         cancelButton.setOnClickListener {
             mAlertDialog.cancel()
         }
-
     }
 
     override fun onDestroyView() {

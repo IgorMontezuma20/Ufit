@@ -9,9 +9,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FavoriteExerciseViewModel @Inject constructor(
-    private val repository: Repository,
-    private val usersProvider: UsersProvider,
-
     application: Application
 ) : AndroidViewModel(application){
 

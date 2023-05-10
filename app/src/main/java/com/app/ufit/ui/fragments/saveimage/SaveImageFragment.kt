@@ -21,7 +21,6 @@ import java.io.File
 
 
 class SaveImageFragment : Fragment() {
-
     private var _binding: FragmentSaveImageBinding? = null
     private val binding get() = _binding!!
 
@@ -37,46 +36,34 @@ class SaveImageFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
         // Inflate the layout for this fragment
         _binding = FragmentSaveImageBinding.inflate(inflater, container, false)
 
         mProfileImageViewModel =
             ViewModelProvider(requireActivity())[ProfileImageViewModel::class.java]
 
-        //mProfileImageViewModel.getUserFromSession()
-
         circleImage = binding.circleImageUser
-        binding.circleImageUser.setOnClickListener {
-            selectImage()
-        }
+        binding.circleImageUser.setOnClickListener { selectImage() }
 
-        binding.btnConfirm.setOnClickListener {
-            mProfileImageViewModel.saveImage(imageFile)
-        }
-//        return inflater.inflate(R.layout.fragment_save_image, container, false)
+        binding.btnConfirm.setOnClickListener { mProfileImageViewModel.saveImage(imageFile) }
         return binding.root
 
     }
 
     private val startImageForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-
             val resultCode = result.resultCode
             val data = result.data
 
             if (resultCode == Activity.RESULT_OK) {
                 val fileUri = data?.data
-                imageFile =
-                    File(fileUri?.path) // EL ARCHIVO QUE VAMOS A GUARDAR COMO IMAGEN EN EL SERVIDOR
+                imageFile = File(fileUri?.path)
                 circleImage?.setImageURI(fileUri)
             } else if (resultCode == ImagePicker.RESULT_ERROR) {
                 Toast.makeText(context, ImagePicker.getError(data), Toast.LENGTH_LONG).show()
             } else {
-                Toast.makeText(context, "Tarea se cancelo", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "A tarefa foi cancelada.", Toast.LENGTH_LONG).show()
             }
-
         }
 
     private fun selectImage() {
@@ -88,6 +75,4 @@ class SaveImageFragment : Fragment() {
                 startImageForResult.launch(it)
             }
     }
-
-
 }

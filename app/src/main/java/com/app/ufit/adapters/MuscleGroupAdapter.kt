@@ -21,10 +21,10 @@ class MuscleGroupAdapter: RecyclerView.Adapter<MuscleGroupAdapter.MyViewHolder>(
             }
 
         companion object {
-            fun from(parent: ViewGroup): MuscleGroupAdapter.MyViewHolder {
+            fun from(parent: ViewGroup): MyViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = CardMuscleGroupItemBinding.inflate(layoutInflater, parent, false)
-                return MuscleGroupAdapter.MyViewHolder(binding)
+                return MyViewHolder(binding)
             }
         }
     }

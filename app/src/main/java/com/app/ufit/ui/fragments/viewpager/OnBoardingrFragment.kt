@@ -1,14 +1,13 @@
 package com.app.ufit.ui.fragments.viewpager
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
-import androidx.navigation.findNavController
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -32,12 +31,6 @@ class OnBoardingrFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentOnboardingBinding.inflate(inflater, container, false)
 
-        binding.btnGetStarted.setOnClickListener {
-            //findNavController().navigate(R.id.)
-        }
-
-        //(activity as AppCompatActivity).supportActionBar?.hide()
-
         setOnBoardingItems()
         setupIndicator()
         setCurrentIndicator(0)
@@ -54,7 +47,6 @@ class OnBoardingrFragment : Fragment() {
         onBoardingItemsAdapter = OnBoardingItemsAdapter(
 
             listOf(
-
                 OnBoardingItem(
                     onBoardingImage = R.drawable.task,
                     title = "Administre suas tarefas",
@@ -73,7 +65,6 @@ class OnBoardingrFragment : Fragment() {
                     title = "Mantenha o foco",
                     description = "Com a gente você sempre irá manter seu foco!"
                 )
-
             )
         )
 
@@ -89,27 +80,7 @@ class OnBoardingrFragment : Fragment() {
         (onBoardingViewPager.getChildAt(0) as RecyclerView).overScrollMode =
             RecyclerView.OVER_SCROLL_NEVER
 
-//        view?.findViewById<ImageView>(R.id.ivNext)?.setOnClickListener {
-//            if (onBoardingViewPager?.currentItem!! + 1 < onBoardingItemsAdapter.itemCount) {
-//                onBoardingViewPager.currentItem = onBoardingViewPager.currentItem + 1
-//
-//            } else {
-//                navigateToHomeActivity()
-//            }
-//        }
-//        view?.findViewById<TextView>(R.id.tvSkip)?.setOnClickListener {
-//            navigateToHomeActivity()
-//        }
-//        view?.findViewById<MaterialButton>(R.id.btnGetStarted)?.setOnClickListener {
-//            navigateToHomeActivity()
-//        }
     }
-
-//    private fun navigateToHomeActivity() {
-//        startActivity(Intent(applicationContext, HomeActivity::class.java))
-//        finish()
-//    }
-
 
     private fun setupIndicator() {
         indicatorsContainer = binding.indicatorsContainer

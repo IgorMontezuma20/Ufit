@@ -15,7 +15,6 @@ import com.app.ufit.ui.fragments.home.HomeFragmentDirections
 class ExerciseItemDisplayBinding {
 
     companion object {
-
         @BindingAdapter("onExerciseItemClickListener")
         @JvmStatic
         fun onExerciseItemClickListener(exerciseItem: CardView, exercise: ExercisesItem) {

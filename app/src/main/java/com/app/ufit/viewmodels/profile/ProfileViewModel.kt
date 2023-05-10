@@ -1,8 +1,6 @@
 package com.app.ufit.viewmodels.profile
 
 import android.app.Application
-import android.content.Intent
-import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.app.ufit.data.SharedPref
@@ -22,18 +20,14 @@ class ProfileViewModel @Inject constructor(
 
 
     fun getUserFromSession() {
-
         val sharedPref = SharedPref(getApplication())
         val gson = Gson()
 
         if (!sharedPref.getData("user").isNullOrBlank()) {
-            // SI EL USARIO EXISTE EN SESION
             val user = gson.fromJson(sharedPref.getData("user"), User::class.java)
             userBirthDate = user.birthDate
             success.postValue(user)
-
         }
-
     }
 
     fun getUserAge(): String {
@@ -51,8 +45,6 @@ class ProfileViewModel @Inject constructor(
 
     fun logout() {
         val sharedPref = SharedPref(getApplication())
-
         sharedPref.remove("user")
-
     }
 }

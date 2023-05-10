@@ -3,18 +3,14 @@ package com.app.ufit.ui.fragments.register
 import android.graphics.Color
 import android.os.Bundle
 import android.text.TextUtils
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.app.ufit.R
 import com.app.ufit.databinding.FragmentRegisterBinding
-import com.app.ufit.databinding.FragmentRegisterInfoBinding
 import com.app.ufit.models.User
-import com.app.ufit.viewmodels.register.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Date
 
@@ -24,33 +20,19 @@ class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
 
-    lateinit var mRegisterViewModel: RegisterViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
-        mRegisterViewModel = ViewModelProvider(requireActivity())[RegisterViewModel::class.java]
-
-        setLoadingProgressbar()
-        mRegisterViewModel.success.observe(requireActivity()) {
-            findNavController().navigate(R.id.action_registerFragment2_to_registerInfoFragment)
-        }
-
-        binding.btnNext.setOnClickListener {
-            register()
-
-        }
+        binding.btnNext.setOnClickListener { register() }
 
         return binding.root
     }
 
 
     private fun register() {
-
         val name = binding.etName.text.toString()
         val lastname = binding.etLastname.text.toString()
         val email = binding.etEmail.text.toString()
@@ -59,15 +41,11 @@ class RegisterFragment : Fragment() {
         val date = Date()
 
         if (isValidForm(name, lastname, email, password, confirmedPass)) {
-
             val user = User("", name, lastname, "", date, "", "", email, password)
             val action =
                 RegisterFragmentDirections.actionRegisterFragment2ToRegisterInfoFragment(user)
             findNavController().navigate(action)
-
         }
-
-
     }
 
     fun String.isEmailValid(): Boolean {
@@ -83,28 +61,31 @@ class RegisterFragment : Fragment() {
         confirmedPass: String
     ): Boolean {
 
-
         when {
             name.isEmpty() -> {
                 binding.tlName.helperText = getString(R.string.obrigatory_field)
                 binding.tlName.boxStrokeColor = Color.parseColor("#FF0000")
                 return false
             }
+
             lastname.isEmpty() -> {
                 binding.tlLastname.helperText = getString(R.string.obrigatory_field)
                 binding.tlLastname.boxStrokeColor = Color.parseColor("#FF0000")
                 return false
             }
+
             email.isEmpty() && !email.isEmailValid() -> {
                 binding.tlEmail.helperText = getString(R.string.obrigatory_field)
                 binding.tlEmail.boxStrokeColor = Color.parseColor("#FF0000")
                 return false
             }
+
             password.isEmpty() -> {
                 binding.tlPassword.helperText = getString(R.string.obrigatory_field)
                 binding.tlPassword.boxStrokeColor = Color.parseColor("#FF0000")
                 return false
             }
+
             confirmedPass.isEmpty() -> {
                 binding.tlPasswordConfirmation.helperText = getString(R.string.obrigatory_field)
                 binding.tlPasswordConfirmation.boxStrokeColor = Color.parseColor("#FF0000")
@@ -119,18 +100,6 @@ class RegisterFragment : Fragment() {
 
             else -> {
                 return true
-            }
-
-        }
-
-    }
-
-    private fun setLoadingProgressbar() {
-        mRegisterViewModel.load.observe(requireActivity()) {
-            if (it) {
-                binding.progressBar.visibility = View.VISIBLE
-            } else {
-                binding.progressBar.visibility = View.GONE
             }
         }
     }

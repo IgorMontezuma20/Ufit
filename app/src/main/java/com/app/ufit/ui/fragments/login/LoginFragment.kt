@@ -1,24 +1,18 @@
 package com.app.ufit.ui.fragments.login
 
-import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.text.TextUtils
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.app.ufit.R
 import com.app.ufit.databinding.FragmentLoginBinding
-import com.app.ufit.models.User
 import com.app.ufit.viewmodels.login.LoginViewModel
-import com.app.ufit.viewmodels.register.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.internal.Contexts
-import dagger.hilt.android.internal.Contexts.getApplication
 
 
 @AndroidEntryPoint
@@ -27,9 +21,7 @@ class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
-
     private lateinit var mLoginViewModel: LoginViewModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -52,7 +44,6 @@ class LoginFragment : Fragment() {
 
         binding.btnEntrar.setOnClickListener {
             loginCheckFields()
-
         }
 
         mLoginViewModel.getUserFromSession()
@@ -61,7 +52,6 @@ class LoginFragment : Fragment() {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment2)
         }
 
-
         return binding.root
     }
 
@@ -69,13 +59,9 @@ class LoginFragment : Fragment() {
         val email = binding.etEmail.text.toString()
         val password = binding.etPassword.text.toString()
 
-
         if (isValidForm(email, password)) {
-
             mLoginViewModel.loginUser(email, password)
-
         }
-
     }
 
     fun String.isEmailValid(): Boolean {
@@ -84,24 +70,23 @@ class LoginFragment : Fragment() {
     }
 
     private fun isValidForm(email: String, password: String): Boolean {
-
         when {
             email.isEmpty() && !email.isEmailValid() -> {
                 binding.tlEmail.helperText = getString(R.string.obrigatory_field)
                 binding.tlEmail.boxStrokeColor = Color.parseColor("#FF0000")
                 return false
             }
+
             password.isEmpty() -> {
                 binding.tlPassword.helperText = getString(R.string.obrigatory_field)
                 binding.tlPassword.boxStrokeColor = Color.parseColor("#FF0000")
                 return false
             }
+
             else -> {
                 return true
             }
-
         }
-
     }
 
     private fun setLoadingProgressbar() {
@@ -118,6 +103,4 @@ class LoginFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-
 }

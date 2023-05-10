@@ -1,7 +1,6 @@
 package com.app.ufit.viewmodels.login
 
 import android.app.Application
-import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
@@ -28,7 +27,6 @@ class LoginViewModel @Inject constructor(
     val load = MutableLiveData<Boolean>()
 
     fun loginUser(email: String, password: String) {
-
         load.postValue(true)
         usersProvider.login(email, password)?.enqueue(object : Callback<ResponseHttp> {
             override fun onResponse(call: Call<ResponseHttp>, response: Response<ResponseHttp>) {
@@ -48,7 +46,6 @@ class LoginViewModel @Inject constructor(
                         "Os dados não estão corretos ",
                         Toast.LENGTH_LONG
                     ).show()
-
                 }
             }
 
@@ -59,8 +56,6 @@ class LoginViewModel @Inject constructor(
                     .show()
             }
         })
-
-
     }
 
     fun saveUserInSession(data: String) {
@@ -71,31 +66,20 @@ class LoginViewModel @Inject constructor(
     }
 
     fun getUserFromSession() {
-
         val sharedPref = SharedPref(getApplication())
-        val gson = Gson()
 
         if (!sharedPref.getData("user").isNullOrBlank()) {
-
-            val user = gson.fromJson(sharedPref.getData("user"), User::class.java)
             success.postValue(true)
-
         }
-
     }
 
     fun verifyLoggedIn(): Boolean {
         val sharedPref = SharedPref(getApplication())
-        val gson = Gson()
 
         if (!sharedPref.getData("user").isNullOrBlank()) {
-
-            val user = gson.fromJson(sharedPref.getData("user"), User::class.java)
             return true
-
         }
+
         return false
     }
-
-
 }

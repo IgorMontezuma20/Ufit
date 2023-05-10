@@ -45,7 +45,6 @@ class FavoritesFragment : Fragment(), ClickEvent {
         binding = FragmentFavoritesBinding.inflate(inflater, container, false)
 
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,7 +57,6 @@ class FavoritesFragment : Fragment(), ClickEvent {
         mFavoriteDao = db.favoritesDao()
 
         setupRecycler()
-
     }
 
 
@@ -106,6 +104,7 @@ class FavoritesFragment : Fragment(), ClickEvent {
         }
 
     }
+
     private fun setupRecycler() {
         mAdapter = FavoriteAdapter(requireContext(), mFavoriteDao, this, mutableListOf())
         binding.rvFavoriteExercises.adapter = mAdapter
@@ -129,7 +128,7 @@ class FavoritesFragment : Fragment(), ClickEvent {
         }
     }
 
-    private fun removeFromFavorites(pos : Int) {
+    private fun removeFromFavorites(pos: Int) {
         lifecycleScope.launch {
             withContext(Dispatchers.IO) {
                 val favorite = mFavoriteDao.findFavoriteByName(favoritesList.get(pos).name)

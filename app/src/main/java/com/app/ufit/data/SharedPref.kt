@@ -20,16 +20,13 @@ class SharedPref @Inject constructor(
     private var prefs: SharedPreferences? = null
 
     init {
-        //prefs = fragment.sharedPreferences("com.app.ufit", Context.MODE_PRIVATE)
-        prefs =
-            getApplication(application).getSharedPreferences("com.app.ufit", Context.MODE_PRIVATE)
+        prefs = getApplication(application).getSharedPreferences("com.app.ufit", Context.MODE_PRIVATE)
     }
 
 
     fun save(key: String, objeto: Any) {
 
         try {
-
             val gson = Gson()
             val json = gson.toJson(objeto)
             with(prefs?.edit()) {

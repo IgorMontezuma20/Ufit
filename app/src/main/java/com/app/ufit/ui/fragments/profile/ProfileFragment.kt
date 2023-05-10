@@ -16,7 +16,6 @@ import com.app.ufit.R
 import com.app.ufit.databinding.CustomExitDialogBinding
 import com.app.ufit.databinding.FragmentProfileBinding
 import com.app.ufit.ui.MainActivity
-import com.app.ufit.ui.fragments.login.LoginFragment
 import com.app.ufit.viewmodels.profile.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,10 +32,9 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         // Inflate the layout for this fragment
-
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
+
         mProfileViewModel = ViewModelProvider(requireActivity())[ProfileViewModel::class.java]
 
         binding.btnEdit.setOnClickListener {
@@ -45,8 +43,6 @@ class ProfileFragment : Fragment() {
 
         binding.btnLogout.setOnClickListener {
             openExitDialog()
-
-
         }
 
         binding.btnPersonalData.setOnClickListener {
@@ -86,8 +82,6 @@ class ProfileFragment : Fragment() {
         // Limpar a pilha de atividades e iniciar a nova atividade LoginActivity
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
-
-
     }
 
     private fun openExitDialog() {
@@ -103,8 +97,6 @@ class ProfileFragment : Fragment() {
             show()
         }
 
-
-
         confirmButton.setOnClickListener {
             logOff()
             findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
@@ -116,7 +108,8 @@ class ProfileFragment : Fragment() {
     }
 
     private fun openWarningDialog() {
-        val view = LayoutInflater.from(requireContext()).inflate(R.layout.custom_warning_dialog, null)
+        val view =
+            LayoutInflater.from(requireContext()).inflate(R.layout.custom_warning_dialog, null)
         val dialog = AlertDialog.Builder(requireContext()).setView(view)
         val dialogBinding = CustomExitDialogBinding.bind(view)
         val confirmButton = dialogBinding.confirmButton
@@ -128,18 +121,13 @@ class ProfileFragment : Fragment() {
             show()
         }
 
-
-
         confirmButton.setOnClickListener {
             mAlertDialog.cancel()
         }
-
-
     }
 
     override fun onDestroy() {
         super.onDestroy()
-
     }
 
 }
