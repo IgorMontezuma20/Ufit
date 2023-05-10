@@ -32,9 +32,9 @@ class ExerciseDetailsFragment : Fragment() {
 
     lateinit var mExerciseDetailsViewModel: ExerciseDetailsViewModel
 
-     private  lateinit var favoriteDao : FavoritesDao
+    private lateinit var favoriteDao: FavoritesDao
 
-    private lateinit var  mFavorite : FavoritesEntity
+    private lateinit var mFavorite: FavoritesEntity
 
     private lateinit var sharedPreferences: SharedPreferences
 
@@ -63,30 +63,31 @@ class ExerciseDetailsFragment : Fragment() {
 
 
 
-        sharedPreferences = requireContext().getSharedPreferences("MySharedPreferences", Context.MODE_PRIVATE)
+        sharedPreferences =
+            requireContext().getSharedPreferences("MySharedPreferences", Context.MODE_PRIVATE)
 
-             // Carrega o estado do botão de favorito do SharedPreferences
+        // Carrega o estado do botão de favorito do SharedPreferences
 
-             isFavorite = sharedPreferences.getBoolean("isFavorite", false)
-             if (isFavorite) {
-                 binding.ivFavorite.setImageResource(R.drawable.ic_favorite)
-             } else {
-                 binding.ivFavorite.setImageResource(R.drawable.ic_favorite_border)
-             }
+        isFavorite = sharedPreferences.getBoolean("isFavorite", false)
+        if (isFavorite) {
+            binding.ivFavorite.setImageResource(R.drawable.ic_favorite)
+        } else {
+            binding.ivFavorite.setImageResource(R.drawable.ic_favorite_border)
+        }
 
-             binding.ivFavorite.setOnClickListener {
-                 isFavorite = !isFavorite
+        binding.ivFavorite.setOnClickListener {
+            isFavorite = !isFavorite
 
-                 if (isFavorite) {
-                     binding.ivFavorite.setImageResource(R.drawable.ic_favorite)
-                     addToFavorites()
-                 } else {
-                     binding.ivFavorite.setImageResource(R.drawable.ic_favorite_border)
-                     removeFromFavorites()
-                 }
-                 // Salva o estado do botão de favorito no SharedPreferences
-                 sharedPreferences.edit().putBoolean("isFavorite", isFavorite).apply()
-             }
+            if (isFavorite) {
+                binding.ivFavorite.setImageResource(R.drawable.ic_favorite)
+                addToFavorites()
+            } else {
+                binding.ivFavorite.setImageResource(R.drawable.ic_favorite_border)
+                removeFromFavorites()
+            }
+            // Salva o estado do botão de favorito no SharedPreferences
+            sharedPreferences.edit().putBoolean("isFavorite", isFavorite).apply()
+        }
 
 
 
@@ -98,12 +99,15 @@ class ExerciseDetailsFragment : Fragment() {
     private fun requestApiData() {
         val args: ExerciseDetailsFragmentArgs by navArgs()
         val myBundle: ExercisesItem? = args.data
-        mExerciseDetailsViewModel.getImage(myBundle?.muscle as String)
-        mExerciseDetailsViewModel.imageResponse.observe(viewLifecycleOwner) { response ->
+        if(myBundle != null){
+            mExerciseDetailsViewModel.getImage(myBundle?.muscle as String)
+            mExerciseDetailsViewModel.imageResponse.observe(viewLifecycleOwner) { response ->
 
-            binding.ivMuscle.load(response)
+                binding.ivMuscle.load(response)
 
+            }
         }
+
     }
 
 
@@ -117,16 +121,18 @@ class ExerciseDetailsFragment : Fragment() {
         binding.tvDifficultyLevel.text = myBundle?.difficulty
         binding.tvInstructions.text = myBundle?.instructions
 
+        if (myBundle != null) {
 
-        mFavorite = FavoritesEntity(
-            id = myBundle!!.id,
-            name = myBundle?.name ?: "",
-            difficulty = myBundle?.difficulty ?: "",
-            equipment = myBundle?.equipment ?: "",
-            instructions = myBundle?.instructions ?: "",
-            muscle = myBundle?.muscle ?: "",
-            type = myBundle?.type ?: ""
-        )
+            mFavorite = FavoritesEntity(
+                id = myBundle!!.id,
+                name = myBundle?.name ?: "",
+                difficulty = myBundle?.difficulty ?: "",
+                equipment = myBundle?.equipment ?: "",
+                instructions = myBundle?.instructions ?: "",
+                muscle = myBundle?.muscle ?: "",
+                type = myBundle?.type ?: ""
+            )
+        }
 
 
     }
@@ -148,7 +154,10 @@ class ExerciseDetailsFragment : Fragment() {
                 val favorite = favoriteDao.findFavoriteByName(mFavorite.name)
                 favorite?.let {
                     favoriteDao.deleteFavorite(it.id)
-                    Log.d("ExerciseDetailsFragment", "Exercise removed from favorites with id = ${it.id}")
+                    Log.d(
+                        "ExerciseDetailsFragment",
+                        "Exercise removed from favorites with id = ${it.id}"
+                    )
                 }
             }
         }

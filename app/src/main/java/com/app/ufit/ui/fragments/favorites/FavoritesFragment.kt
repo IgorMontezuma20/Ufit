@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
@@ -20,6 +21,8 @@ import com.app.ufit.data.database.FavoritesDao
 import com.app.ufit.data.database.entities.FavoritesEntity
 import com.app.ufit.databinding.CustomExitDialogBinding
 import com.app.ufit.databinding.FragmentFavoritesBinding
+import com.app.ufit.models.ExercisesItem
+import com.app.ufit.ui.fragments.exercise.ExercisesFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -54,7 +57,7 @@ class FavoritesFragment : Fragment(), ClickEvent {
         ).build()
         mFavoriteDao = db.favoritesDao()
 
-        mAdapter = FavoriteAdapter(requireContext(), mFavoriteDao, clickEvent,mutableListOf())
+        mAdapter = FavoriteAdapter(requireContext(), mFavoriteDao, this,mutableListOf())
         binding.rvFavoriteExercises.adapter = mAdapter
         binding.rvFavoriteExercises.layoutManager = LinearLayoutManager(requireContext())
 
@@ -70,7 +73,15 @@ class FavoritesFragment : Fragment(), ClickEvent {
 
 
     override fun OnClick(position: Int) {
-        findNavController().navigate(R.id.action_favoritesFragment_to_exerciseDetailsFragment)
+        val favEntity = favoritesList.get(position)
+        val exercise = ExercisesItem(favEntity.id, favEntity.difficulty, favEntity.equipment, favEntity.instructions, favEntity.muscle,
+                favEntity.name, favEntity.type)
+        val action =
+            FavoritesFragmentDirections.actionFavoritesFragmentToExerciseDetailsFragment(exercise)
+        findNavController().navigate(action)
+
+
+//        findNavController().navigate(R.id.action_favoritesFragment_to_exerciseDetailsFragment)
     }
     override fun OnLongPress(pos: Int) {
         openDeleteDialog()
