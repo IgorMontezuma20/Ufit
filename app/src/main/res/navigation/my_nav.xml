@@ -128,12 +128,20 @@
         android:name="com.app.ufit.ui.fragments.favorites.FavoritesFragment"
         android:label="Favoritos"
         tools:layout="@layout/fragment_favorites" >
+        <argument
+            android:name="data"
+            android:defaultValue="@null"
+            app:argType="com.app.ufit.models.ExercisesItem"
+            app:nullable="true" />
         <action
             android:id="@+id/action_favoritesFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
         <action
             android:id="@+id/action_favoritesFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_favoritesFragment_to_exerciseDetailsFragment"
+            app:destination="@id/exerciseDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/exerciseDetailsFragment"

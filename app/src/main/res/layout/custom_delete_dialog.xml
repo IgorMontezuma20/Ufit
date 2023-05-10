@@ -6,13 +6,13 @@
     android:layout_height="match_parent">
 
     <com.airbnb.lottie.LottieAnimationView
-        android:layout_width="125dp"
-        android:layout_height="125dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_margin="15dp"
         android:elevation="2dp"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/exit"
+        app:lottie_rawRes="@raw/delete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,7 +46,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/exit_dialog_title"
+                    android:text="@string/delete_favorite_dialog_title"
                     android:textColor="@color/blue_700"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -55,7 +55,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@string/exit_dialog_description"
+                    android:text="@string/delete_favorite_dialog_description"
                     android:textColor="@color/blue_700"
                     android:textSize="16sp" />
 

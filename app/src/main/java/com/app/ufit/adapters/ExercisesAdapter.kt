@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.app.ufit.R
+import com.app.ufit.data.database.ExercisesDao
 import com.app.ufit.databinding.ExerciseItemBinding
 import com.app.ufit.models.ExercisesItem
 import com.app.ufit.util.ExercisesDiffUtil
@@ -44,6 +46,8 @@ class ExercisesAdapter : RecyclerView.Adapter<ExercisesAdapter.MyViewHolder>() {
         holder.bind(currentExercise)
 
     }
+
+
 
 
     fun setData(newData: List<ExercisesItem>){

@@ -8,6 +8,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.app.ufit.data.Repository
 import com.app.ufit.data.database.entities.ExercisesEntity
+import com.app.ufit.data.database.entities.FavoritesEntity
 import com.app.ufit.models.Exercises
 import com.app.ufit.models.ExercisesItem
 import com.app.ufit.util.NetworkResult
@@ -40,6 +41,8 @@ class MainViewModel @Inject constructor(
             repository.local.insertExercises(exercisesEntity)
         }
 
+
+
     private suspend fun getExercisesSafeCall(queries: Map<String, String>) {
         exercisesResponse.value = NetworkResult.Loading()
         if(hasInternetConnection()){
@@ -69,6 +72,8 @@ class MainViewModel @Inject constructor(
         val exercisesEntity = ExercisesEntity(exercises)
         insertExercise(exercisesEntity)
     }
+
+
 
     private fun handleExercisesResponse(response: Response<List<ExercisesItem>>): NetworkResult<List<ExercisesItem>>? {
         when {

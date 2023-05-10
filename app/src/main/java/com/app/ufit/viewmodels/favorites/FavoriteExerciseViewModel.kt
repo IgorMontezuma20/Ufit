@@ -11,6 +11,7 @@ import javax.inject.Inject
 class FavoriteExerciseViewModel @Inject constructor(
     private val repository: Repository,
     private val usersProvider: UsersProvider,
+
     application: Application
 ) : AndroidViewModel(application){
 

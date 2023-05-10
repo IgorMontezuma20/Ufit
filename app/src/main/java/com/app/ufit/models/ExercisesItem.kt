@@ -2,11 +2,15 @@ package com.app.ufit.models
 
 
 import android.os.Parcelable
+import androidx.room.ColumnInfo
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class ExercisesItem(
+    @PrimaryKey(autoGenerate = true)
+    var id: Int,
     @SerializedName("difficulty")
     val difficulty: String,
 //    @SerializedName("equipment")
@@ -21,4 +25,5 @@ data class ExercisesItem(
     val name: String?=null,
     @SerializedName("type")
     val type: String
+
 ) : Parcelable

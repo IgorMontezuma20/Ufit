@@ -9,12 +9,14 @@ import com.app.ufit.util.ExercisesTypeConverter
 
 @Database(
     entities = [ExercisesEntity::class, FavoritesEntity::class],
-    version = 2,
+    version = 1,
     exportSchema = false
 )
 @TypeConverters(ExercisesTypeConverter::class)
 abstract class ExercisesDatabase: RoomDatabase() {
 
     abstract fun exercisesDao(): ExercisesDao
+    abstract fun favoritesDao(): FavoritesDao
 
 }
+

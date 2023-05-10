@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue_500"
+    
     tools:context=".ui.fragments.viewpager.OnBoardingrFragment">
 
     <androidx.viewpager2.widget.ViewPager2
@@ -13,35 +13,44 @@
         android:layout_height="0dp"
         android:background="@drawable/view_pager_background"
         app:layout_constraintBottom_toTopOf="@+id/btnGetStarted"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="-16dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/indicatorsContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="86dp"
+
         android:orientation="horizontal"
-
+        app:layout_constraintBottom_toBottomOf="@+id/onBoardingViewPager"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/viewCenterOfNext" />
 
-    <TextView
-        android:id="@+id/tvSkip"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/contSkip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="20dp"
-        android:text="Pular"
-        android:textColor="@color/blue_700"
-        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:id="@+id/tvSkip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="20dp"
+            android:text="Pular"
+            android:textColor="@color/blue_700"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
         android:id="@+id/viewCenterOfNext"
@@ -53,21 +62,6 @@
         app:layout_constraintTop_toTopOf="parent"
 
         />
-
-   <!-- <ImageView
-        android:id="@+id/ivNext"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="48dp"
-        android:background="@drawable/icon_background"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/ic_right"
-        app:layout_constraintBottom_toTopOf="@id/btnGetStarted"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-
-
-        /> -->
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnGetStarted"
