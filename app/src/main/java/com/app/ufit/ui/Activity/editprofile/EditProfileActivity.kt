@@ -54,8 +54,9 @@ class EditProfileActivity : AppCompatActivity() {
             val name = binding.etName.text.toString()
             val lastname = binding.etLastname.text.toString()
             mProfileImageViewModel.updateData(imageFile, name, lastname)
-
             mProfileImageViewModel.saveImage(imageFile)
+
+            finish()
         }
 
 
@@ -81,7 +82,6 @@ class EditProfileActivity : AppCompatActivity() {
             } else if (resultCode == ImagePicker.RESULT_ERROR) {
                 Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_LONG).show()
             } else {
-                Toast.makeText(this, "Tarea se cancelo", Toast.LENGTH_LONG).show()
             }
         }
 

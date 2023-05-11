@@ -64,8 +64,6 @@ class ProfileImageViewModel @Inject constructor(
                     Log.d(TAG, "RESPONSE: $response")
                     Log.d(TAG, "BODY: ${response.body()}")
 
-                    Toast.makeText(getApplication(), response.body()?.message, Toast.LENGTH_SHORT)
-                        .show()
 
                     saveUserInSession(response.body()?.data.toString())
                 }
@@ -85,8 +83,6 @@ class ProfileImageViewModel @Inject constructor(
                     Log.d(TAG, "RESPONSE: $response")
                     Log.d(TAG, "BODY: ${response.body()}")
 
-                    Toast.makeText(getApplication(), response.body()?.message, Toast.LENGTH_SHORT)
-                        .show()
                     saveUserInSession(response.body()?.data.toString())
                 }
 

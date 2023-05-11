@@ -29,11 +29,6 @@ class DeleteUserViewModel @Inject constructor(
                 success.postValue(true)
                 load.postValue(false)
 
-                Toast.makeText(
-                    getApplication(),
-                    response.body()?.message.toString(),
-                    Toast.LENGTH_LONG
-                ).show()
                 Log.d(ContentValues.TAG, "Response: $response")
                 Log.d(ContentValues.TAG, "Body: ${response.body()}")
             }
