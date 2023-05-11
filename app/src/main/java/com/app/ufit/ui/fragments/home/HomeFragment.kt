@@ -27,6 +27,8 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val mAdapter by lazy { MuscleGroupAdapter() }
+
+    private val mAdapterExerciseTypes by lazy { MuscleGroupAdapter() }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
@@ -40,7 +42,7 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         setupRecyclerView()
-
+        setupRecyclerViewExerciseTypes()
         binding.btnMap.setOnClickListener {
             openMapsDialog()
         }
@@ -72,7 +74,27 @@ class HomeFragment : Fragment() {
         listMuscleGroup.add(getString(R.string.triceps))
 
         mAdapter.setData(listMuscleGroup)
+
+
     }
+
+    private fun setupRecyclerViewExerciseTypes() {
+        binding.recyclerViewExerciseTypes.adapter = mAdapterExerciseTypes
+        binding.recyclerViewExerciseTypes.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
+
+        val listExercisetypes = arrayListOf<String>()
+        listExercisetypes.add("cardio")
+        listExercisetypes.add("olympic weightlifting")
+        listExercisetypes.add("plyometrics")
+        listExercisetypes.add("powerlifting")
+        listExercisetypes.add("strength")
+        listExercisetypes.add("stretching")
+        listExercisetypes.add("strongman")
+
+        mAdapterExerciseTypes.setData(listExercisetypes)
+    }
+
 
     private fun openMapsLink() {
         val intentUri = "geo:?q=encontre as academias mais proximas"
@@ -80,7 +102,6 @@ class HomeFragment : Fragment() {
         intent.setPackage("com.google.android.apps.maps")
         startActivity(intent)
     }
-
     private fun openMapsDialog() {
         val view = LayoutInflater.from(requireContext()).inflate(R.layout.custom_maps_dialog, null)
         val dialog = AlertDialog.Builder(requireContext()).setView(view)

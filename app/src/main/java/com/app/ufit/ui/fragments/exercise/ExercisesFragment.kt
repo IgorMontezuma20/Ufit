@@ -72,6 +72,7 @@ class ExercisesFragment : Fragment() {
                     response.data?.let { mAdapter.setData(it) }
                     Log.d("listSize", response.data?.size.toString())
                 }
+
                 is NetworkResult.Error -> {
                     Toast.makeText(
                         requireContext(),
@@ -79,6 +80,7 @@ class ExercisesFragment : Fragment() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+
                 is NetworkResult.Loading -> {
                 }
             }
@@ -90,12 +92,39 @@ class ExercisesFragment : Fragment() {
         val queries: HashMap<String, String> = HashMap()
         var exercise = args.muscle as String
 
-        if (exercise.equals("Lower back")) {
-            exercise = "lower_back"
-        } else if (exercise.equals("Middle back")) {
-            exercise = "middle_back"
+        val listExercisetypes = arrayListOf<String>()
+        listExercisetypes.add("cardio")
+        listExercisetypes.add("olympic weightlifting")
+        listExercisetypes.add("plyometrics")
+        listExercisetypes.add("powerlifting")
+        listExercisetypes.add("strength")
+        listExercisetypes.add("stretching")
+        listExercisetypes.add("strongman")
+
+        var verify = false
+        for (exerciseType in listExercisetypes) {
+            if (exercise.equals(exerciseType)) {
+                verify = true
+                break
+            }
         }
-        queries["muscle"] = exercise.lowercase()
+
+        if (verify) {
+            if (exercise.equals("olympic weightlifting")){
+                exercise = "olympic_weightlifting"
+            }
+            queries["type"] = exercise.lowercase()
+
+        } else {
+            if (exercise.equals("Lower back")) {
+                exercise = "lower_back"
+            } else if (exercise.equals("Middle back")) {
+                exercise = "middle_back"
+            }
+            queries["muscle"] = exercise.lowercase()
+        }
+
+
 
         return queries
     }
