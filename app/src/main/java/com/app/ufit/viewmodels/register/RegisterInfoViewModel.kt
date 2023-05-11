@@ -37,11 +37,6 @@ class RegisterInfoViewModel @Inject constructor(
                 success.postValue(true)
                 load.postValue(false)
 
-                Toast.makeText(
-                    getApplication(),
-                    response.body()?.message,
-                    Toast.LENGTH_LONG
-                ).show()
                 Log.d(ContentValues.TAG, "Response: ${response}")
                 Log.d(ContentValues.TAG, "Body: ${response.body()}")
             }

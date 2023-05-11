@@ -34,8 +34,6 @@ class LoginViewModel @Inject constructor(
                 Log.d("Main", "Response : ${response.body()}")
 
                 if (response.body()?.isSuccess == true) {
-                    Toast.makeText(getApplication(), response.body()?.message, Toast.LENGTH_LONG)
-                        .show()
                     saveUserInSession(response.body()?.data.toString())
                     success.postValue(true)
                     load.postValue(false)

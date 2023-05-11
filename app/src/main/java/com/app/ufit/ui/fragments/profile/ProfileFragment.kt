@@ -79,7 +79,6 @@ class ProfileFragment : Fragment() {
             binding.ivProfileImage.load(it.image)
             binding.tvAge.text = mProfileViewModel.getUserAge()
 
-            Toast.makeText(requireContext(), user!!.id.toString(), Toast.LENGTH_SHORT).show()
         }
 
         mProfileViewModel.getUserFromSession()
