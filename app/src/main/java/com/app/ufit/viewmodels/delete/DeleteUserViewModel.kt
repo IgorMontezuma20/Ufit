@@ -13,6 +13,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
+
 @HiltViewModel
 class DeleteUserViewModel @Inject constructor(
     private val usersProvider: UsersProvider,
@@ -30,7 +31,7 @@ class DeleteUserViewModel @Inject constructor(
 
                 Toast.makeText(
                     getApplication(),
-                    response.body()?.message,
+                    response.body()?.message.toString(),
                     Toast.LENGTH_LONG
                 ).show()
                 Log.d(ContentValues.TAG, "Response: $response")
@@ -48,4 +49,6 @@ class DeleteUserViewModel @Inject constructor(
             }
         })
     }
+
+
 }

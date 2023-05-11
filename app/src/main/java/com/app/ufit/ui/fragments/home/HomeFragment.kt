@@ -32,11 +32,9 @@ class HomeFragment : Fragment() {
 
 
     private val mAdapter by lazy { MuscleGroupAdapter() }
-    private lateinit var deleteUserViewModel: DeleteUserViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
-        deleteUserViewModel = ViewModelProvider(requireActivity())[DeleteUserViewModel::class.java]
 
 
     }
@@ -52,14 +50,6 @@ class HomeFragment : Fragment() {
 
         binding.btnMap.setOnClickListener {
             openMapsDialog()
-        }
-
-
-        deleteUserViewModel.getUserFromSession()
-
-        binding.remove.setOnClickListener {
-
-            deleteUser("2")
         }
 
         return binding.root
@@ -119,23 +109,9 @@ class HomeFragment : Fragment() {
             mAlertDialog.cancel()
         }
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-
-    private fun deleteUser(userId: String) {
-
-        deleteUserViewModel.deleteUser(userId)
-
-        deleteUserViewModel.success.observe(viewLifecycleOwner) { isSuccess ->
-            if (isSuccess) {
-                Toast.makeText(requireContext(), "Usuário excluído com sucesso", Toast.LENGTH_SHORT).show()
-            }
-        }
-
     }
 
 }
