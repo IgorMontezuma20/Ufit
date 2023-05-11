@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,7 +17,9 @@ import com.app.ufit.R
 import com.app.ufit.adapters.MuscleGroupAdapter
 import com.app.ufit.databinding.CustomExitDialogBinding
 import com.app.ufit.databinding.FragmentHomeBinding
+import com.app.ufit.models.User
 import com.app.ufit.viewmodels.MainViewModel
+import com.app.ufit.viewmodels.delete.DeleteUserViewModel
 
 
 class HomeFragment : Fragment() {
@@ -26,12 +29,16 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
+
+
     private val mAdapter by lazy { MuscleGroupAdapter() }
 
     private val mAdapterExerciseTypes by lazy { MuscleGroupAdapter() }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
+
+
     }
 
     override fun onCreateView(
@@ -123,11 +130,9 @@ class HomeFragment : Fragment() {
             mAlertDialog.cancel()
         }
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 
 }

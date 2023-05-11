@@ -52,4 +52,8 @@ class UsersProvider @Inject constructor() {
         return usersRoutes?.update(image, requestBody)
     }
 
+    fun deleteUser(userId: String): Call<ResponseHttp>? {
+        return usersRoutes?.deleteUser(userId)
+    }
+
 }
