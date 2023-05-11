@@ -1,14 +1,17 @@
 package com.app.ufit.viewmodels.login
 
 import android.app.Application
+import android.graphics.Color
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.app.ufit.data.SharedPref
 import com.app.ufit.models.ResponseHttp
 import com.app.ufit.models.User
 import com.app.ufit.provider.UsersProvider
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call
@@ -25,6 +28,8 @@ class LoginViewModel @Inject constructor(
 
     val success = MutableLiveData<Boolean>()
     val load = MutableLiveData<Boolean>()
+    private val _showSnackbarEvent = MutableLiveData<String>()
+    val showSnackbarEvent: LiveData<String> get() = _showSnackbarEvent
 
     fun loginUser(email: String, password: String) {
         load.postValue(true)
@@ -34,24 +39,20 @@ class LoginViewModel @Inject constructor(
                 Log.d("Main", "Response : ${response.body()}")
 
                 if (response.body()?.isSuccess == true) {
+
                     saveUserInSession(response.body()?.data.toString())
                     success.postValue(true)
                     load.postValue(false)
 
                 } else {
-                    Toast.makeText(
-                        getApplication(),
-                        "Os dados não estão corretos ",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    _showSnackbarEvent.value = "Preencha todos os campos"
                 }
             }
 
             override fun onFailure(call: Call<ResponseHttp>, t: Throwable) {
                 load.postValue(false)
                 Log.d("Main", "Houve um Erro ${t.message}")
-                Toast.makeText(getApplication(), "Houve um Erro ${t.message}", Toast.LENGTH_LONG)
-                    .show()
+                _showSnackbarEvent.value = "Houve um Erro ${t.message}"
             }
         })
     }

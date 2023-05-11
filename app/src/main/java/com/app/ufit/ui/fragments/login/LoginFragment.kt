@@ -6,12 +6,15 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.app.ufit.R
 import com.app.ufit.databinding.FragmentLoginBinding
 import com.app.ufit.viewmodels.login.LoginViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -40,19 +43,31 @@ class LoginFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
+        mLoginViewModel.getUserFromSession()
+
         setLoadingProgressbar()
+        setSnackBar()
 
         binding.btnEntrar.setOnClickListener {
             loginCheckFields()
         }
-
-        mLoginViewModel.getUserFromSession()
 
         binding.constLogin.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment2)
         }
 
         return binding.root
+    }
+
+    private fun setSnackBar(){
+        val snackbar = Snackbar.make(requireActivity().findViewById(android.R.id.content), ".", Snackbar.LENGTH_SHORT)
+        snackbar.setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.red100))
+        snackbar.setTextColor(Color.WHITE)
+
+        mLoginViewModel.showSnackbarEvent.observe(viewLifecycleOwner, Observer {
+            snackbar.setText(it)
+            snackbar.show()
+        })
     }
 
     private fun loginCheckFields() {
@@ -98,6 +113,8 @@ class LoginFragment : Fragment() {
             }
         }
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

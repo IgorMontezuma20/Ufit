@@ -1,12 +1,16 @@
 package com.app.ufit.ui.Activity.editprofile
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import coil.load
@@ -17,6 +21,7 @@ import com.app.ufit.provider.UsersProvider
 import com.app.ufit.viewmodels.profile.ProfileViewModel
 import com.app.ufit.viewmodels.profileImage.ProfileImageViewModel
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
@@ -46,6 +51,8 @@ class EditProfileActivity : AppCompatActivity() {
 
         mProfileImageViewModel = ViewModelProvider(this)[ProfileImageViewModel::class.java]
 
+        setSnackBar()
+
         binding.ivProfileImage.setOnClickListener {
             selectImage()
         }
@@ -54,6 +61,7 @@ class EditProfileActivity : AppCompatActivity() {
             val name = binding.etName.text.toString()
             val lastname = binding.etLastname.text.toString()
             mProfileImageViewModel.updateData(imageFile, name, lastname)
+
             mProfileImageViewModel.saveImage(imageFile)
 
             finish()
@@ -67,6 +75,17 @@ class EditProfileActivity : AppCompatActivity() {
         }
 
         mProfileViewModel.getUserFromSession()
+    }
+
+    private fun setSnackBar(){
+        val snackbar = Snackbar.make(binding.root, ".", Snackbar.LENGTH_SHORT)
+        snackbar.setBackgroundTint(ContextCompat.getColor(this, R.color.blue_700))
+        snackbar.setTextColor(Color.WHITE)
+
+        mProfileImageViewModel.showSnackbarEvent.observe(this, Observer {
+            snackbar.setText(it)
+            snackbar.show()
+        })
     }
 
     private val startImageForResult =

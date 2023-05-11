@@ -5,6 +5,8 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.app.ufit.data.SharedPref
 import com.app.ufit.models.ResponseHttp
 import com.app.ufit.models.User
@@ -22,7 +24,11 @@ class ProfileImageViewModel @Inject constructor(
     application: Application,
     private val usersProvider: UsersProvider,
 
+
     ) : AndroidViewModel(application) {
+
+    private val _showSnackbarEvent = MutableLiveData<String>()
+    val showSnackbarEvent: LiveData<String> get() = _showSnackbarEvent
 
     fun saveImage(imageFile: File?) {
         val user = getUserFromSession()
@@ -36,12 +42,12 @@ class ProfileImageViewModel @Inject constructor(
                     Log.d(TAG, "RESPONSE: $response")
                     Log.d(TAG, "BODY: ${response.body()}")
                     saveUserInSession(response.body()?.data.toString())
+                    _showSnackbarEvent.value = "Todos os dados foram salvos"
                 }
 
                 override fun onFailure(call: Call<ResponseHttp>, t: Throwable) {
                     Log.d(TAG, "Error: ${t.message}")
-                    Toast.makeText(getApplication(), "Error: ${t.message}", Toast.LENGTH_LONG)
-                        .show()
+                    _showSnackbarEvent.value = "Error: ${t.message}"
                 }
 
             })
@@ -64,14 +70,14 @@ class ProfileImageViewModel @Inject constructor(
                     Log.d(TAG, "RESPONSE: $response")
                     Log.d(TAG, "BODY: ${response.body()}")
 
+                    _showSnackbarEvent.value =  response.body()?.message
 
                     saveUserInSession(response.body()?.data.toString())
                 }
 
                 override fun onFailure(call: Call<ResponseHttp>, t: Throwable) {
                     Log.d(TAG, "Error: ${t.message}")
-                    Toast.makeText(getApplication(), "Error: ${t.message}", Toast.LENGTH_LONG)
-                        .show()
+                    _showSnackbarEvent.value = "Error: ${t.message}"
                 }
             })
         } else {
@@ -83,6 +89,7 @@ class ProfileImageViewModel @Inject constructor(
                     Log.d(TAG, "RESPONSE: $response")
                     Log.d(TAG, "BODY: ${response.body()}")
 
+                    _showSnackbarEvent.value = response.body()?.message
                     saveUserInSession(response.body()?.data.toString())
                 }
 
