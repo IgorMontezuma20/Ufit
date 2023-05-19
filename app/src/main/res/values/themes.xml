@@ -14,5 +14,6 @@
         <!-- Customize your theme here. -->
 
         <item name="fontFamily">@font/baloo_paaji_2_medium</item>
+
     </style>
 </resources>

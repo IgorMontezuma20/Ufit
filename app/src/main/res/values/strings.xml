@@ -54,6 +54,8 @@
     <string name="notification_title_text">Notificação</string>
     <string name="notification_text">Notificações Pop-Up</string>
     <string name="exit_text">Sair</string>
+    <string name="password_hint_txt">Senha</string>
+    <string name="email_hint_txt">Email</string>
 
     <string-array name="gender">
         <item>Masculino</item>
