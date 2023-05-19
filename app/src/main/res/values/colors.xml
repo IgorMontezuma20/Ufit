@@ -12,15 +12,15 @@
     <color name="blue_200">#c3fdff</color>
     <color name="blue_500">#90caf9</color>
     <color name="blue_700">#5d99c6</color>
+    <color name="blue_800">#0277BD</color>
     <color name="btn_color">#57a6ab</color>
     <color name="text_color">#43414b </color>
     <color name="purple_100">#f3f3ff</color>
     <color name="gray_100">#F7F8F8</color>
     <color name="gray_200">#F9F9F9</color>
+    <color name="gray_300">#C0C2C9</color>
     <color name="gray_500">#80D1D1D1</color>
     <color name="pink_500">#F36595</color>
-
-
 
 
     <color name="red">#FF0000</color>
@@ -29,6 +29,10 @@
     <color name="orange">#FF9800</color>
     <color name="blue">#1753EC</color>
     <color name="dark_gray">#181818</color>
+
+
+    <!-- DARK THEME -->
+    <color name="blue_700_dark">#5d99c6</color>
 
 
 </resources>

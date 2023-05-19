@@ -12,4 +12,7 @@ class FavoriteExerciseViewModel @Inject constructor(
     application: Application
 ) : AndroidViewModel(application){
 
+
+
+
 }

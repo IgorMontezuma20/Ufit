@@ -14,5 +14,28 @@
         <!-- Customize your theme here. -->
 
         <item name="fontFamily">@font/baloo_paaji_2_medium</item>
+
+    </style>
+
+    <!--LIGHT MODE-->
+    <!-- Screen background -->
+    <style name="SCREEN">
+        <item name="android:background">
+            @color/white
+        </item>
+    </style>
+
+    <!--Text background light mode-->
+    <style name="TEXT">
+        <item name="android:textColor">
+            @color/blue_700
+        </item>
+    </style>
+
+    <!--Text background light mode-->
+    <style name="TITLE">
+        <item name="android:textColor">
+            @color/black
+        </item>
     </style>
 </resources>
