@@ -10,7 +10,24 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/blue_700</item>
+        <item name="android:statusBarColor">@color/black</item>
         <!-- Customize your theme here. -->
+
+        <item name="fontFamily">@font/baloo_paaji_2_medium</item>
+
+
+    </style>
+
+    <!--DARK MODE-->
+    <!-- Screen background -->
+    <style name="SCREEN">
+        <item name="android:background">#B0BEC5</item>
+    </style>
+
+    <!--Text background dark mode-->
+    <style name="TEXT">
+        <item name="android:textColor">
+            @color/blue_700
+        </item>
     </style>
 </resources>

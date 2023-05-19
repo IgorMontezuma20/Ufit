@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    style="@style/SCREEN"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.register.RegisterInfoFragment">
 
@@ -21,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/register_info_title"
-        android:textColor="@color/blue_700"
+        style="@style/TEXT"
         android:textSize="26sp"
         android:textStyle="bold"
         app:fontFamily="@font/roboto_medium"
@@ -36,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="@string/register_info_subtitle"
-        android:textColor="@color/black"
+        style="@style/TEXT"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,6 +54,7 @@
         app:boxStrokeWidth="0dp"
         app:endIconTint="@color/blue_700"
         app:startIconTint="@color/blue_700"
+        android:textColorHint="@color/blue_700"
         app:helperTextEnabled="true"
         app:helperTextTextColor="@color/red"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +66,8 @@
             android:id="@+id/acGender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Escolha o seu gênero"
+            android:textColor="@color/blue_700"
+            android:hint="@string/gender_hint_txt"
             android:singleLine="true" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -77,6 +80,7 @@
         app:boxBackgroundColor="@color/gray_100"
         app:boxStrokeColor="@color/white"
         app:boxStrokeWidth="0dp"
+        android:textColorHint="@color/blue_700"
         app:helperTextEnabled="true"
         app:helperTextTextColor="@color/red"
         app:layout_constraintEnd_toEndOf="parent"
@@ -91,6 +95,7 @@
             android:drawableStart="@drawable/calendar"
             android:drawablePadding="12dp"
             android:hint="@string/date_hint"
+            android:textColor="@color/blue_700"
             app:mask="##/##/####" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -101,6 +106,7 @@
         android:layout_width="250dp"
         android:layout_height="80dp"
         app:boxBackgroundColor="@color/gray_100"
+        android:textColorHint="@color/blue_700"
         app:boxStrokeWidth="0dp"
         app:helperTextEnabled="true"
         app:helperTextTextColor="@color/red"
@@ -114,7 +120,8 @@
             android:drawableStart="@drawable/weight_scale"
             android:drawablePadding="10dp"
             android:drawableTint="@color/blue_700"
-            android:hint="Seu peso"
+            android:hint="@string/weight_hint_txt"
+            android:textColor="@color/blue_700"
             android:paddingStart="10dp"
             android:singleLine="true" />
 
@@ -139,6 +146,7 @@
         android:layout_height="80dp"
         app:boxBackgroundColor="@color/gray_100"
         app:boxStrokeColor="@color/white"
+        android:textColorHint="@color/blue_700"
         app:boxStrokeWidth="0dp"
         app:helperTextEnabled="true"
         app:helperTextTextColor="@color/red"
@@ -152,7 +160,8 @@
             android:drawableStart="@drawable/compare_arrows"
             android:drawablePadding="10dp"
             android:drawableTint="@color/blue_700"
-            android:hint="Sua altura"
+            android:hint="@string/height_hint_txt"
+            android:textColor="@color/blue_700"
             android:paddingStart="10dp"
             android:singleLine="true" />
 

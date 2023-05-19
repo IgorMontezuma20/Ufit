@@ -56,6 +56,11 @@
     <string name="exit_text">Sair</string>
     <string name="password_hint_txt">Senha</string>
     <string name="email_hint_txt">Email</string>
+    <string name="splash_title_txt">Treine do seu jeito</string>
+    <string name="splash_desc_txt">Encontre os exercícios que combinam com você!</string>
+    <string name="height_hint_txt">Sua altura</string>
+    <string name="weight_hint_txt">Seu peso</string>
+    <string name="gender_hint_txt">Escolha o seu gênero</string>
 
     <string-array name="gender">
         <item>Masculino</item>
