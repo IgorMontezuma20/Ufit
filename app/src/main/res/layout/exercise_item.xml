@@ -71,6 +71,7 @@
                 android:ellipsize="end"
                 android:maxLines="3"
                 android:text="@{exerciseItem.instructions}"
+                style="@style/TEXT"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/ivAnimation"
