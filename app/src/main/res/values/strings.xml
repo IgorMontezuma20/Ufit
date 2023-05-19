@@ -61,6 +61,8 @@
     <string name="height_hint_txt">Sua altura</string>
     <string name="weight_hint_txt">Seu peso</string>
     <string name="gender_hint_txt">Escolha o seu gênero</string>
+    <string name="name_hint_txt">Nome</string>
+    <string name="surname_hint_txt">Sobrenome</string>
 
     <string-array name="gender">
         <item>Masculino</item>
