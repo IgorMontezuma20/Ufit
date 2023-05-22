@@ -63,38 +63,32 @@ class RegisterFragment : Fragment() {
 
         when {
             name.isEmpty() -> {
-                binding.tlName.helperText = getString(R.string.obrigatory_field)
-                binding.tlName.boxStrokeColor = Color.parseColor("#FF0000")
+                binding.tlName.error = getString(R.string.obrigatory_field)
                 return false
             }
 
             lastname.isEmpty() -> {
-                binding.tlLastname.helperText = getString(R.string.obrigatory_field)
-                binding.tlLastname.boxStrokeColor = Color.parseColor("#FF0000")
+                binding.tlLastname.error = getString(R.string.obrigatory_field)
                 return false
             }
 
             email.isEmpty() && !email.isEmailValid() -> {
-                binding.tlEmail.helperText = getString(R.string.obrigatory_field)
-                binding.tlEmail.boxStrokeColor = Color.parseColor("#FF0000")
+                binding.tlEmail.error = getString(R.string.obrigatory_field)
                 return false
             }
 
             password.isEmpty() -> {
-                binding.tlPassword.helperText = getString(R.string.obrigatory_field)
-                binding.tlPassword.boxStrokeColor = Color.parseColor("#FF0000")
+                binding.tlPassword.error = getString(R.string.obrigatory_field)
                 return false
             }
 
             confirmedPass.isEmpty() -> {
-                binding.tlPasswordConfirmation.helperText = getString(R.string.obrigatory_field)
-                binding.tlPasswordConfirmation.boxStrokeColor = Color.parseColor("#FF0000")
+                binding.tlPasswordConfirmation.error = getString(R.string.obrigatory_field)
                 return false
             }
 
             password != confirmedPass -> {
-                binding.tlPasswordConfirmation.helperText = getString(R.string.password_dont_match)
-                binding.tlPasswordConfirmation.boxStrokeColor = Color.parseColor("#FF0000")
+                binding.tlPasswordConfirmation.error = getString(R.string.password_dont_match)
                 return false
             }
 

@@ -138,26 +138,22 @@ class RegisterInfoFragment : Fragment() {
 
         when {
             gender.isEmpty() -> {
-                binding.tlGender.helperText = getString(R.string.obrigatory_field)
-                binding.tlGender.boxStrokeColor = Color.parseColor("#FF0000")
+                binding.tlGender.error = getString(R.string.obrigatory_field)
                 return false
             }
 
             birthDate.isEmpty() -> {
-                binding.tlBirth.helperText = getString(R.string.obrigatory_field)
-                binding.tlBirth.boxStrokeColor = Color.parseColor("#FF0000")
+                binding.tlBirth.error = getString(R.string.obrigatory_field)
                 return false
             }
 
             weight.isEmpty() -> {
-                binding.tlWeight.helperText = getString(R.string.obrigatory_field)
-                binding.tlWeight.boxStrokeColor = Color.parseColor("#FF0000")
+                binding.tlWeight.error = getString(R.string.obrigatory_field)
                 return false
             }
 
             height.isEmpty() -> {
-                binding.tlHeight.helperText = getString(R.string.obrigatory_field)
-                binding.tlHeight.boxStrokeColor = Color.parseColor("#FF0000")
+                binding.tlHeight.error = getString(R.string.obrigatory_field)
                 return false
             }
 
